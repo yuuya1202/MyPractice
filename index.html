@@ -663,6 +663,7 @@
   </div>
 </div>
 
+<!-- DETAIL OVERLAY -->
 <div class="overlay" id="detailOverlay" onclick="handleOverlayClick(event, 'detail')">
   <div class="detail-modal" id="detailModal">
     <div class="modal-handle"></div>
@@ -707,6 +708,7 @@
   </div>
 </div>
 
+<!-- FILTER OVERLAY -->
 <div class="overlay" id="filterOverlay" onclick="handleOverlayClick(event, 'filter')">
   <div class="filter-modal" id="filterModal">
     <div class="modal-handle"></div>
@@ -771,44 +773,16 @@ function saveMemo(key, data) {
 }
 
 async function loadSongs() {
-  const cached = localStorage.getItem(CACHE_KEY);
-  if (cached) {
-    songs = JSON.parse(cached);
-    render();
-    return;
-  }
   try {
-    // 修正：外部URLではなく、リポジトリ内の songs.json を読み込む
-    const res = await fetch('songs.json');
-    if (!res.ok) throw new Error('songs.jsonが見つかりません');
-    
+    const res = await fetch('./songs.json');
     const data = await res.json();
-    const result = [];
-    data.forEach(song => {
-      song.difficulties.forEach(diff => {
-        if (diff.level >= 18 && diff.level < 19) {
-          const suffix = getUrlSuffix(diff.type);
-          result.push({
-            key: makeKey(song.songid, diff.type),
-            songid: song.songid,
-            title: song.title,
-            level: diff.level,
-            type: diff.type,
-            typeLabel: TYPE_LABEL[diff.type] || diff.type.toUpperCase(),
-            bpm: song.bpm,
-            jacket: (diff.jacketArtPath || '').replace(/__/g,'').replace('https://sdvxindex.com/','https://sdvxindex.com/'),
-            chartUrl: `https://sdvxindex.com/s/${song.songid}/${suffix}/`
-          });
-        }
-      });
+    data.forEach(s => {
+      s.typeLabel = TYPE_LABEL[s.type] || s.type.toUpperCase();
     });
-    result.sort((a,b) => a.level - b.level || a.title.localeCompare(b.title));
-    songs = result;
-    localStorage.setItem(CACHE_KEY, JSON.stringify(songs));
+    songs = data;
     render();
   } catch(e) {
-    console.error(e);
-    document.getElementById('listContainer').innerHTML = '<div class="empty">データの読み込みに失敗しました。<br>songs.jsonが正しく配置されているか確認してください。</div>';
+    document.getElementById('listContainer').innerHTML = '<div class="empty">データの読み込みに失敗しました。<br>ページを再読み込みしてください。</div>';
   }
 }
 
@@ -818,6 +792,9 @@ function getUrlSuffix(type) {
 }
 
 function buildLevelGrid() {
+  const levels = [];
+  for (let i = 0; i <= 9; i++) levels.push(18 + i * 0.1);
+  // get actual levels from songs
   const actualLevels = [...new Set(songs.map(s => s.level))].sort((a,b)=>a-b);
   const grid = document.getElementById('levelGrid');
   grid.innerHTML = '';
