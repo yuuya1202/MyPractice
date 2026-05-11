@@ -1,80 +1,80 @@
 [
   {
-    "key": "01009_m",
+    "key": "01009_h",
     "title": "Broken 8cmix",
-    "type": "maximum",
+    "type": "heavenly",
     "level": 18.6,
     "bpm": "150",
     "jacket": "https://sdvx.in/jk/01/01009.jpg",
     "chartUrl": "https://sdvx.in/01/01009m.htm"
   },
   {
-    "key": "01015_m",
+    "key": "01015_h",
     "title": "Evans VolteX Pf arrange",
-    "type": "maximum",
+    "type": "heavenly",
     "level": 18.3,
     "bpm": "180",
     "jacket": "https://sdvx.in/jk/01/01015.jpg",
     "chartUrl": "https://sdvx.in/01/01015m.htm"
   },
   {
-    "key": "01030_m",
+    "key": "01030_g",
     "title": "XepherLight and Darkness Dragon REMIX",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.4,
     "bpm": "180",
     "jacket": "https://sdvx.in/jk/01/01030.jpg",
     "chartUrl": "https://sdvx.in/01/01030m.htm"
   },
   {
-    "key": "01034_m",
+    "key": "01034_i",
     "title": "冥 Rockin' SWING REMIX",
-    "type": "maximum",
+    "type": "infinite",
     "level": 18.2,
     "bpm": "200",
     "jacket": "https://sdvx.in/jk/01/01034.jpg",
     "chartUrl": "https://sdvx.in/01/01034m.htm"
   },
   {
-    "key": "01038_m",
+    "key": "01038_i",
     "title": "FLOWER REDALiCE Remix",
-    "type": "maximum",
+    "type": "infinite",
     "level": 18.6,
     "bpm": "180",
     "jacket": "https://sdvx.in/jk/01/01038.jpg",
     "chartUrl": "https://sdvx.in/01/01038m.htm"
   },
   {
-    "key": "01043_m",
+    "key": "01043_x",
     "title": "世界はネコのもの",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18.3,
     "bpm": "157",
     "jacket": "https://sdvx.in/jk/01/01043.jpg",
     "chartUrl": "https://sdvx.in/01/01043m.htm"
   },
   {
-    "key": "01045_m",
+    "key": "01045_x",
     "title": "neu BSP style",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18.5,
     "bpm": "130-199",
     "jacket": "https://sdvx.in/jk/01/01045.jpg",
     "chartUrl": "https://sdvx.in/01/01045m.htm"
   },
   {
-    "key": "01058_m",
+    "key": "01058_g",
     "title": "香港功夫大旋風",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.2,
     "bpm": "178",
     "jacket": "https://sdvx.in/jk/01/01058.jpg",
     "chartUrl": "https://sdvx.in/01/01058m.htm"
   },
   {
-    "key": "01061_m",
+    "key": "01061_h",
     "title": "Onigo",
-    "type": "maximum",
+    "type": "heavenly",
     "level": 18.6,
     "bpm": "175",
     "jacket": "https://sdvx.in/jk/01/01061.jpg",
@@ -90,162 +90,153 @@
     "chartUrl": "https://sdvx.in/01/01071e.htm"
   },
   {
-    "key": "01089_m",
+    "key": "01089_h",
     "title": "幻想のサテライト",
-    "type": "maximum",
+    "type": "heavenly",
     "level": 18.1,
     "bpm": "230",
     "jacket": "https://sdvx.in/jk/01/01089.jpg",
     "chartUrl": "https://sdvx.in/01/01089m.htm"
   },
   {
-    "key": "01102_m",
+    "key": "01102_h",
     "title": "腐れ外道とチョコレゐト",
-    "type": "maximum",
+    "type": "heavenly",
     "level": 18,
     "bpm": "260",
     "jacket": "https://sdvx.in/jk/01/01102.jpg",
     "chartUrl": "https://sdvx.in/01/01102m.htm"
   },
   {
-    "key": "01107_m",
+    "key": "01107_h",
     "title": "V.I.P.",
-    "type": "maximum",
+    "type": "heavenly",
     "level": 18.7,
     "bpm": "169",
     "jacket": "https://sdvx.in/jk/01/01107.jpg",
     "chartUrl": "https://sdvx.in/01/01107m.htm"
   },
   {
-    "key": "01115_m",
+    "key": "01115_g",
     "title": "Absurd Gaff",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.6,
     "bpm": "160",
     "jacket": "https://sdvx.in/jk/01/01115.jpg",
     "chartUrl": "https://sdvx.in/01/01115m.htm"
   },
   {
-    "key": "01120_m",
+    "key": "01120_g",
     "title": "PANIC HOLIC",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.1,
     "bpm": "220",
     "jacket": "https://sdvx.in/jk/01/01120.jpg",
     "chartUrl": "https://sdvx.in/01/01120m.htm"
   },
   {
-    "key": "01122_m",
+    "key": "01122_i",
     "title": "croiX",
-    "type": "maximum",
+    "type": "infinite",
     "level": 18.6,
     "bpm": "160-195",
     "jacket": "https://sdvx.in/jk/01/01122.jpg",
     "chartUrl": "https://sdvx.in/01/01122m.htm"
   },
   {
-    "key": "01124_m",
+    "key": "01124_i",
     "title": "Max Burning!!",
-    "type": "maximum",
+    "type": "infinite",
     "level": 18.5,
     "bpm": "190",
     "jacket": "https://sdvx.in/jk/01/01124.jpg",
     "chartUrl": "https://sdvx.in/01/01124m.htm"
   },
   {
-    "key": "01128_m",
+    "key": "01128_g",
     "title": "魔理沙は大変なものを盗んでいきました",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.7,
     "bpm": "170",
     "jacket": "https://sdvx.in/jk/01/01128.jpg",
     "chartUrl": "https://sdvx.in/01/01128m.htm"
   },
   {
-    "key": "01129_m",
+    "key": "01129_x",
     "title": "物凄い勢いでけーねが物凄いうた",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18.6,
     "bpm": "180",
     "jacket": "https://sdvx.in/jk/01/01129.jpg",
     "chartUrl": "https://sdvx.in/01/01129m.htm"
   },
   {
-    "key": "01146_m",
+    "key": "01146_h",
     "title": "金縛りの逢を",
-    "type": "maximum",
+    "type": "heavenly",
     "level": 18.1,
     "bpm": "200",
     "jacket": "https://sdvx.in/jk/01/01146.jpg",
     "chartUrl": "https://sdvx.in/01/01146m.htm"
   },
   {
-    "key": "01147_m",
-    "title": "Earthquake Super Shock - SDVX Edit. -",
-    "type": "maximum",
-    "level": 18.3,
-    "bpm": "175",
-    "jacket": "https://sdvx.in/jk/01/01147.jpg",
-    "chartUrl": "https://sdvx.in/01/01147m.htm"
-  },
-  {
-    "key": "01156_m",
+    "key": "01156_h",
     "title": "The world of sound",
-    "type": "maximum",
+    "type": "heavenly",
     "level": 18.7,
     "bpm": "210",
     "jacket": "https://sdvx.in/jk/01/01156.jpg",
     "chartUrl": "https://sdvx.in/01/01156m.htm"
   },
   {
-    "key": "01165_m",
+    "key": "01165_h",
     "title": "孤独の番人",
-    "type": "maximum",
+    "type": "heavenly",
     "level": 18.4,
     "bpm": "190",
     "jacket": "https://sdvx.in/jk/01/01165.jpg",
     "chartUrl": "https://sdvx.in/01/01165m.htm"
   },
   {
-    "key": "02011_m",
+    "key": "02011_x",
     "title": "Foolish Hero",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18.4,
     "bpm": "145",
     "jacket": "https://sdvx.in/jk/02/02011.jpg",
     "chartUrl": "https://sdvx.in/02/02011m.htm"
   },
   {
-    "key": "02016_m",
+    "key": "02016_v",
     "title": "Sakura Reflection (P*Light Slayer Remix)",
-    "type": "maximum",
+    "type": "vivid",
     "level": 18.1,
     "bpm": "186",
     "jacket": "https://sdvx.in/jk/02/02016.jpg",
     "chartUrl": "https://sdvx.in/02/02016m.htm"
   },
   {
-    "key": "02017_m",
+    "key": "02017_v",
     "title": "She is my wifeすーぱーアイドル☆ミツル子Remixちゃん",
-    "type": "maximum",
+    "type": "vivid",
     "level": 18.6,
     "bpm": "85-370",
     "jacket": "https://sdvx.in/jk/02/02017.jpg",
     "chartUrl": "https://sdvx.in/02/02017m.htm"
   },
   {
-    "key": "02035_m",
+    "key": "02035_h",
     "title": "魔境堕天録サリエル",
-    "type": "maximum",
+    "type": "heavenly",
     "level": 18.7,
     "bpm": "176",
     "jacket": "https://sdvx.in/jk/02/02035.jpg",
     "chartUrl": "https://sdvx.in/02/02035m.htm"
   },
   {
-    "key": "02044_m",
+    "key": "02044_h",
     "title": "Qubism",
-    "type": "maximum",
+    "type": "heavenly",
     "level": 18.4,
     "bpm": "180",
     "jacket": "https://sdvx.in/jk/02/02044.jpg",
@@ -261,36 +252,36 @@
     "chartUrl": "https://sdvx.in/02/02045e.htm"
   },
   {
-    "key": "02047_m",
+    "key": "02047_v",
     "title": "こちら、幸福安心委員会です。",
-    "type": "maximum",
+    "type": "vivid",
     "level": 18.5,
     "bpm": "128",
     "jacket": "https://sdvx.in/jk/02/02047.jpg",
     "chartUrl": "https://sdvx.in/02/02047m.htm"
   },
   {
-    "key": "02055_m",
+    "key": "02055_x",
     "title": "I'm so Happy",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18.3,
     "bpm": "181",
     "jacket": "https://sdvx.in/jk/02/02055.jpg",
     "chartUrl": "https://sdvx.in/02/02055m.htm"
   },
   {
-    "key": "02062_m",
+    "key": "02062_h",
     "title": "C18H27NO3",
-    "type": "maximum",
+    "type": "heavenly",
     "level": 18.1,
     "bpm": "210",
     "jacket": "https://sdvx.in/jk/02/02062.jpg",
     "chartUrl": "https://sdvx.in/02/02062m.htm"
   },
   {
-    "key": "02063_m",
+    "key": "02063_x",
     "title": "Lieselotte",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18.1,
     "bpm": "180",
     "jacket": "https://sdvx.in/jk/02/02063.jpg",
@@ -306,72 +297,63 @@
     "chartUrl": "https://sdvx.in/02/02081e.htm"
   },
   {
-    "key": "02091_m",
+    "key": "02091_v",
     "title": "#Fairy_dancing_in_lake",
-    "type": "maximum",
+    "type": "vivid",
     "level": 18.6,
     "bpm": "142",
     "jacket": "https://sdvx.in/jk/02/02091.jpg",
     "chartUrl": "https://sdvx.in/02/02091m.htm"
   },
   {
-    "key": "02094_m",
+    "key": "02094_x",
     "title": "恋はどう？モロ◎波動OK☆方程式!!",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18.2,
     "bpm": "128",
     "jacket": "https://sdvx.in/jk/02/02094.jpg",
     "chartUrl": "https://sdvx.in/02/02094m.htm"
   },
   {
-    "key": "02096_m",
+    "key": "02096_v",
     "title": "Unicorn tail Dustboxxxx RMX",
-    "type": "maximum",
+    "type": "vivid",
     "level": 18.1,
     "bpm": "200",
     "jacket": "https://sdvx.in/jk/02/02096.jpg",
     "chartUrl": "https://sdvx.in/02/02096m.htm"
   },
   {
-    "key": "02109_m",
+    "key": "02109_x",
     "title": "ウサテイ",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18,
     "bpm": "190",
     "jacket": "https://sdvx.in/jk/02/02109.jpg",
     "chartUrl": "https://sdvx.in/02/02109m.htm"
   },
   {
-    "key": "02122_m",
+    "key": "02122_g",
     "title": "Crack Traxxxx",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.4,
     "bpm": "220",
     "jacket": "https://sdvx.in/jk/02/02122.jpg",
     "chartUrl": "https://sdvx.in/02/02122m.htm"
   },
   {
-    "key": "02127_m",
+    "key": "02127_g",
     "title": "最終鬼畜妹フランドール・S",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.1,
     "bpm": "200",
     "jacket": "https://sdvx.in/jk/02/02127.jpg",
     "chartUrl": "https://sdvx.in/02/02127m.htm"
   },
   {
-    "key": "02139_m",
-    "title": "BUBBLE RAVER",
-    "type": "maximum",
-    "level": 18.4,
-    "bpm": "174",
-    "jacket": "https://sdvx.in/jk/02/02139.jpg",
-    "chartUrl": "https://sdvx.in/02/02139m.htm"
-  },
-  {
-    "key": "02158_m",
+    "key": "02158_v",
     "title": "ムーニャポヨポヨスッポコニャーゴ",
-    "type": "maximum",
+    "type": "vivid",
     "level": 18.8,
     "bpm": "180",
     "jacket": "https://sdvx.in/jk/02/02158.jpg",
@@ -396,27 +378,27 @@
     "chartUrl": "https://sdvx.in/02/02169e.htm"
   },
   {
-    "key": "02170_m",
+    "key": "02170_h",
     "title": "超越してしまった彼女と其を生み落した理由",
-    "type": "maximum",
+    "type": "heavenly",
     "level": 18.8,
     "bpm": "178",
     "jacket": "https://sdvx.in/jk/02/02170.jpg",
     "chartUrl": "https://sdvx.in/02/02170m.htm"
   },
   {
-    "key": "02171_m",
+    "key": "02171_g",
     "title": "Hellfire",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.6,
     "bpm": "176",
     "jacket": "https://sdvx.in/jk/02/02171.jpg",
     "chartUrl": "https://sdvx.in/02/02171m.htm"
   },
   {
-    "key": "02172_m",
+    "key": "02172_g",
     "title": "Last Concerto",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.8,
     "bpm": "220",
     "jacket": "https://sdvx.in/jk/02/02172.jpg",
@@ -432,54 +414,54 @@
     "chartUrl": "https://sdvx.in/02/02173e.htm"
   },
   {
-    "key": "02174_m",
+    "key": "02174_v",
     "title": "おお われら喜び讃うべし、主よ",
-    "type": "maximum",
+    "type": "vivid",
     "level": 18.3,
     "bpm": "180",
     "jacket": "https://sdvx.in/jk/02/02174.jpg",
     "chartUrl": "https://sdvx.in/02/02174m.htm"
   },
   {
-    "key": "02175_m",
+    "key": "02175_v",
     "title": "上海紅茶館～ Chinese Tea Orchid Remix",
-    "type": "maximum",
+    "type": "vivid",
     "level": 18.4,
     "bpm": "188",
     "jacket": "https://sdvx.in/jk/02/02175.jpg",
     "chartUrl": "https://sdvx.in/02/02175m.htm"
   },
   {
-    "key": "02186_m",
+    "key": "02186_x",
     "title": "デッドボヲルdeホームラン",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18.6,
     "bpm": "145",
     "jacket": "https://sdvx.in/jk/02/02186.jpg",
     "chartUrl": "https://sdvx.in/02/02186m.htm"
   },
   {
-    "key": "02189_m",
+    "key": "02189_x",
     "title": "轟け！恋のビーンボール！！",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18.6,
     "bpm": "180",
     "jacket": "https://sdvx.in/jk/02/02189.jpg",
     "chartUrl": "https://sdvx.in/02/02189m.htm"
   },
   {
-    "key": "02203_m",
+    "key": "02203_x",
     "title": "crazy cinema story",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18.8,
     "bpm": "137-150",
     "jacket": "https://sdvx.in/jk/02/02203.jpg",
     "chartUrl": "https://sdvx.in/02/02203m.htm"
   },
   {
-    "key": "02214_m",
+    "key": "02214_h",
     "title": "Harpuia",
-    "type": "maximum",
+    "type": "heavenly",
     "level": 18.5,
     "bpm": "93-186",
     "jacket": "https://sdvx.in/jk/02/02214.jpg",
@@ -495,18 +477,18 @@
     "chartUrl": "https://sdvx.in/02/02215e.htm"
   },
   {
-    "key": "02223_m",
+    "key": "02223_x",
     "title": "ボルテ体操第一",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18.5,
     "bpm": "175-200",
     "jacket": "https://sdvx.in/jk/02/02223.jpg",
     "chartUrl": "https://sdvx.in/02/02223m.htm"
   },
   {
-    "key": "02257_m",
+    "key": "02257_h",
     "title": "Idola",
-    "type": "maximum",
+    "type": "heavenly",
     "level": 18.7,
     "bpm": "201",
     "jacket": "https://sdvx.in/jk/02/02257.jpg",
@@ -522,27 +504,27 @@
     "chartUrl": "https://sdvx.in/02/02277e.htm"
   },
   {
-    "key": "02287_m",
+    "key": "02287_x",
     "title": "有頂天ビバーチェ",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18.2,
     "bpm": "266",
     "jacket": "https://sdvx.in/jk/02/02287.jpg",
     "chartUrl": "https://sdvx.in/02/02287m.htm"
   },
   {
-    "key": "02293_m",
+    "key": "02293_g",
     "title": "Wish upon Twin Stars",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.7,
     "bpm": "200",
     "jacket": "https://sdvx.in/jk/02/02293.jpg",
     "chartUrl": "https://sdvx.in/02/02293m.htm"
   },
   {
-    "key": "02294_m",
+    "key": "02294_g",
     "title": "CODE -CRiMSON-",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.6,
     "bpm": "167",
     "jacket": "https://sdvx.in/jk/02/02294.jpg",
@@ -585,9 +567,9 @@
     "chartUrl": "https://sdvx.in/03/03051e.htm"
   },
   {
-    "key": "03052_m",
+    "key": "03052_x",
     "title": "The Sampling Paradise (P*Light Remix)",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18.6,
     "bpm": "181",
     "jacket": "https://sdvx.in/jk/03/03052.jpg",
@@ -630,18 +612,18 @@
     "chartUrl": "https://sdvx.in/03/03073e.htm"
   },
   {
-    "key": "03074_m",
+    "key": "03074_g",
     "title": "KAC 2012 ULTIMATE MEDLEY-HISTORIA SOUND VOLTEX-",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.5,
     "bpm": "200",
     "jacket": "https://sdvx.in/jk/03/03074.jpg",
     "chartUrl": "https://sdvx.in/03/03074m.htm"
   },
   {
-    "key": "03076_m",
+    "key": "03076_x",
     "title": "Chant du Cygne",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18.8,
     "bpm": "140-190",
     "jacket": "https://sdvx.in/jk/03/03076.jpg",
@@ -711,18 +693,18 @@
     "chartUrl": "https://sdvx.in/03/03128e.htm"
   },
   {
-    "key": "03133_m",
+    "key": "03133_x",
     "title": "Sounds Of Summer",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18.3,
     "bpm": "175",
     "jacket": "https://sdvx.in/jk/03/03133.jpg",
     "chartUrl": "https://sdvx.in/03/03133m.htm"
   },
   {
-    "key": "03134_m",
+    "key": "03134_g",
     "title": "Opium and Purple haze",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18,
     "bpm": "165",
     "jacket": "https://sdvx.in/jk/03/03134.jpg",
@@ -738,9 +720,9 @@
     "chartUrl": "https://sdvx.in/03/03139e.htm"
   },
   {
-    "key": "03143_m",
+    "key": "03143_x",
     "title": "Le Fruit Défendu",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18.3,
     "bpm": "220",
     "jacket": "https://sdvx.in/jk/03/03143.jpg",
@@ -846,9 +828,9 @@
     "chartUrl": "https://sdvx.in/03/03170e.htm"
   },
   {
-    "key": "03172_m",
+    "key": "03172_x",
     "title": "ちくわパフェだよ☆ＣＫＰ",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18.7,
     "bpm": "205",
     "jacket": "https://sdvx.in/jk/03/03172.jpg",
@@ -864,9 +846,9 @@
     "chartUrl": "https://sdvx.in/03/03176e.htm"
   },
   {
-    "key": "03178_m",
+    "key": "03178_h",
     "title": "Garakuta Doll Play",
-    "type": "maximum",
+    "type": "heavenly",
     "level": 18.6,
     "bpm": "256",
     "jacket": "https://sdvx.in/jk/03/03178.jpg",
@@ -900,9 +882,9 @@
     "chartUrl": "https://sdvx.in/03/03188e.htm"
   },
   {
-    "key": "03189_m",
+    "key": "03189_g",
     "title": "HAELE III ~Angel Worlds~",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.7,
     "bpm": "185",
     "jacket": "https://sdvx.in/jk/03/03189.jpg",
@@ -963,9 +945,9 @@
     "chartUrl": "https://sdvx.in/03/03229e.htm"
   },
   {
-    "key": "03231_m",
+    "key": "03231_x",
     "title": "conflict",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18.5,
     "bpm": "160",
     "jacket": "https://sdvx.in/jk/03/03231.jpg",
@@ -981,18 +963,18 @@
     "chartUrl": "https://sdvx.in/03/03242e.htm"
   },
   {
-    "key": "03243_m",
+    "key": "03243_x",
     "title": "雲の彼方",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18.5,
     "bpm": "150",
     "jacket": "https://sdvx.in/jk/03/03243.jpg",
     "chartUrl": "https://sdvx.in/03/03243m.htm"
   },
   {
-    "key": "03244_m",
+    "key": "03244_x",
     "title": "Candy Colored Hearts",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18.7,
     "bpm": "193",
     "jacket": "https://sdvx.in/jk/03/03244.jpg",
@@ -1008,9 +990,9 @@
     "chartUrl": "https://sdvx.in/03/03245e.htm"
   },
   {
-    "key": "03245_m",
+    "key": "03245_x",
     "title": "NEO GRAVITY",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18.7,
     "bpm": "165",
     "jacket": "https://sdvx.in/jk/03/03245.jpg",
@@ -1098,27 +1080,27 @@
     "chartUrl": "https://sdvx.in/03/03268e.htm"
   },
   {
-    "key": "03273_m",
+    "key": "03273_g",
     "title": "XROSS THE XOUL",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.4,
     "bpm": "194",
     "jacket": "https://sdvx.in/jk/03/03273.jpg",
     "chartUrl": "https://sdvx.in/03/03273m.htm"
   },
   {
-    "key": "03277_m",
+    "key": "03277_g",
     "title": "Renegade Fruits",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.2,
     "bpm": "240",
     "jacket": "https://sdvx.in/jk/03/03277.jpg",
     "chartUrl": "https://sdvx.in/03/03277m.htm"
   },
   {
-    "key": "03293_m",
+    "key": "03293_x",
     "title": "The star in eclipse",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18.2,
     "bpm": "220",
     "jacket": "https://sdvx.in/jk/03/03293.jpg",
@@ -1152,63 +1134,63 @@
     "chartUrl": "https://sdvx.in/03/03323e.htm"
   },
   {
-    "key": "03341_m",
+    "key": "03341_g",
     "title": "Ok!! Hug Me",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.3,
     "bpm": "210",
     "jacket": "https://sdvx.in/jk/03/03341.jpg",
     "chartUrl": "https://sdvx.in/03/03341m.htm"
   },
   {
-    "key": "03352_m",
+    "key": "03352_g",
     "title": "Completeness Under Incompleteness",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.7,
     "bpm": "194",
     "jacket": "https://sdvx.in/jk/03/03352.jpg",
     "chartUrl": "https://sdvx.in/03/03352m.htm"
   },
   {
-    "key": "03353_m",
+    "key": "03353_g",
     "title": "Celestial stinger",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.5,
     "bpm": "259",
     "jacket": "https://sdvx.in/jk/03/03353.jpg",
     "chartUrl": "https://sdvx.in/03/03353m.htm"
   },
   {
-    "key": "03357_m",
+    "key": "03357_x",
     "title": "B.B.K.K.B.K.K.",
-    "type": "maximum",
+    "type": "exceed",
     "level": 18.1,
     "bpm": "170",
     "jacket": "https://sdvx.in/jk/03/03357.jpg",
     "chartUrl": "https://sdvx.in/03/03357m.htm"
   },
   {
-    "key": "03358_m",
+    "key": "03358_g",
     "title": "NEO TREASON",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.4,
     "bpm": "200",
     "jacket": "https://sdvx.in/jk/03/03358.jpg",
     "chartUrl": "https://sdvx.in/03/03358m.htm"
   },
   {
-    "key": "03364_m",
+    "key": "03364_g",
     "title": "Angelic Jelly",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.3,
     "bpm": "200",
     "jacket": "https://sdvx.in/jk/03/03364.jpg",
     "chartUrl": "https://sdvx.in/03/03364m.htm"
   },
   {
-    "key": "03367_m",
+    "key": "03367_g",
     "title": "Triple Counter",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.2,
     "bpm": "216",
     "jacket": "https://sdvx.in/jk/03/03367.jpg",
@@ -1980,9 +1962,9 @@
     "chartUrl": "https://sdvx.in/04/04247m.htm"
   },
   {
-    "key": "04253_m",
+    "key": "04253_g",
     "title": "業焔繚乱",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.6,
     "bpm": "201",
     "jacket": "https://sdvx.in/jk/04/04253.jpg",
@@ -2097,9 +2079,9 @@
     "chartUrl": "https://sdvx.in/04/04288m.htm"
   },
   {
-    "key": "04289_m",
+    "key": "04289_g",
     "title": "Nexta",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.5,
     "bpm": "160",
     "jacket": "https://sdvx.in/jk/04/04289.jpg",
@@ -2151,9 +2133,9 @@
     "chartUrl": "https://sdvx.in/04/04300m.htm"
   },
   {
-    "key": "04302_m",
+    "key": "04302_g",
     "title": "Reb∞t",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.5,
     "bpm": "240",
     "jacket": "https://sdvx.in/jk/04/04302.jpg",
@@ -2250,9 +2232,9 @@
     "chartUrl": "https://sdvx.in/04/04325e.htm"
   },
   {
-    "key": "04326_m",
+    "key": "04326_g",
     "title": "まじかる生主＠りすなちゃん",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.3,
     "bpm": "220",
     "jacket": "https://sdvx.in/jk/04/04326.jpg",
@@ -2331,9 +2313,9 @@
     "chartUrl": "https://sdvx.in/04/04350m.htm"
   },
   {
-    "key": "04351_m",
+    "key": "04351_g",
     "title": "PROVOES*PROPOSE <<êl fine>>",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.7,
     "bpm": "120-280",
     "jacket": "https://sdvx.in/jk/04/04351.jpg",
@@ -2484,18 +2466,18 @@
     "chartUrl": "https://sdvx.in/04/04387m.htm"
   },
   {
-    "key": "04390_m",
+    "key": "04390_g",
     "title": "真っ白な靴",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18,
     "bpm": "226",
     "jacket": "https://sdvx.in/jk/04/04390.jpg",
     "chartUrl": "https://sdvx.in/04/04390m.htm"
   },
   {
-    "key": "04391_m",
+    "key": "04391_g",
     "title": "ALTONA",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.1,
     "bpm": "158",
     "jacket": "https://sdvx.in/jk/04/04391.jpg",
@@ -2763,18 +2745,18 @@
     "chartUrl": "https://sdvx.in/05/05092m.htm"
   },
   {
-    "key": "05094_m",
+    "key": "05094_g",
     "title": "Barbless Ego",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18,
     "bpm": "150",
     "jacket": "https://sdvx.in/jk/05/05094.jpg",
     "chartUrl": "https://sdvx.in/05/05094m.htm"
   },
   {
-    "key": "05095_m",
+    "key": "05095_g",
     "title": "Cloud Crasher",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.4,
     "bpm": "200",
     "jacket": "https://sdvx.in/jk/05/05095.jpg",
@@ -2799,18 +2781,18 @@
     "chartUrl": "https://sdvx.in/05/05097m.htm"
   },
   {
-    "key": "05102_m",
+    "key": "05102_g",
     "title": "rE:Voltagers",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.1,
     "bpm": "153",
     "jacket": "https://sdvx.in/jk/05/05102.jpg",
     "chartUrl": "https://sdvx.in/05/05102m.htm"
   },
   {
-    "key": "05103_m",
+    "key": "05103_g",
     "title": "Liar rain",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.4,
     "bpm": "220",
     "jacket": "https://sdvx.in/jk/05/05103.jpg",
@@ -2934,18 +2916,18 @@
     "chartUrl": "https://sdvx.in/05/05124m.htm"
   },
   {
-    "key": "05131_m",
+    "key": "05131_g",
     "title": "ねこみみ(=ФωФ=)ぱんでみみっく",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.3,
     "bpm": "195",
     "jacket": "https://sdvx.in/jk/05/05131.jpg",
     "chartUrl": "https://sdvx.in/05/05131m.htm"
   },
   {
-    "key": "05132_m",
+    "key": "05132_g",
     "title": "Typhoon Craaash!!",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.3,
     "bpm": "172",
     "jacket": "https://sdvx.in/jk/05/05132.jpg",
@@ -2988,9 +2970,9 @@
     "chartUrl": "https://sdvx.in/05/05146m.htm"
   },
   {
-    "key": "05152_m",
+    "key": "05152_g",
     "title": "タイムトラベル",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.5,
     "bpm": "220",
     "jacket": "https://sdvx.in/jk/05/05152.jpg",
@@ -3042,18 +3024,18 @@
     "chartUrl": "https://sdvx.in/05/05159m.htm"
   },
   {
-    "key": "05160_m",
+    "key": "05160_g",
     "title": "Believe In Yourself",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.1,
     "bpm": "165",
     "jacket": "https://sdvx.in/jk/05/05160.jpg",
     "chartUrl": "https://sdvx.in/05/05160m.htm"
   },
   {
-    "key": "05161_m",
+    "key": "05161_g",
     "title": "OZONE",
-    "type": "maximum",
+    "type": "gravity",
     "level": 18.1,
     "bpm": "180",
     "jacket": "https://sdvx.in/jk/05/05161.jpg",
@@ -3240,27 +3222,27 @@
     "chartUrl": "https://sdvx.in/05/05209m.htm"
   },
   {
-    "key": "05210_m",
+    "key": "05210_v",
     "title": "トマヨイ",
-    "type": "maximum",
+    "type": "vivid",
     "level": 18.4,
     "bpm": "165",
     "jacket": "https://sdvx.in/jk/05/05210.jpg",
     "chartUrl": "https://sdvx.in/05/05210m.htm"
   },
   {
-    "key": "05212_m",
+    "key": "05212_v",
     "title": "Over The Top",
-    "type": "maximum",
+    "type": "vivid",
     "level": 18.6,
     "bpm": "205",
     "jacket": "https://sdvx.in/jk/05/05212.jpg",
     "chartUrl": "https://sdvx.in/05/05212m.htm"
   },
   {
-    "key": "05214_m",
+    "key": "05214_v",
     "title": "World of Iris",
-    "type": "maximum",
+    "type": "vivid",
     "level": 18.2,
     "bpm": "255",
     "jacket": "https://sdvx.in/jk/05/05214.jpg",
@@ -3276,36 +3258,36 @@
     "chartUrl": "https://sdvx.in/05/05225m.htm"
   },
   {
-    "key": "05230_m",
+    "key": "05230_v",
     "title": "Ichi-Go! DX Pancake!",
-    "type": "maximum",
+    "type": "vivid",
     "level": 18.4,
     "bpm": "90-180",
     "jacket": "https://sdvx.in/jk/05/05230.jpg",
     "chartUrl": "https://sdvx.in/05/05230m.htm"
   },
   {
-    "key": "05232_m",
+    "key": "05232_v",
     "title": "おはようからおやすみまでかまってポメポメ",
-    "type": "maximum",
+    "type": "vivid",
     "level": 18.2,
     "bpm": "177",
     "jacket": "https://sdvx.in/jk/05/05232.jpg",
     "chartUrl": "https://sdvx.in/05/05232m.htm"
   },
   {
-    "key": "05233_m",
+    "key": "05233_v",
     "title": "Electric Injury",
-    "type": "maximum",
+    "type": "vivid",
     "level": 18.4,
     "bpm": "190",
     "jacket": "https://sdvx.in/jk/05/05233.jpg",
     "chartUrl": "https://sdvx.in/05/05233m.htm"
   },
   {
-    "key": "05235_m",
+    "key": "05235_v",
     "title": "月々紅花",
-    "type": "maximum",
+    "type": "vivid",
     "level": 18.3,
     "bpm": "183",
     "jacket": "https://sdvx.in/jk/05/05235.jpg",
@@ -3438,18 +3420,18 @@
     "chartUrl": "https://sdvx.in/05/05263m.htm"
   },
   {
-    "key": "05264_m",
+    "key": "05264_v",
     "title": "SLEEPWALKER",
-    "type": "maximum",
+    "type": "vivid",
     "level": 18.2,
     "bpm": "188",
     "jacket": "https://sdvx.in/jk/05/05264.jpg",
     "chartUrl": "https://sdvx.in/05/05264m.htm"
   },
   {
-    "key": "05269_m",
+    "key": "05269_v",
     "title": "Ring!Run!Nyan!!",
-    "type": "maximum",
+    "type": "vivid",
     "level": 18.4,
     "bpm": "195",
     "jacket": "https://sdvx.in/jk/05/05269.jpg",
@@ -3798,36 +3780,36 @@
     "chartUrl": "https://sdvx.in/06/06074m.htm"
   },
   {
-    "key": "06077_m",
+    "key": "06077_v",
     "title": "€omet popcorn",
-    "type": "maximum",
+    "type": "vivid",
     "level": 18,
     "bpm": "244",
     "jacket": "https://sdvx.in/jk/06/06077.jpg",
     "chartUrl": "https://sdvx.in/06/06077m.htm"
   },
   {
-    "key": "06079_m",
+    "key": "06079_v",
     "title": "PSYCHO+HEROES",
-    "type": "maximum",
+    "type": "vivid",
     "level": 18.3,
     "bpm": "210",
     "jacket": "https://sdvx.in/jk/06/06079.jpg",
     "chartUrl": "https://sdvx.in/06/06079m.htm"
   },
   {
-    "key": "06081_m",
+    "key": "06081_v",
     "title": "Hurt me plenty",
-    "type": "maximum",
+    "type": "vivid",
     "level": 18.2,
     "bpm": "143",
     "jacket": "https://sdvx.in/jk/06/06081.jpg",
     "chartUrl": "https://sdvx.in/06/06081m.htm"
   },
   {
-    "key": "06082_m",
+    "key": "06082_v",
     "title": "Your SOUL Is Mine",
-    "type": "maximum",
+    "type": "vivid",
     "level": 18.3,
     "bpm": "195",
     "jacket": "https://sdvx.in/jk/06/06082.jpg",
