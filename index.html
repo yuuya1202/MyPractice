@@ -663,7 +663,6 @@
   </div>
 </div>
 
-<!-- DETAIL OVERLAY -->
 <div class="overlay" id="detailOverlay" onclick="handleOverlayClick(event, 'detail')">
   <div class="detail-modal" id="detailModal">
     <div class="modal-handle"></div>
@@ -708,7 +707,6 @@
   </div>
 </div>
 
-<!-- FILTER OVERLAY -->
 <div class="overlay" id="filterOverlay" onclick="handleOverlayClick(event, 'filter')">
   <div class="filter-modal" id="filterModal">
     <div class="modal-handle"></div>
@@ -780,7 +778,10 @@ async function loadSongs() {
     return;
   }
   try {
-    const res = await fetch('https://sdvxindex.com/songsv1.3.6.json');
+    // 修正：外部URLではなく、リポジトリ内の songs.json を読み込む
+    const res = await fetch('songs.json');
+    if (!res.ok) throw new Error('songs.jsonが見つかりません');
+    
     const data = await res.json();
     const result = [];
     data.forEach(song => {
@@ -806,7 +807,8 @@ async function loadSongs() {
     localStorage.setItem(CACHE_KEY, JSON.stringify(songs));
     render();
   } catch(e) {
-    document.getElementById('listContainer').innerHTML = '<div class="empty">データの読み込みに失敗しました。<br>ネットワークを確認してください。</div>';
+    console.error(e);
+    document.getElementById('listContainer').innerHTML = '<div class="empty">データの読み込みに失敗しました。<br>songs.jsonが正しく配置されているか確認してください。</div>';
   }
 }
 
@@ -816,9 +818,6 @@ function getUrlSuffix(type) {
 }
 
 function buildLevelGrid() {
-  const levels = [];
-  for (let i = 0; i <= 9; i++) levels.push(18 + i * 0.1);
-  // get actual levels from songs
   const actualLevels = [...new Set(songs.map(s => s.level))].sort((a,b)=>a-b);
   const grid = document.getElementById('levelGrid');
   grid.innerHTML = '';
