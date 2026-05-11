@@ -263,20 +263,6 @@
 
   .chart-iframe { width: 100%; height: 100%; border: none; background: #fff; }
 
-  .chart-fallback {
-    display: none; flex-direction: column; align-items: center;
-    justify-content: center; height: 100%; gap: 16px;
-    color: white; padding: 20px; text-align: center;
-  }
-  .chart-fallback.show { display: flex; }
-
-  .chart-open-btn {
-    background: var(--accent); border: none; border-radius: 10px;
-    padding: 14px 28px; color: white; font-size: 14px;
-    font-family: 'Noto Sans JP', sans-serif; font-weight: 700;
-    cursor: pointer; text-decoration: none; display: inline-block;
-  }
-
   /* FILTER MODAL */
   .filter-modal {
     background: var(--bg2); border-radius: 20px 20px 0 0;
@@ -456,11 +442,7 @@
     <button class="chart-close-btn" onclick="closeChartModal()">✕ 閉じる</button>
   </div>
   <div class="chart-iframe-wrap">
-    <iframe class="chart-iframe" id="chartIframe" src="" onload="onIframeLoad()" onerror="onIframeError()"></iframe>
-    <div class="chart-fallback" id="chartFallback">
-      <div style="font-size:14px;color:#ccc;line-height:1.6;">埋め込みが許可されていないため<br>別タブで開いてください</div>
-      <a class="chart-open-btn" id="chartFallbackLink" href="#" target="_blank">別タブで開く</a>
-    </div>
+    <iframe class="chart-iframe" id="chartIframe" src=""></iframe>
   </div>
 </div>
 
@@ -655,44 +637,13 @@ function updateDoneInlineBtn(done) {
 
 function openChartModal() {
   const iframe = document.getElementById('chartIframe');
-  const fallback = document.getElementById('chartFallback');
-  document.getElementById('chartFallbackLink').href = currentChartUrl;
-  fallback.classList.remove('show');
-  iframe.style.display = 'block';
   iframe.src = currentChartUrl;
   document.getElementById('chartOverlay').classList.add('open');
-  setTimeout(() => {
-    try {
-      const doc = iframe.contentDocument || iframe.contentWindow.document;
-      if (!doc || doc.body.innerHTML === '') { iframe.style.display='none'; fallback.classList.add('show'); }
-    } catch(e) { iframe.style.display='none'; fallback.classList.add('show'); }
-  }, 3000);
-}
-
-function onIframeLoad() {
-  const iframe = document.getElementById('chartIframe');
-  try {
-    const doc = iframe.contentDocument || iframe.contentWindow.document;
-    if (!doc || doc.title === '' || doc.body.innerHTML === '') {
-      iframe.style.display='none';
-      document.getElementById('chartFallback').classList.add('show');
-    }
-  } catch(e) {
-    iframe.style.display='none';
-    document.getElementById('chartFallback').classList.add('show');
-  }
-}
-
-function onIframeError() {
-  document.getElementById('chartIframe').style.display='none';
-  document.getElementById('chartFallback').classList.add('show');
 }
 
 function closeChartModal() {
   document.getElementById('chartOverlay').classList.remove('open');
   document.getElementById('chartIframe').src='';
-  document.getElementById('chartFallback').classList.remove('show');
-  document.getElementById('chartIframe').style.display='block';
 }
 
 function openFilterModal() {
