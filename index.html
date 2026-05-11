@@ -721,4 +721,59 @@ function toggleDangerFilter(val) {
 
 function updateDangerFilterBtns() {
   document.getElementById('fc-none').className = 'danger-chip' + (fDanger.has('none') ? ' sel-blue' : '');
-  document.getElementById('fc-caution').className = 'danger-c
+  document.getElementById('fc-caution').className = 'danger-chip' + (fDanger.has('caution') ? ' sel-yellow' : '');
+  document.getElementById('fc-danger').className = 'danger-chip' + (fDanger.has('danger') ? ' sel-red' : '');
+}
+
+function setStatusFilter(val) { fStatus = val; updateStatusFilterBtns(); applyFilters(); }
+
+function updateStatusFilterBtns() {
+  ['all','undone','done'].forEach(v => {
+    document.getElementById(`fs-${v}`).className = 'status-opt' + (fStatus === v ? ' sel' : '');
+  });
+}
+
+function resetFilters() {
+  fLevels.clear(); fDanger.clear(); fStatus = 'all';
+  buildLevelGrid(); updateDangerFilterBtns(); updateStatusFilterBtns(); applyFilters();
+}
+
+function updateFilterIndicator() {
+  const active = fLevels.size > 0 || fDanger.size > 0 || fStatus !== 'all';
+  document.getElementById('filterIndicator').className = 'filter-indicator' + (active ? ' show' : '');
+  document.getElementById('filterBtn').className = 'filter-btn' + (active ? ' active' : '');
+}
+
+function updatePills() {
+  const container = document.getElementById('activePills');
+  container.innerHTML = '';
+  fLevels.forEach(lv => {
+    const pill = document.createElement('div');
+    pill.className = 'filter-pill';
+    pill.innerHTML = `${lv.toFixed(1)} <span onclick="toggleLevelFilter(${lv})">✕</span>`;
+    container.appendChild(pill);
+  });
+  const dangerNames = { none:'問題なし', caution:'要注意', danger:'危険' };
+  fDanger.forEach(d => {
+    const pill = document.createElement('div');
+    pill.className = 'filter-pill';
+    pill.innerHTML = `${dangerNames[d]} <span onclick="toggleDangerFilter('${d}')">✕</span>`;
+    container.appendChild(pill);
+  });
+  if (fStatus !== 'all') {
+    const pill = document.createElement('div');
+    pill.className = 'filter-pill';
+    pill.innerHTML = `${fStatus === 'done' ? '対策済み' : '未対策'} <span onclick="setStatusFilter('all')">✕</span>`;
+    container.appendChild(pill);
+  }
+}
+
+function handleOverlayClick(e, type) {
+  const modal = document.getElementById(type === 'detail' ? 'detailModal' : 'filterModal');
+  if (!modal.contains(e.target)) { type === 'detail' ? closeDetail() : closeFilterModal(); }
+}
+
+loadSongs();
+</script>
+</body>
+</html>
