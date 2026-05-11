@@ -5,7 +5,7 @@
     "type": "vivid",
     "level": 18,
     "bpm": "244",
-    "jacket": "https://sdvx.in/06/jacket/06077v.png",
+    "jacket": "https://sdvx.in/06/jacket/06077m.png",
     "chartUrl": "https://sdvx.in/06/06077m.htm"
   },
   {
@@ -23,7 +23,7 @@
     "type": "gravity",
     "level": 18,
     "bpm": "150",
-    "jacket": "https://sdvx.in/05/jacket/05094g.png",
+    "jacket": "https://sdvx.in/05/jacket/05094m.png",
     "chartUrl": "https://sdvx.in/05/05094m.htm"
   },
   {
@@ -149,7 +149,7 @@
     "type": "exhaust",
     "level": 18,
     "bpm": "225",
-    "jacket": "https://sdvx.in/04/jacket/04056e.png",
+    "jacket": "https://sdvx.in/04/jacket/04056m.png",
     "chartUrl": "https://sdvx.in/04/04056e.htm"
   },
   {
@@ -194,7 +194,7 @@
     "type": "gravity",
     "level": 18,
     "bpm": "165",
-    "jacket": "https://sdvx.in/03/jacket/03134g.png",
+    "jacket": "https://sdvx.in/03/jacket/03134m.png",
     "chartUrl": "https://sdvx.in/03/03134m.htm"
   },
   {
@@ -230,7 +230,7 @@
     "type": "exceed",
     "level": 18,
     "bpm": "190",
-    "jacket": "https://sdvx.in/02/jacket/02109x.png",
+    "jacket": "https://sdvx.in/02/jacket/02109m.png",
     "chartUrl": "https://sdvx.in/02/02109m.htm"
   },
   {
@@ -302,7 +302,7 @@
     "type": "gravity",
     "level": 18,
     "bpm": "226",
-    "jacket": "https://sdvx.in/04/jacket/04390g.png",
+    "jacket": "https://sdvx.in/04/jacket/04390m.png",
     "chartUrl": "https://sdvx.in/04/04390m.htm"
   },
   {
@@ -329,7 +329,7 @@
     "type": "heavenly",
     "level": 18,
     "bpm": "260",
-    "jacket": "https://sdvx.in/01/jacket/01102h.png",
+    "jacket": "https://sdvx.in/01/jacket/01102m.png",
     "chartUrl": "https://sdvx.in/01/01102m.htm"
   },
   {
@@ -365,7 +365,7 @@
     "type": "gravity",
     "level": 18.1,
     "bpm": "158",
-    "jacket": "https://sdvx.in/04/jacket/04391g.png",
+    "jacket": "https://sdvx.in/04/jacket/04391m.png",
     "chartUrl": "https://sdvx.in/04/04391m.htm"
   },
   {
@@ -374,7 +374,7 @@
     "type": "exceed",
     "level": 18.1,
     "bpm": "170",
-    "jacket": "https://sdvx.in/03/jacket/03357x.png",
+    "jacket": "https://sdvx.in/03/jacket/03357m.png",
     "chartUrl": "https://sdvx.in/03/03357m.htm"
   },
   {
@@ -383,7 +383,7 @@
     "type": "gravity",
     "level": 18.1,
     "bpm": "165",
-    "jacket": "https://sdvx.in/05/jacket/05160g.png",
+    "jacket": "https://sdvx.in/05/jacket/05160m.png",
     "chartUrl": "https://sdvx.in/05/05160m.htm"
   },
   {
@@ -401,7 +401,7 @@
     "type": "heavenly",
     "level": 18.1,
     "bpm": "210",
-    "jacket": "https://sdvx.in/02/jacket/02062h.png",
+    "jacket": "https://sdvx.in/02/jacket/02062m.png",
     "chartUrl": "https://sdvx.in/02/02062m.htm"
   },
   {
@@ -455,7 +455,7 @@
     "type": "exhaust",
     "level": 18.1,
     "bpm": "200",
-    "jacket": "https://sdvx.in/03/jacket/03257e.png",
+    "jacket": "https://sdvx.in/03/jacket/03257m.png",
     "chartUrl": "https://sdvx.in/03/03257e.htm"
   },
   {
@@ -482,7 +482,7 @@
     "type": "exceed",
     "level": 18.1,
     "bpm": "180",
-    "jacket": "https://sdvx.in/02/jacket/02063x.png",
+    "jacket": "https://sdvx.in/02/jacket/02063m.png",
     "chartUrl": "https://sdvx.in/02/02063m.htm"
   },
   {
@@ -572,7 +572,7 @@
     "type": "gravity",
     "level": 18.1,
     "bpm": "180",
-    "jacket": "https://sdvx.in/05/jacket/05161g.png",
+    "jacket": "https://sdvx.in/05/jacket/05161m.png",
     "chartUrl": "https://sdvx.in/05/05161m.htm"
   },
   {
@@ -581,7 +581,7 @@
     "type": "gravity",
     "level": 18.1,
     "bpm": "220",
-    "jacket": "https://sdvx.in/01/jacket/01120g.png",
+    "jacket": "https://sdvx.in/01/jacket/01120m.png",
     "chartUrl": "https://sdvx.in/01/01120m.htm"
   },
   {
@@ -599,7 +599,7 @@
     "type": "gravity",
     "level": 18.1,
     "bpm": "153",
-    "jacket": "https://sdvx.in/05/jacket/05102g.png",
+    "jacket": "https://sdvx.in/05/jacket/05102m.png",
     "chartUrl": "https://sdvx.in/05/05102m.htm"
   },
   {
@@ -617,7 +617,7 @@
     "type": "vivid",
     "level": 18.1,
     "bpm": "186",
-    "jacket": "https://sdvx.in/02/jacket/02016v.png",
+    "jacket": "https://sdvx.in/02/jacket/02016m.png",
     "chartUrl": "https://sdvx.in/02/02016m.htm"
   },
   {
@@ -707,7 +707,7 @@
     "type": "vivid",
     "level": 18.1,
     "bpm": "200",
-    "jacket": "https://sdvx.in/02/jacket/02096v.png",
+    "jacket": "https://sdvx.in/02/jacket/02096m.png",
     "chartUrl": "https://sdvx.in/02/02096m.htm"
   },
   {
@@ -860,7 +860,7 @@
     "type": "heavenly",
     "level": 18.1,
     "bpm": "200",
-    "jacket": "https://sdvx.in/01/jacket/01146h.png",
+    "jacket": "https://sdvx.in/01/jacket/01146m.png",
     "chartUrl": "https://sdvx.in/01/01146m.htm"
   },
   {
@@ -869,7 +869,7 @@
     "type": "heavenly",
     "level": 18.1,
     "bpm": "230",
-    "jacket": "https://sdvx.in/01/jacket/01089h.png",
+    "jacket": "https://sdvx.in/01/jacket/01089m.png",
     "chartUrl": "https://sdvx.in/01/01089m.htm"
   },
   {
@@ -887,7 +887,7 @@
     "type": "gravity",
     "level": 18.1,
     "bpm": "200",
-    "jacket": "https://sdvx.in/02/jacket/02127g.png",
+    "jacket": "https://sdvx.in/02/jacket/02127m.png",
     "chartUrl": "https://sdvx.in/02/02127m.htm"
   },
   {
@@ -968,7 +968,7 @@
     "type": "exhaust",
     "level": 18.2,
     "bpm": "222",
-    "jacket": "https://sdvx.in/03/jacket/03381e.png",
+    "jacket": "https://sdvx.in/03/jacket/03381m.png",
     "chartUrl": "https://sdvx.in/03/03381e.htm"
   },
   {
@@ -1004,7 +1004,7 @@
     "type": "exhaust",
     "level": 18.2,
     "bpm": "100-173",
-    "jacket": "https://sdvx.in/02/jacket/02081e.png",
+    "jacket": "https://sdvx.in/02/jacket/02081m.png",
     "chartUrl": "https://sdvx.in/02/02081e.htm"
   },
   {
@@ -1148,7 +1148,7 @@
     "type": "exhaust",
     "level": 18.2,
     "bpm": "173",
-    "jacket": "https://sdvx.in/03/jacket/03176e.png",
+    "jacket": "https://sdvx.in/03/jacket/03176m.png",
     "chartUrl": "https://sdvx.in/03/03176e.htm"
   },
   {
@@ -1193,7 +1193,7 @@
     "type": "exhaust",
     "level": 18.2,
     "bpm": "215",
-    "jacket": "https://sdvx.in/02/jacket/02295e.png",
+    "jacket": "https://sdvx.in/02/jacket/02295m.png",
     "chartUrl": "https://sdvx.in/02/02295e.htm"
   },
   {
@@ -1211,7 +1211,7 @@
     "type": "vivid",
     "level": 18.2,
     "bpm": "143",
-    "jacket": "https://sdvx.in/06/jacket/06081v.png",
+    "jacket": "https://sdvx.in/06/jacket/06081m.png",
     "chartUrl": "https://sdvx.in/06/06081m.htm"
   },
   {
@@ -1220,7 +1220,7 @@
     "type": "exhaust",
     "level": 18.2,
     "bpm": "230",
-    "jacket": "https://sdvx.in/03/jacket/03062e.png",
+    "jacket": "https://sdvx.in/03/jacket/03062m.png",
     "chartUrl": "https://sdvx.in/03/03062e.htm"
   },
   {
@@ -1346,7 +1346,7 @@
     "type": "exhaust",
     "level": 18.2,
     "bpm": "380",
-    "jacket": "https://sdvx.in/03/jacket/03051e.png",
+    "jacket": "https://sdvx.in/03/jacket/03051m.png",
     "chartUrl": "https://sdvx.in/03/03051e.htm"
   },
   {
@@ -1382,7 +1382,7 @@
     "type": "gravity",
     "level": 18.2,
     "bpm": "240",
-    "jacket": "https://sdvx.in/03/jacket/03277g.png",
+    "jacket": "https://sdvx.in/03/jacket/03277m.png",
     "chartUrl": "https://sdvx.in/03/03277m.htm"
   },
   {
@@ -1400,7 +1400,7 @@
     "type": "vivid",
     "level": 18.2,
     "bpm": "188",
-    "jacket": "https://sdvx.in/05/jacket/05264v.png",
+    "jacket": "https://sdvx.in/05/jacket/05264m.png",
     "chartUrl": "https://sdvx.in/05/05264m.htm"
   },
   {
@@ -1472,7 +1472,7 @@
     "type": "exceed",
     "level": 18.2,
     "bpm": "220",
-    "jacket": "https://sdvx.in/03/jacket/03293x.png",
+    "jacket": "https://sdvx.in/03/jacket/03293m.png",
     "chartUrl": "https://sdvx.in/03/03293m.htm"
   },
   {
@@ -1481,7 +1481,7 @@
     "type": "exhaust",
     "level": 18.2,
     "bpm": "165",
-    "jacket": "https://sdvx.in/03/jacket/03073e.png",
+    "jacket": "https://sdvx.in/03/jacket/03073m.png",
     "chartUrl": "https://sdvx.in/03/03073e.htm"
   },
   {
@@ -1490,7 +1490,7 @@
     "type": "gravity",
     "level": 18.2,
     "bpm": "216",
-    "jacket": "https://sdvx.in/03/jacket/03367g.png",
+    "jacket": "https://sdvx.in/03/jacket/03367m.png",
     "chartUrl": "https://sdvx.in/03/03367m.htm"
   },
   {
@@ -1544,7 +1544,7 @@
     "type": "vivid",
     "level": 18.2,
     "bpm": "255",
-    "jacket": "https://sdvx.in/05/jacket/05214v.png",
+    "jacket": "https://sdvx.in/05/jacket/05214m.png",
     "chartUrl": "https://sdvx.in/05/05214m.htm"
   },
   {
@@ -1562,7 +1562,7 @@
     "type": "vivid",
     "level": 18.2,
     "bpm": "177",
-    "jacket": "https://sdvx.in/05/jacket/05232v.png",
+    "jacket": "https://sdvx.in/05/jacket/05232m.png",
     "chartUrl": "https://sdvx.in/05/05232m.htm"
   },
   {
@@ -1679,7 +1679,7 @@
     "type": "exhaust",
     "level": 18.2,
     "bpm": "186",
-    "jacket": "https://sdvx.in/03/jacket/03198e.png",
+    "jacket": "https://sdvx.in/03/jacket/03198m.png",
     "chartUrl": "https://sdvx.in/03/03198e.htm"
   },
   {
@@ -1697,7 +1697,7 @@
     "type": "gravity",
     "level": 18.2,
     "bpm": "178",
-    "jacket": "https://sdvx.in/01/jacket/01058g.png",
+    "jacket": "https://sdvx.in/01/jacket/01058m.png",
     "chartUrl": "https://sdvx.in/01/01058m.htm"
   },
   {
@@ -1706,7 +1706,7 @@
     "type": "exhaust",
     "level": 18.2,
     "bpm": "209",
-    "jacket": "https://sdvx.in/03/jacket/03384e.png",
+    "jacket": "https://sdvx.in/03/jacket/03384m.png",
     "chartUrl": "https://sdvx.in/03/03384e.htm"
   },
   {
@@ -1724,7 +1724,7 @@
     "type": "exhaust",
     "level": 18.2,
     "bpm": "220",
-    "jacket": "https://sdvx.in/03/jacket/03386e.png",
+    "jacket": "https://sdvx.in/03/jacket/03386m.png",
     "chartUrl": "https://sdvx.in/03/03386e.htm"
   },
   {
@@ -1742,7 +1742,7 @@
     "type": "infinite",
     "level": 18.2,
     "bpm": "200",
-    "jacket": "https://sdvx.in/01/jacket/01034i.png",
+    "jacket": "https://sdvx.in/01/jacket/01034m.png",
     "chartUrl": "https://sdvx.in/01/01034m.htm"
   },
   {
@@ -1751,7 +1751,7 @@
     "type": "exceed",
     "level": 18.2,
     "bpm": "266",
-    "jacket": "https://sdvx.in/02/jacket/02287x.png",
+    "jacket": "https://sdvx.in/02/jacket/02287m.png",
     "chartUrl": "https://sdvx.in/02/02287m.htm"
   },
   {
@@ -1778,7 +1778,7 @@
     "type": "exceed",
     "level": 18.2,
     "bpm": "128",
-    "jacket": "https://sdvx.in/02/jacket/02094x.png",
+    "jacket": "https://sdvx.in/02/jacket/02094m.png",
     "chartUrl": "https://sdvx.in/02/02094m.htm"
   },
   {
@@ -1805,7 +1805,7 @@
     "type": "gravity",
     "level": 18.3,
     "bpm": "200",
-    "jacket": "https://sdvx.in/03/jacket/03364g.png",
+    "jacket": "https://sdvx.in/03/jacket/03364m.png",
     "chartUrl": "https://sdvx.in/03/03364m.htm"
   },
   {
@@ -1976,7 +1976,7 @@
     "type": "heavenly",
     "level": 18.3,
     "bpm": "180",
-    "jacket": "https://sdvx.in/01/jacket/01015h.png",
+    "jacket": "https://sdvx.in/01/jacket/01015m.png",
     "chartUrl": "https://sdvx.in/01/01015m.htm"
   },
   {
@@ -2030,7 +2030,7 @@
     "type": "exhaust",
     "level": 18.3,
     "bpm": "200",
-    "jacket": "https://sdvx.in/01/jacket/01071e.png",
+    "jacket": "https://sdvx.in/01/jacket/01071m.png",
     "chartUrl": "https://sdvx.in/01/01071e.htm"
   },
   {
@@ -2057,7 +2057,7 @@
     "type": "exhaust",
     "level": 18.3,
     "bpm": "285",
-    "jacket": "https://sdvx.in/06/jacket/06395e.png",
+    "jacket": "https://sdvx.in/06/jacket/06395m.png",
     "chartUrl": "https://sdvx.in/06/06395e.htm"
   },
   {
@@ -2084,7 +2084,7 @@
     "type": "exceed",
     "level": 18.3,
     "bpm": "181",
-    "jacket": "https://sdvx.in/02/jacket/02055x.png",
+    "jacket": "https://sdvx.in/02/jacket/02055m.png",
     "chartUrl": "https://sdvx.in/02/02055m.htm"
   },
   {
@@ -2093,7 +2093,7 @@
     "type": "exhaust",
     "level": 18.3,
     "bpm": "216",
-    "jacket": "https://sdvx.in/03/jacket/03382e.png",
+    "jacket": "https://sdvx.in/03/jacket/03382m.png",
     "chartUrl": "https://sdvx.in/03/03382e.htm"
   },
   {
@@ -2129,7 +2129,7 @@
     "type": "exceed",
     "level": 18.3,
     "bpm": "220",
-    "jacket": "https://sdvx.in/03/jacket/03143x.png",
+    "jacket": "https://sdvx.in/03/jacket/03143m.png",
     "chartUrl": "https://sdvx.in/03/03143m.htm"
   },
   {
@@ -2183,7 +2183,7 @@
     "type": "exhaust",
     "level": 18.3,
     "bpm": "998",
-    "jacket": "https://sdvx.in/05/jacket/05283e.png",
+    "jacket": "https://sdvx.in/05/jacket/05283m.png",
     "chartUrl": "https://sdvx.in/05/05283e.htm"
   },
   {
@@ -2192,7 +2192,7 @@
     "type": "exhaust",
     "level": 18.3,
     "bpm": "165",
-    "jacket": "https://sdvx.in/03/jacket/03245e.png",
+    "jacket": "https://sdvx.in/03/jacket/03245m.png",
     "chartUrl": "https://sdvx.in/03/03245e.htm"
   },
   {
@@ -2201,7 +2201,7 @@
     "type": "gravity",
     "level": 18.3,
     "bpm": "210",
-    "jacket": "https://sdvx.in/03/jacket/03341g.png",
+    "jacket": "https://sdvx.in/03/jacket/03341m.png",
     "chartUrl": "https://sdvx.in/03/03341m.htm"
   },
   {
@@ -2237,7 +2237,7 @@
     "type": "exhaust",
     "level": 18.3,
     "bpm": "144",
-    "jacket": "https://sdvx.in/03/jacket/03383e.png",
+    "jacket": "https://sdvx.in/03/jacket/03383m.png",
     "chartUrl": "https://sdvx.in/03/03383e.htm"
   },
   {
@@ -2246,7 +2246,7 @@
     "type": "vivid",
     "level": 18.3,
     "bpm": "210",
-    "jacket": "https://sdvx.in/06/jacket/06079v.png",
+    "jacket": "https://sdvx.in/06/jacket/06079m.png",
     "chartUrl": "https://sdvx.in/06/06079m.htm"
   },
   {
@@ -2318,7 +2318,7 @@
     "type": "exhaust",
     "level": 18.3,
     "bpm": "186",
-    "jacket": "https://sdvx.in/03/jacket/03200e.png",
+    "jacket": "https://sdvx.in/03/jacket/03200m.png",
     "chartUrl": "https://sdvx.in/03/03200e.htm"
   },
   {
@@ -2327,7 +2327,7 @@
     "type": "exhaust",
     "level": 18.3,
     "bpm": "171",
-    "jacket": "https://sdvx.in/03/jacket/03166e.png",
+    "jacket": "https://sdvx.in/03/jacket/03166m.png",
     "chartUrl": "https://sdvx.in/03/03166e.htm"
   },
   {
@@ -2354,7 +2354,7 @@
     "type": "exceed",
     "level": 18.3,
     "bpm": "175",
-    "jacket": "https://sdvx.in/03/jacket/03133x.png",
+    "jacket": "https://sdvx.in/03/jacket/03133m.png",
     "chartUrl": "https://sdvx.in/03/03133m.htm"
   },
   {
@@ -2435,7 +2435,7 @@
     "type": "gravity",
     "level": 18.3,
     "bpm": "172",
-    "jacket": "https://sdvx.in/05/jacket/05132g.png",
+    "jacket": "https://sdvx.in/05/jacket/05132m.png",
     "chartUrl": "https://sdvx.in/05/05132m.htm"
   },
   {
@@ -2444,7 +2444,7 @@
     "type": "exhaust",
     "level": 18.3,
     "bpm": "200",
-    "jacket": "https://sdvx.in/03/jacket/03323e.png",
+    "jacket": "https://sdvx.in/03/jacket/03323m.png",
     "chartUrl": "https://sdvx.in/03/03323e.htm"
   },
   {
@@ -2462,7 +2462,7 @@
     "type": "exhaust",
     "level": 18.3,
     "bpm": "240",
-    "jacket": "https://sdvx.in/02/jacket/02308e.png",
+    "jacket": "https://sdvx.in/02/jacket/02308m.png",
     "chartUrl": "https://sdvx.in/02/02308e.htm"
   },
   {
@@ -2480,7 +2480,7 @@
     "type": "exhaust",
     "level": 18.3,
     "bpm": "198",
-    "jacket": "https://sdvx.in/04/jacket/04140e.png",
+    "jacket": "https://sdvx.in/04/jacket/04140m.png",
     "chartUrl": "https://sdvx.in/04/04140e.htm"
   },
   {
@@ -2498,7 +2498,7 @@
     "type": "vivid",
     "level": 18.3,
     "bpm": "195",
-    "jacket": "https://sdvx.in/06/jacket/06082v.png",
+    "jacket": "https://sdvx.in/06/jacket/06082m.png",
     "chartUrl": "https://sdvx.in/06/06082m.htm"
   },
   {
@@ -2516,7 +2516,7 @@
     "type": "vivid",
     "level": 18.3,
     "bpm": "180",
-    "jacket": "https://sdvx.in/02/jacket/02174v.png",
+    "jacket": "https://sdvx.in/02/jacket/02174m.png",
     "chartUrl": "https://sdvx.in/02/02174m.htm"
   },
   {
@@ -2534,7 +2534,7 @@
     "type": "gravity",
     "level": 18.3,
     "bpm": "195",
-    "jacket": "https://sdvx.in/05/jacket/05131g.png",
+    "jacket": "https://sdvx.in/05/jacket/05131m.png",
     "chartUrl": "https://sdvx.in/05/05131m.htm"
   },
   {
@@ -2597,7 +2597,7 @@
     "type": "exhaust",
     "level": 18.3,
     "bpm": "194",
-    "jacket": "https://sdvx.in/03/jacket/03180e.png",
+    "jacket": "https://sdvx.in/03/jacket/03180m.png",
     "chartUrl": "https://sdvx.in/03/03180e.htm"
   },
   {
@@ -2606,7 +2606,7 @@
     "type": "gravity",
     "level": 18.3,
     "bpm": "220",
-    "jacket": "https://sdvx.in/04/jacket/04326g.png",
+    "jacket": "https://sdvx.in/04/jacket/04326m.png",
     "chartUrl": "https://sdvx.in/04/04326m.htm"
   },
   {
@@ -2660,7 +2660,7 @@
     "type": "vivid",
     "level": 18.3,
     "bpm": "183",
-    "jacket": "https://sdvx.in/05/jacket/05235v.png",
+    "jacket": "https://sdvx.in/05/jacket/05235m.png",
     "chartUrl": "https://sdvx.in/05/05235m.htm"
   },
   {
@@ -2669,7 +2669,7 @@
     "type": "exhaust",
     "level": 18.3,
     "bpm": "500",
-    "jacket": "https://sdvx.in/03/jacket/03307e.png",
+    "jacket": "https://sdvx.in/03/jacket/03307m.png",
     "chartUrl": "https://sdvx.in/03/03307e.htm"
   },
   {
@@ -2696,7 +2696,7 @@
     "type": "exceed",
     "level": 18.3,
     "bpm": "157",
-    "jacket": "https://sdvx.in/01/jacket/01043x.png",
+    "jacket": "https://sdvx.in/01/jacket/01043m.png",
     "chartUrl": "https://sdvx.in/01/01043m.htm"
   },
   {
@@ -2714,7 +2714,7 @@
     "type": "exhaust",
     "level": 18.3,
     "bpm": "188",
-    "jacket": "https://sdvx.in/03/jacket/03078e.png",
+    "jacket": "https://sdvx.in/03/jacket/03078m.png",
     "chartUrl": "https://sdvx.in/03/03078e.htm"
   },
   {
@@ -2741,7 +2741,7 @@
     "type": "exhaust",
     "level": 18.3,
     "bpm": "208",
-    "jacket": "https://sdvx.in/03/jacket/03148e.png",
+    "jacket": "https://sdvx.in/03/jacket/03148m.png",
     "chartUrl": "https://sdvx.in/03/03148e.htm"
   },
   {
@@ -2750,7 +2750,7 @@
     "type": "exhaust",
     "level": 18.3,
     "bpm": "236",
-    "jacket": "https://sdvx.in/05/jacket/05117e.png",
+    "jacket": "https://sdvx.in/05/jacket/05117m.png",
     "chartUrl": "https://sdvx.in/05/05117e.htm"
   },
   {
@@ -2786,7 +2786,7 @@
     "type": "exhaust",
     "level": 18.4,
     "bpm": "170",
-    "jacket": "https://sdvx.in/03/jacket/03401e.png",
+    "jacket": "https://sdvx.in/03/jacket/03401m.png",
     "chartUrl": "https://sdvx.in/03/03401e.htm"
   },
   {
@@ -2822,7 +2822,7 @@
     "type": "exhaust",
     "level": 18.4,
     "bpm": "177",
-    "jacket": "https://sdvx.in/03/jacket/03212e.png",
+    "jacket": "https://sdvx.in/03/jacket/03212m.png",
     "chartUrl": "https://sdvx.in/03/03212e.htm"
   },
   {
@@ -2867,7 +2867,7 @@
     "type": "exhaust",
     "level": 18.4,
     "bpm": "185",
-    "jacket": "https://sdvx.in/02/jacket/02173e.png",
+    "jacket": "https://sdvx.in/02/jacket/02173m.png",
     "chartUrl": "https://sdvx.in/02/02173e.htm"
   },
   {
@@ -2903,7 +2903,7 @@
     "type": "gravity",
     "level": 18.4,
     "bpm": "200",
-    "jacket": "https://sdvx.in/05/jacket/05095g.png",
+    "jacket": "https://sdvx.in/05/jacket/05095m.png",
     "chartUrl": "https://sdvx.in/05/05095m.htm"
   },
   {
@@ -2912,7 +2912,7 @@
     "type": "gravity",
     "level": 18.4,
     "bpm": "220",
-    "jacket": "https://sdvx.in/02/jacket/02122g.png",
+    "jacket": "https://sdvx.in/02/jacket/02122m.png",
     "chartUrl": "https://sdvx.in/02/02122m.htm"
   },
   {
@@ -2966,7 +2966,7 @@
     "type": "vivid",
     "level": 18.4,
     "bpm": "190",
-    "jacket": "https://sdvx.in/05/jacket/05233v.png",
+    "jacket": "https://sdvx.in/05/jacket/05233m.png",
     "chartUrl": "https://sdvx.in/05/05233m.htm"
   },
   {
@@ -3002,7 +3002,7 @@
     "type": "exceed",
     "level": 18.4,
     "bpm": "145",
-    "jacket": "https://sdvx.in/02/jacket/02011x.png",
+    "jacket": "https://sdvx.in/02/jacket/02011m.png",
     "chartUrl": "https://sdvx.in/02/02011m.htm"
   },
   {
@@ -3074,7 +3074,7 @@
     "type": "exhaust",
     "level": 18.4,
     "bpm": "225",
-    "jacket": "https://sdvx.in/04/jacket/04238e.png",
+    "jacket": "https://sdvx.in/04/jacket/04238m.png",
     "chartUrl": "https://sdvx.in/04/04238e.htm"
   },
   {
@@ -3083,7 +3083,7 @@
     "type": "vivid",
     "level": 18.4,
     "bpm": "90-180",
-    "jacket": "https://sdvx.in/05/jacket/05230v.png",
+    "jacket": "https://sdvx.in/05/jacket/05230m.png",
     "chartUrl": "https://sdvx.in/05/05230m.htm"
   },
   {
@@ -3101,7 +3101,7 @@
     "type": "exhaust",
     "level": 18.4,
     "bpm": "199",
-    "jacket": "https://sdvx.in/02/jacket/02277e.png",
+    "jacket": "https://sdvx.in/02/jacket/02277m.png",
     "chartUrl": "https://sdvx.in/02/02277e.htm"
   },
   {
@@ -3191,7 +3191,7 @@
     "type": "gravity",
     "level": 18.4,
     "bpm": "220",
-    "jacket": "https://sdvx.in/05/jacket/05103g.png",
+    "jacket": "https://sdvx.in/05/jacket/05103m.png",
     "chartUrl": "https://sdvx.in/05/05103m.htm"
   },
   {
@@ -3245,7 +3245,7 @@
     "type": "gravity",
     "level": 18.4,
     "bpm": "200",
-    "jacket": "https://sdvx.in/03/jacket/03358g.png",
+    "jacket": "https://sdvx.in/03/jacket/03358m.png",
     "chartUrl": "https://sdvx.in/03/03358m.htm"
   },
   {
@@ -3290,7 +3290,7 @@
     "type": "exhaust",
     "level": 18.4,
     "bpm": "48-195",
-    "jacket": "https://sdvx.in/03/jacket/03146e.png",
+    "jacket": "https://sdvx.in/03/jacket/03146m.png",
     "chartUrl": "https://sdvx.in/03/03146e.htm"
   },
   {
@@ -3326,7 +3326,7 @@
     "type": "exhaust",
     "level": 18.4,
     "bpm": "183",
-    "jacket": "https://sdvx.in/03/jacket/03115e.png",
+    "jacket": "https://sdvx.in/03/jacket/03115m.png",
     "chartUrl": "https://sdvx.in/03/03115e.htm"
   },
   {
@@ -3344,7 +3344,7 @@
     "type": "exhaust",
     "level": 18.4,
     "bpm": "115-220",
-    "jacket": "https://sdvx.in/03/jacket/03150e.png",
+    "jacket": "https://sdvx.in/03/jacket/03150m.png",
     "chartUrl": "https://sdvx.in/03/03150e.htm"
   },
   {
@@ -3353,7 +3353,7 @@
     "type": "heavenly",
     "level": 18.4,
     "bpm": "180",
-    "jacket": "https://sdvx.in/02/jacket/02044h.png",
+    "jacket": "https://sdvx.in/02/jacket/02044m.png",
     "chartUrl": "https://sdvx.in/02/02044m.htm"
   },
   {
@@ -3362,7 +3362,7 @@
     "type": "vivid",
     "level": 18.4,
     "bpm": "195",
-    "jacket": "https://sdvx.in/05/jacket/05269v.png",
+    "jacket": "https://sdvx.in/05/jacket/05269m.png",
     "chartUrl": "https://sdvx.in/05/05269m.htm"
   },
   {
@@ -3506,7 +3506,7 @@
     "type": "exhaust",
     "level": 18.4,
     "bpm": "185",
-    "jacket": "https://sdvx.in/02/jacket/02045e.png",
+    "jacket": "https://sdvx.in/02/jacket/02045m.png",
     "chartUrl": "https://sdvx.in/02/02045e.htm"
   },
   {
@@ -3515,7 +3515,7 @@
     "type": "exhaust",
     "level": 18.4,
     "bpm": "265",
-    "jacket": "https://sdvx.in/05/jacket/05240e.png",
+    "jacket": "https://sdvx.in/05/jacket/05240m.png",
     "chartUrl": "https://sdvx.in/05/05240e.htm"
   },
   {
@@ -3524,7 +3524,7 @@
     "type": "exhaust",
     "level": 18.4,
     "bpm": "175",
-    "jacket": "https://sdvx.in/03/jacket/03170e.png",
+    "jacket": "https://sdvx.in/03/jacket/03170m.png",
     "chartUrl": "https://sdvx.in/03/03170e.htm"
   },
   {
@@ -3542,7 +3542,7 @@
     "type": "gravity",
     "level": 18.4,
     "bpm": "180",
-    "jacket": "https://sdvx.in/01/jacket/01030g.png",
+    "jacket": "https://sdvx.in/01/jacket/01030m.png",
     "chartUrl": "https://sdvx.in/01/01030m.htm"
   },
   {
@@ -3551,7 +3551,7 @@
     "type": "gravity",
     "level": 18.4,
     "bpm": "194",
-    "jacket": "https://sdvx.in/03/jacket/03273g.png",
+    "jacket": "https://sdvx.in/03/jacket/03273m.png",
     "chartUrl": "https://sdvx.in/03/03273m.htm"
   },
   {
@@ -3569,7 +3569,7 @@
     "type": "exhaust",
     "level": 18.4,
     "bpm": "222",
-    "jacket": "https://sdvx.in/03/jacket/03151e.png",
+    "jacket": "https://sdvx.in/03/jacket/03151m.png",
     "chartUrl": "https://sdvx.in/03/03151e.htm"
   },
   {
@@ -3641,7 +3641,7 @@
     "type": "vivid",
     "level": 18.4,
     "bpm": "165",
-    "jacket": "https://sdvx.in/05/jacket/05210v.png",
+    "jacket": "https://sdvx.in/05/jacket/05210m.png",
     "chartUrl": "https://sdvx.in/05/05210m.htm"
   },
   {
@@ -3659,7 +3659,7 @@
     "type": "exhaust",
     "level": 18.4,
     "bpm": "125-180",
-    "jacket": "https://sdvx.in/03/jacket/03224e.png",
+    "jacket": "https://sdvx.in/03/jacket/03224m.png",
     "chartUrl": "https://sdvx.in/03/03224e.htm"
   },
   {
@@ -3695,7 +3695,7 @@
     "type": "heavenly",
     "level": 18.4,
     "bpm": "190",
-    "jacket": "https://sdvx.in/01/jacket/01165h.png",
+    "jacket": "https://sdvx.in/01/jacket/01165m.png",
     "chartUrl": "https://sdvx.in/01/01165m.htm"
   },
   {
@@ -3740,7 +3740,7 @@
     "type": "vivid",
     "level": 18.4,
     "bpm": "188",
-    "jacket": "https://sdvx.in/02/jacket/02175v.png",
+    "jacket": "https://sdvx.in/02/jacket/02175m.png",
     "chartUrl": "https://sdvx.in/02/02175m.htm"
   },
   {
@@ -3785,7 +3785,7 @@
     "type": "exhaust",
     "level": 18.4,
     "bpm": "180-230",
-    "jacket": "https://sdvx.in/03/jacket/03225e.png",
+    "jacket": "https://sdvx.in/03/jacket/03225m.png",
     "chartUrl": "https://sdvx.in/03/03225e.htm"
   },
   {
@@ -3803,7 +3803,7 @@
     "type": "exhaust",
     "level": 18.4,
     "bpm": "220",
-    "jacket": "https://sdvx.in/04/jacket/04400e.png",
+    "jacket": "https://sdvx.in/04/jacket/04400m.png",
     "chartUrl": "https://sdvx.in/04/04400e.htm"
   },
   {
@@ -3839,7 +3839,7 @@
     "type": "exhaust",
     "level": 18.5,
     "bpm": "666",
-    "jacket": "https://sdvx.in/05/jacket/05186e.png",
+    "jacket": "https://sdvx.in/05/jacket/05186m.png",
     "chartUrl": "https://sdvx.in/05/05186e.htm"
   },
   {
@@ -3857,7 +3857,7 @@
     "type": "exhaust",
     "level": 18.5,
     "bpm": "212",
-    "jacket": "https://sdvx.in/06/jacket/06381e.png",
+    "jacket": "https://sdvx.in/06/jacket/06381m.png",
     "chartUrl": "https://sdvx.in/06/06381e.htm"
   },
   {
@@ -3893,7 +3893,7 @@
     "type": "exhaust",
     "level": 18.5,
     "bpm": "234",
-    "jacket": "https://sdvx.in/02/jacket/02169e.png",
+    "jacket": "https://sdvx.in/02/jacket/02169m.png",
     "chartUrl": "https://sdvx.in/02/02169e.htm"
   },
   {
@@ -3911,7 +3911,7 @@
     "type": "exhaust",
     "level": 18.5,
     "bpm": "234",
-    "jacket": "https://sdvx.in/06/jacket/06239e.png",
+    "jacket": "https://sdvx.in/06/jacket/06239m.png",
     "chartUrl": "https://sdvx.in/06/06239e.htm"
   },
   {
@@ -3929,7 +3929,7 @@
     "type": "gravity",
     "level": 18.5,
     "bpm": "259",
-    "jacket": "https://sdvx.in/03/jacket/03353g.png",
+    "jacket": "https://sdvx.in/03/jacket/03353m.png",
     "chartUrl": "https://sdvx.in/03/03353m.htm"
   },
   {
@@ -3965,7 +3965,7 @@
     "type": "exceed",
     "level": 18.5,
     "bpm": "160",
-    "jacket": "https://sdvx.in/03/jacket/03231x.png",
+    "jacket": "https://sdvx.in/03/jacket/03231m.png",
     "chartUrl": "https://sdvx.in/03/03231m.htm"
   },
   {
@@ -3992,7 +3992,7 @@
     "type": "exhaust",
     "level": 18.5,
     "bpm": "200",
-    "jacket": "https://sdvx.in/03/jacket/03262e.png",
+    "jacket": "https://sdvx.in/03/jacket/03262m.png",
     "chartUrl": "https://sdvx.in/03/03262e.htm"
   },
   {
@@ -4082,7 +4082,7 @@
     "type": "exhaust",
     "level": 18.5,
     "bpm": "177",
-    "jacket": "https://sdvx.in/03/jacket/03167e.png",
+    "jacket": "https://sdvx.in/03/jacket/03167m.png",
     "chartUrl": "https://sdvx.in/03/03167e.htm"
   },
   {
@@ -4100,7 +4100,7 @@
     "type": "exhaust",
     "level": 18.5,
     "bpm": "50-200",
-    "jacket": "https://sdvx.in/03/jacket/03267e.png",
+    "jacket": "https://sdvx.in/03/jacket/03267m.png",
     "chartUrl": "https://sdvx.in/03/03267e.htm"
   },
   {
@@ -4154,7 +4154,7 @@
     "type": "heavenly",
     "level": 18.5,
     "bpm": "93-186",
-    "jacket": "https://sdvx.in/02/jacket/02214h.png",
+    "jacket": "https://sdvx.in/02/jacket/02214m.png",
     "chartUrl": "https://sdvx.in/02/02214m.htm"
   },
   {
@@ -4199,7 +4199,7 @@
     "type": "gravity",
     "level": 18.5,
     "bpm": "200",
-    "jacket": "https://sdvx.in/03/jacket/03074g.png",
+    "jacket": "https://sdvx.in/03/jacket/03074m.png",
     "chartUrl": "https://sdvx.in/03/03074m.htm"
   },
   {
@@ -4208,7 +4208,7 @@
     "type": "exhaust",
     "level": 18.5,
     "bpm": "30-234",
-    "jacket": "https://sdvx.in/03/jacket/03263e.png",
+    "jacket": "https://sdvx.in/03/jacket/03263m.png",
     "chartUrl": "https://sdvx.in/03/03263e.htm"
   },
   {
@@ -4235,7 +4235,7 @@
     "type": "exhaust",
     "level": 18.5,
     "bpm": "236",
-    "jacket": "https://sdvx.in/03/jacket/03242e.png",
+    "jacket": "https://sdvx.in/03/jacket/03242m.png",
     "chartUrl": "https://sdvx.in/03/03242e.htm"
   },
   {
@@ -4271,7 +4271,7 @@
     "type": "infinite",
     "level": 18.5,
     "bpm": "190",
-    "jacket": "https://sdvx.in/01/jacket/01124i.png",
+    "jacket": "https://sdvx.in/01/jacket/01124m.png",
     "chartUrl": "https://sdvx.in/01/01124m.htm"
   },
   {
@@ -4316,7 +4316,7 @@
     "type": "exceed",
     "level": 18.5,
     "bpm": "130-199",
-    "jacket": "https://sdvx.in/01/jacket/01045x.png",
+    "jacket": "https://sdvx.in/01/jacket/01045m.png",
     "chartUrl": "https://sdvx.in/01/01045m.htm"
   },
   {
@@ -4325,7 +4325,7 @@
     "type": "gravity",
     "level": 18.5,
     "bpm": "160",
-    "jacket": "https://sdvx.in/04/jacket/04289g.png",
+    "jacket": "https://sdvx.in/04/jacket/04289m.png",
     "chartUrl": "https://sdvx.in/04/04289m.htm"
   },
   {
@@ -4397,7 +4397,7 @@
     "type": "gravity",
     "level": 18.5,
     "bpm": "240",
-    "jacket": "https://sdvx.in/04/jacket/04302g.png",
+    "jacket": "https://sdvx.in/04/jacket/04302m.png",
     "chartUrl": "https://sdvx.in/04/04302m.htm"
   },
   {
@@ -4406,7 +4406,7 @@
     "type": "exhaust",
     "level": 18.5,
     "bpm": "160",
-    "jacket": "https://sdvx.in/03/jacket/03268e.png",
+    "jacket": "https://sdvx.in/03/jacket/03268m.png",
     "chartUrl": "https://sdvx.in/03/03268e.htm"
   },
   {
@@ -4451,7 +4451,7 @@
     "type": "exhaust",
     "level": 18.5,
     "bpm": "200",
-    "jacket": "https://sdvx.in/03/jacket/03405e.png",
+    "jacket": "https://sdvx.in/03/jacket/03405m.png",
     "chartUrl": "https://sdvx.in/03/03405e.htm"
   },
   {
@@ -4532,7 +4532,7 @@
     "type": "exhaust",
     "level": 18.5,
     "bpm": "190",
-    "jacket": "https://sdvx.in/03/jacket/03152e.png",
+    "jacket": "https://sdvx.in/03/jacket/03152m.png",
     "chartUrl": "https://sdvx.in/03/03152e.htm"
   },
   {
@@ -4550,7 +4550,7 @@
     "type": "exhaust",
     "level": 18.5,
     "bpm": "222",
-    "jacket": "https://sdvx.in/02/jacket/02302e.png",
+    "jacket": "https://sdvx.in/02/jacket/02302m.png",
     "chartUrl": "https://sdvx.in/02/02302e.htm"
   },
   {
@@ -4613,7 +4613,7 @@
     "type": "exhaust",
     "level": 18.5,
     "bpm": "63-252",
-    "jacket": "https://sdvx.in/03/jacket/03390e.png",
+    "jacket": "https://sdvx.in/03/jacket/03390m.png",
     "chartUrl": "https://sdvx.in/03/03390e.htm"
   },
   {
@@ -4622,7 +4622,7 @@
     "type": "exhaust",
     "level": 18.5,
     "bpm": "176-264",
-    "jacket": "https://sdvx.in/06/jacket/06255e.png",
+    "jacket": "https://sdvx.in/06/jacket/06255m.png",
     "chartUrl": "https://sdvx.in/06/06255e.htm"
   },
   {
@@ -4658,7 +4658,7 @@
     "type": "vivid",
     "level": 18.5,
     "bpm": "128",
-    "jacket": "https://sdvx.in/02/jacket/02047v.png",
+    "jacket": "https://sdvx.in/02/jacket/02047m.png",
     "chartUrl": "https://sdvx.in/02/02047m.htm"
   },
   {
@@ -4676,7 +4676,7 @@
     "type": "gravity",
     "level": 18.5,
     "bpm": "220",
-    "jacket": "https://sdvx.in/05/jacket/05152g.png",
+    "jacket": "https://sdvx.in/05/jacket/05152m.png",
     "chartUrl": "https://sdvx.in/05/05152m.htm"
   },
   {
@@ -4712,7 +4712,7 @@
     "type": "exceed",
     "level": 18.5,
     "bpm": "175-200",
-    "jacket": "https://sdvx.in/02/jacket/02223x.png",
+    "jacket": "https://sdvx.in/02/jacket/02223m.png",
     "chartUrl": "https://sdvx.in/02/02223m.htm"
   },
   {
@@ -4748,7 +4748,7 @@
     "type": "exceed",
     "level": 18.5,
     "bpm": "150",
-    "jacket": "https://sdvx.in/03/jacket/03243x.png",
+    "jacket": "https://sdvx.in/03/jacket/03243m.png",
     "chartUrl": "https://sdvx.in/03/03243m.htm"
   },
   {
@@ -4793,7 +4793,7 @@
     "type": "exhaust",
     "level": 18.5,
     "bpm": "207",
-    "jacket": "https://sdvx.in/03/jacket/03394e.png",
+    "jacket": "https://sdvx.in/03/jacket/03394m.png",
     "chartUrl": "https://sdvx.in/03/03394e.htm"
   },
   {
@@ -4892,7 +4892,7 @@
     "type": "vivid",
     "level": 18.6,
     "bpm": "142",
-    "jacket": "https://sdvx.in/02/jacket/02091v.png",
+    "jacket": "https://sdvx.in/02/jacket/02091m.png",
     "chartUrl": "https://sdvx.in/02/02091m.htm"
   },
   {
@@ -4901,7 +4901,7 @@
     "type": "gravity",
     "level": 18.6,
     "bpm": "160",
-    "jacket": "https://sdvx.in/01/jacket/01115g.png",
+    "jacket": "https://sdvx.in/01/jacket/01115m.png",
     "chartUrl": "https://sdvx.in/01/01115m.htm"
   },
   {
@@ -4982,7 +4982,7 @@
     "type": "heavenly",
     "level": 18.6,
     "bpm": "150",
-    "jacket": "https://sdvx.in/01/jacket/01009h.png",
+    "jacket": "https://sdvx.in/01/jacket/01009m.png",
     "chartUrl": "https://sdvx.in/01/01009m.htm"
   },
   {
@@ -5009,7 +5009,7 @@
     "type": "gravity",
     "level": 18.6,
     "bpm": "167",
-    "jacket": "https://sdvx.in/02/jacket/02294g.png",
+    "jacket": "https://sdvx.in/02/jacket/02294m.png",
     "chartUrl": "https://sdvx.in/02/02294m.htm"
   },
   {
@@ -5027,7 +5027,7 @@
     "type": "infinite",
     "level": 18.6,
     "bpm": "160-195",
-    "jacket": "https://sdvx.in/01/jacket/01122i.png",
+    "jacket": "https://sdvx.in/01/jacket/01122m.png",
     "chartUrl": "https://sdvx.in/01/01122m.htm"
   },
   {
@@ -5054,7 +5054,7 @@
     "type": "exhaust",
     "level": 18.6,
     "bpm": "250-255",
-    "jacket": "https://sdvx.in/03/jacket/03246e.png",
+    "jacket": "https://sdvx.in/03/jacket/03246m.png",
     "chartUrl": "https://sdvx.in/03/03246e.htm"
   },
   {
@@ -5063,7 +5063,7 @@
     "type": "exhaust",
     "level": 18.6,
     "bpm": "265",
-    "jacket": "https://sdvx.in/03/jacket/03308e.png",
+    "jacket": "https://sdvx.in/03/jacket/03308m.png",
     "chartUrl": "https://sdvx.in/03/03308e.htm"
   },
   {
@@ -5099,7 +5099,7 @@
     "type": "infinite",
     "level": 18.6,
     "bpm": "180",
-    "jacket": "https://sdvx.in/01/jacket/01038i.png",
+    "jacket": "https://sdvx.in/01/jacket/01038m.png",
     "chartUrl": "https://sdvx.in/01/01038m.htm"
   },
   {
@@ -5108,7 +5108,7 @@
     "type": "exhaust",
     "level": 18.6,
     "bpm": "120-240",
-    "jacket": "https://sdvx.in/03/jacket/03368e.png",
+    "jacket": "https://sdvx.in/03/jacket/03368m.png",
     "chartUrl": "https://sdvx.in/03/03368e.htm"
   },
   {
@@ -5117,7 +5117,7 @@
     "type": "exhaust",
     "level": 18.6,
     "bpm": "201",
-    "jacket": "https://sdvx.in/02/jacket/02168e.png",
+    "jacket": "https://sdvx.in/02/jacket/02168m.png",
     "chartUrl": "https://sdvx.in/02/02168e.htm"
   },
   {
@@ -5126,7 +5126,7 @@
     "type": "heavenly",
     "level": 18.6,
     "bpm": "256",
-    "jacket": "https://sdvx.in/03/jacket/03178h.png",
+    "jacket": "https://sdvx.in/03/jacket/03178m.png",
     "chartUrl": "https://sdvx.in/03/03178m.htm"
   },
   {
@@ -5135,7 +5135,7 @@
     "type": "exhaust",
     "level": 18.6,
     "bpm": "256",
-    "jacket": "https://sdvx.in/03/jacket/03380e.png",
+    "jacket": "https://sdvx.in/03/jacket/03380m.png",
     "chartUrl": "https://sdvx.in/03/03380e.htm"
   },
   {
@@ -5144,7 +5144,7 @@
     "type": "exhaust",
     "level": 18.6,
     "bpm": "183",
-    "jacket": "https://sdvx.in/03/jacket/03117e.png",
+    "jacket": "https://sdvx.in/03/jacket/03117m.png",
     "chartUrl": "https://sdvx.in/03/03117e.htm"
   },
   {
@@ -5180,7 +5180,7 @@
     "type": "gravity",
     "level": 18.6,
     "bpm": "176",
-    "jacket": "https://sdvx.in/02/jacket/02171g.png",
+    "jacket": "https://sdvx.in/02/jacket/02171m.png",
     "chartUrl": "https://sdvx.in/02/02171m.htm"
   },
   {
@@ -5216,7 +5216,7 @@
     "type": "exhaust",
     "level": 18.6,
     "bpm": "282",
-    "jacket": "https://sdvx.in/06/jacket/06629e.png",
+    "jacket": "https://sdvx.in/06/jacket/06629m.png",
     "chartUrl": "https://sdvx.in/06/06629e.htm"
   },
   {
@@ -5225,7 +5225,7 @@
     "type": "exhaust",
     "level": 18.6,
     "bpm": "280",
-    "jacket": "https://sdvx.in/07/jacket/07063e.png",
+    "jacket": "https://sdvx.in/07/jacket/07063m.png",
     "chartUrl": "https://sdvx.in/07/07063e.htm"
   },
   {
@@ -5252,7 +5252,7 @@
     "type": "exhaust",
     "level": 18.6,
     "bpm": "205-206",
-    "jacket": "https://sdvx.in/03/jacket/03064e.png",
+    "jacket": "https://sdvx.in/03/jacket/03064m.png",
     "chartUrl": "https://sdvx.in/03/03064e.htm"
   },
   {
@@ -5315,7 +5315,7 @@
     "type": "heavenly",
     "level": 18.6,
     "bpm": "175",
-    "jacket": "https://sdvx.in/01/jacket/01061h.png",
+    "jacket": "https://sdvx.in/01/jacket/01061m.png",
     "chartUrl": "https://sdvx.in/01/01061m.htm"
   },
   {
@@ -5324,7 +5324,7 @@
     "type": "exhaust",
     "level": 18.6,
     "bpm": "100",
-    "jacket": "https://sdvx.in/06/jacket/06585e.png",
+    "jacket": "https://sdvx.in/06/jacket/06585m.png",
     "chartUrl": "https://sdvx.in/06/06585e.htm"
   },
   {
@@ -5342,7 +5342,7 @@
     "type": "vivid",
     "level": 18.6,
     "bpm": "205",
-    "jacket": "https://sdvx.in/05/jacket/05212v.png",
+    "jacket": "https://sdvx.in/05/jacket/05212m.png",
     "chartUrl": "https://sdvx.in/05/05212m.htm"
   },
   {
@@ -5432,7 +5432,7 @@
     "type": "exhaust",
     "level": 18.6,
     "bpm": "224",
-    "jacket": "https://sdvx.in/03/jacket/03079e.png",
+    "jacket": "https://sdvx.in/03/jacket/03079m.png",
     "chartUrl": "https://sdvx.in/03/03079e.htm"
   },
   {
@@ -5459,7 +5459,7 @@
     "type": "vivid",
     "level": 18.6,
     "bpm": "85-370",
-    "jacket": "https://sdvx.in/02/jacket/02017v.png",
+    "jacket": "https://sdvx.in/02/jacket/02017m.png",
     "chartUrl": "https://sdvx.in/02/02017m.htm"
   },
   {
@@ -5495,7 +5495,7 @@
     "type": "exceed",
     "level": 18.6,
     "bpm": "181",
-    "jacket": "https://sdvx.in/03/jacket/03052x.png",
+    "jacket": "https://sdvx.in/03/jacket/03052m.png",
     "chartUrl": "https://sdvx.in/03/03052m.htm"
   },
   {
@@ -5513,7 +5513,7 @@
     "type": "exhaust",
     "level": 18.6,
     "bpm": "187",
-    "jacket": "https://sdvx.in/03/jacket/03145e.png",
+    "jacket": "https://sdvx.in/03/jacket/03145m.png",
     "chartUrl": "https://sdvx.in/03/03145e.htm"
   },
   {
@@ -5603,7 +5603,7 @@
     "type": "exceed",
     "level": 18.6,
     "bpm": "145",
-    "jacket": "https://sdvx.in/02/jacket/02186x.png",
+    "jacket": "https://sdvx.in/02/jacket/02186m.png",
     "chartUrl": "https://sdvx.in/02/02186m.htm"
   },
   {
@@ -5612,7 +5612,7 @@
     "type": "exhaust",
     "level": 18.6,
     "bpm": "200",
-    "jacket": "https://sdvx.in/03/jacket/03188e.png",
+    "jacket": "https://sdvx.in/03/jacket/03188m.png",
     "chartUrl": "https://sdvx.in/03/03188e.htm"
   },
   {
@@ -5648,7 +5648,7 @@
     "type": "gravity",
     "level": 18.6,
     "bpm": "201",
-    "jacket": "https://sdvx.in/04/jacket/04253g.png",
+    "jacket": "https://sdvx.in/04/jacket/04253m.png",
     "chartUrl": "https://sdvx.in/04/04253m.htm"
   },
   {
@@ -5657,7 +5657,7 @@
     "type": "exceed",
     "level": 18.6,
     "bpm": "180",
-    "jacket": "https://sdvx.in/02/jacket/02189x.png",
+    "jacket": "https://sdvx.in/02/jacket/02189m.png",
     "chartUrl": "https://sdvx.in/02/02189m.htm"
   },
   {
@@ -5666,7 +5666,7 @@
     "type": "exhaust",
     "level": 18.6,
     "bpm": "32-259",
-    "jacket": "https://sdvx.in/03/jacket/03077e.png",
+    "jacket": "https://sdvx.in/03/jacket/03077m.png",
     "chartUrl": "https://sdvx.in/03/03077e.htm"
   },
   {
@@ -5684,7 +5684,7 @@
     "type": "exhaust",
     "level": 18.6,
     "bpm": "153",
-    "jacket": "https://sdvx.in/03/jacket/03139e.png",
+    "jacket": "https://sdvx.in/03/jacket/03139m.png",
     "chartUrl": "https://sdvx.in/03/03139e.htm"
   },
   {
@@ -5702,7 +5702,7 @@
     "type": "exhaust",
     "level": 18.6,
     "bpm": "240",
-    "jacket": "https://sdvx.in/03/jacket/03156e.png",
+    "jacket": "https://sdvx.in/03/jacket/03156m.png",
     "chartUrl": "https://sdvx.in/03/03156e.htm"
   },
   {
@@ -5756,7 +5756,7 @@
     "type": "exhaust",
     "level": 18.6,
     "bpm": "173",
-    "jacket": "https://sdvx.in/03/jacket/03253e.png",
+    "jacket": "https://sdvx.in/03/jacket/03253m.png",
     "chartUrl": "https://sdvx.in/03/03253e.htm"
   },
   {
@@ -5774,7 +5774,7 @@
     "type": "exceed",
     "level": 18.6,
     "bpm": "180",
-    "jacket": "https://sdvx.in/01/jacket/01129x.png",
+    "jacket": "https://sdvx.in/01/jacket/01129m.png",
     "chartUrl": "https://sdvx.in/01/01129m.htm"
   },
   {
@@ -5792,7 +5792,7 @@
     "type": "exhaust",
     "level": 18.7,
     "bpm": "125-166",
-    "jacket": "https://sdvx.in/06/jacket/06127e.png",
+    "jacket": "https://sdvx.in/06/jacket/06127m.png",
     "chartUrl": "https://sdvx.in/06/06127e.htm"
   },
   {
@@ -5801,7 +5801,7 @@
     "type": "exhaust",
     "level": 18.7,
     "bpm": "82-248",
-    "jacket": "https://sdvx.in/04/jacket/04401e.png",
+    "jacket": "https://sdvx.in/04/jacket/04401m.png",
     "chartUrl": "https://sdvx.in/04/04401e.htm"
   },
   {
@@ -5810,7 +5810,7 @@
     "type": "exhaust",
     "level": 18.7,
     "bpm": "256",
-    "jacket": "https://sdvx.in/03/jacket/03149e.png",
+    "jacket": "https://sdvx.in/03/jacket/03149m.png",
     "chartUrl": "https://sdvx.in/03/03149e.htm"
   },
   {
@@ -5819,7 +5819,7 @@
     "type": "exceed",
     "level": 18.7,
     "bpm": "193",
-    "jacket": "https://sdvx.in/03/jacket/03244x.png",
+    "jacket": "https://sdvx.in/03/jacket/03244m.png",
     "chartUrl": "https://sdvx.in/03/03244m.htm"
   },
   {
@@ -5828,7 +5828,7 @@
     "type": "gravity",
     "level": 18.7,
     "bpm": "194",
-    "jacket": "https://sdvx.in/03/jacket/03352g.png",
+    "jacket": "https://sdvx.in/03/jacket/03352m.png",
     "chartUrl": "https://sdvx.in/03/03352m.htm"
   },
   {
@@ -5846,7 +5846,7 @@
     "type": "exhaust",
     "level": 18.7,
     "bpm": "240-500",
-    "jacket": "https://sdvx.in/06/jacket/06526e.png",
+    "jacket": "https://sdvx.in/06/jacket/06526m.png",
     "chartUrl": "https://sdvx.in/06/06526e.htm"
   },
   {
@@ -5864,7 +5864,7 @@
     "type": "exhaust",
     "level": 18.7,
     "bpm": "114",
-    "jacket": "https://sdvx.in/03/jacket/03247e.png",
+    "jacket": "https://sdvx.in/03/jacket/03247m.png",
     "chartUrl": "https://sdvx.in/03/03247e.htm"
   },
   {
@@ -5882,7 +5882,7 @@
     "type": "exhaust",
     "level": 18.7,
     "bpm": "256",
-    "jacket": "https://sdvx.in/04/jacket/04141e.png",
+    "jacket": "https://sdvx.in/04/jacket/04141m.png",
     "chartUrl": "https://sdvx.in/04/04141e.htm"
   },
   {
@@ -5900,7 +5900,7 @@
     "type": "gravity",
     "level": 18.7,
     "bpm": "185",
-    "jacket": "https://sdvx.in/03/jacket/03189g.png",
+    "jacket": "https://sdvx.in/03/jacket/03189m.png",
     "chartUrl": "https://sdvx.in/03/03189m.htm"
   },
   {
@@ -5909,7 +5909,7 @@
     "type": "exhaust",
     "level": 18.7,
     "bpm": "210",
-    "jacket": "https://sdvx.in/03/jacket/03093e.png",
+    "jacket": "https://sdvx.in/03/jacket/03093m.png",
     "chartUrl": "https://sdvx.in/03/03093e.htm"
   },
   {
@@ -5936,7 +5936,7 @@
     "type": "heavenly",
     "level": 18.7,
     "bpm": "201",
-    "jacket": "https://sdvx.in/02/jacket/02257h.png",
+    "jacket": "https://sdvx.in/02/jacket/02257m.png",
     "chartUrl": "https://sdvx.in/02/02257m.htm"
   },
   {
@@ -5954,7 +5954,7 @@
     "type": "exhaust",
     "level": 18.7,
     "bpm": "197",
-    "jacket": "https://sdvx.in/03/jacket/03128e.png",
+    "jacket": "https://sdvx.in/03/jacket/03128m.png",
     "chartUrl": "https://sdvx.in/03/03128e.htm"
   },
   {
@@ -5981,7 +5981,7 @@
     "type": "exhaust",
     "level": 18.7,
     "bpm": "275",
-    "jacket": "https://sdvx.in/06/jacket/06170e.png",
+    "jacket": "https://sdvx.in/06/jacket/06170m.png",
     "chartUrl": "https://sdvx.in/06/06170e.htm"
   },
   {
@@ -5999,7 +5999,7 @@
     "type": "exhaust",
     "level": 18.7,
     "bpm": "190",
-    "jacket": "https://sdvx.in/06/jacket/06458e.png",
+    "jacket": "https://sdvx.in/06/jacket/06458m.png",
     "chartUrl": "https://sdvx.in/06/06458e.htm"
   },
   {
@@ -6008,7 +6008,7 @@
     "type": "exceed",
     "level": 18.7,
     "bpm": "165",
-    "jacket": "https://sdvx.in/03/jacket/03245x.png",
+    "jacket": "https://sdvx.in/03/jacket/03245m.png",
     "chartUrl": "https://sdvx.in/03/03245m.htm"
   },
   {
@@ -6035,7 +6035,7 @@
     "type": "gravity",
     "level": 18.7,
     "bpm": "120-280",
-    "jacket": "https://sdvx.in/04/jacket/04351g.png",
+    "jacket": "https://sdvx.in/04/jacket/04351m.png",
     "chartUrl": "https://sdvx.in/04/04351m.htm"
   },
   {
@@ -6098,7 +6098,7 @@
     "type": "heavenly",
     "level": 18.7,
     "bpm": "210",
-    "jacket": "https://sdvx.in/01/jacket/01156h.png",
+    "jacket": "https://sdvx.in/01/jacket/01156m.png",
     "chartUrl": "https://sdvx.in/01/01156m.htm"
   },
   {
@@ -6143,7 +6143,7 @@
     "type": "heavenly",
     "level": 18.7,
     "bpm": "169",
-    "jacket": "https://sdvx.in/01/jacket/01107h.png",
+    "jacket": "https://sdvx.in/01/jacket/01107m.png",
     "chartUrl": "https://sdvx.in/01/01107m.htm"
   },
   {
@@ -6161,7 +6161,7 @@
     "type": "gravity",
     "level": 18.7,
     "bpm": "200",
-    "jacket": "https://sdvx.in/02/jacket/02293g.png",
+    "jacket": "https://sdvx.in/02/jacket/02293m.png",
     "chartUrl": "https://sdvx.in/02/02293m.htm"
   },
   {
@@ -6179,7 +6179,7 @@
     "type": "exhaust",
     "level": 18.7,
     "bpm": "277",
-    "jacket": "https://sdvx.in/06/jacket/06169e.png",
+    "jacket": "https://sdvx.in/06/jacket/06169m.png",
     "chartUrl": "https://sdvx.in/06/06169e.htm"
   },
   {
@@ -6188,7 +6188,7 @@
     "type": "exhaust",
     "level": 18.7,
     "bpm": "240",
-    "jacket": "https://sdvx.in/06/jacket/06272e.png",
+    "jacket": "https://sdvx.in/06/jacket/06272m.png",
     "chartUrl": "https://sdvx.in/06/06272e.htm"
   },
   {
@@ -6233,7 +6233,7 @@
     "type": "exhaust",
     "level": 18.7,
     "bpm": "222",
-    "jacket": "https://sdvx.in/03/jacket/03179e.png",
+    "jacket": "https://sdvx.in/03/jacket/03179m.png",
     "chartUrl": "https://sdvx.in/03/03179e.htm"
   },
   {
@@ -6251,7 +6251,7 @@
     "type": "exceed",
     "level": 18.7,
     "bpm": "205",
-    "jacket": "https://sdvx.in/03/jacket/03172x.png",
+    "jacket": "https://sdvx.in/03/jacket/03172m.png",
     "chartUrl": "https://sdvx.in/03/03172m.htm"
   },
   {
@@ -6323,7 +6323,7 @@
     "type": "heavenly",
     "level": 18.7,
     "bpm": "176",
-    "jacket": "https://sdvx.in/02/jacket/02035h.png",
+    "jacket": "https://sdvx.in/02/jacket/02035m.png",
     "chartUrl": "https://sdvx.in/02/02035m.htm"
   },
   {
@@ -6332,7 +6332,7 @@
     "type": "gravity",
     "level": 18.7,
     "bpm": "170",
-    "jacket": "https://sdvx.in/01/jacket/01128g.png",
+    "jacket": "https://sdvx.in/01/jacket/01128m.png",
     "chartUrl": "https://sdvx.in/01/01128m.htm"
   },
   {
@@ -6368,7 +6368,7 @@
     "type": "exhaust",
     "level": 18.7,
     "bpm": "180",
-    "jacket": "https://sdvx.in/06/jacket/06414e.png",
+    "jacket": "https://sdvx.in/06/jacket/06414m.png",
     "chartUrl": "https://sdvx.in/06/06414e.htm"
   },
   {
@@ -6386,7 +6386,7 @@
     "type": "exhaust",
     "level": 18.8,
     "bpm": "271",
-    "jacket": "https://sdvx.in/06/jacket/06471e.png",
+    "jacket": "https://sdvx.in/06/jacket/06471m.png",
     "chartUrl": "https://sdvx.in/06/06471e.htm"
   },
   {
@@ -6422,7 +6422,7 @@
     "type": "exhaust",
     "level": 18.8,
     "bpm": "30-195",
-    "jacket": "https://sdvx.in/02/jacket/02215e.png",
+    "jacket": "https://sdvx.in/02/jacket/02215m.png",
     "chartUrl": "https://sdvx.in/02/02215e.htm"
   },
   {
@@ -6431,7 +6431,7 @@
     "type": "exceed",
     "level": 18.8,
     "bpm": "140-190",
-    "jacket": "https://sdvx.in/03/jacket/03076x.png",
+    "jacket": "https://sdvx.in/03/jacket/03076m.png",
     "chartUrl": "https://sdvx.in/03/03076m.htm"
   },
   {
@@ -6449,7 +6449,7 @@
     "type": "exceed",
     "level": 18.8,
     "bpm": "137-150",
-    "jacket": "https://sdvx.in/02/jacket/02203x.png",
+    "jacket": "https://sdvx.in/02/jacket/02203m.png",
     "chartUrl": "https://sdvx.in/02/02203m.htm"
   },
   {
@@ -6503,7 +6503,7 @@
     "type": "exhaust",
     "level": 18.8,
     "bpm": "201",
-    "jacket": "https://sdvx.in/04/jacket/04205e.png",
+    "jacket": "https://sdvx.in/04/jacket/04205m.png",
     "chartUrl": "https://sdvx.in/04/04205e.htm"
   },
   {
@@ -6512,7 +6512,7 @@
     "type": "gravity",
     "level": 18.8,
     "bpm": "220",
-    "jacket": "https://sdvx.in/02/jacket/02172g.png",
+    "jacket": "https://sdvx.in/02/jacket/02172m.png",
     "chartUrl": "https://sdvx.in/02/02172m.htm"
   },
   {
@@ -6530,7 +6530,7 @@
     "type": "exhaust",
     "level": 18.8,
     "bpm": "277",
-    "jacket": "https://sdvx.in/03/jacket/03266e.png",
+    "jacket": "https://sdvx.in/03/jacket/03266m.png",
     "chartUrl": "https://sdvx.in/03/03266e.htm"
   },
   {
@@ -6548,7 +6548,7 @@
     "type": "exhaust",
     "level": 18.8,
     "bpm": "195",
-    "jacket": "https://sdvx.in/03/jacket/03404e.png",
+    "jacket": "https://sdvx.in/03/jacket/03404m.png",
     "chartUrl": "https://sdvx.in/03/03404e.htm"
   },
   {
@@ -6593,7 +6593,7 @@
     "type": "exhaust",
     "level": 18.8,
     "bpm": "200",
-    "jacket": "https://sdvx.in/03/jacket/03229e.png",
+    "jacket": "https://sdvx.in/03/jacket/03229m.png",
     "chartUrl": "https://sdvx.in/03/03229e.htm"
   },
   {
@@ -6602,7 +6602,7 @@
     "type": "exhaust",
     "level": 18.8,
     "bpm": "234",
-    "jacket": "https://sdvx.in/04/jacket/04325e.png",
+    "jacket": "https://sdvx.in/04/jacket/04325m.png",
     "chartUrl": "https://sdvx.in/04/04325e.htm"
   },
   {
@@ -6638,7 +6638,7 @@
     "type": "vivid",
     "level": 18.8,
     "bpm": "180",
-    "jacket": "https://sdvx.in/02/jacket/02158v.png",
+    "jacket": "https://sdvx.in/02/jacket/02158m.png",
     "chartUrl": "https://sdvx.in/02/02158m.htm"
   },
   {
@@ -6683,7 +6683,7 @@
     "type": "exhaust",
     "level": 18.8,
     "bpm": "185",
-    "jacket": "https://sdvx.in/06/jacket/06595e.png",
+    "jacket": "https://sdvx.in/06/jacket/06595m.png",
     "chartUrl": "https://sdvx.in/06/06595e.htm"
   },
   {
@@ -6701,7 +6701,7 @@
     "type": "heavenly",
     "level": 18.8,
     "bpm": "178",
-    "jacket": "https://sdvx.in/02/jacket/02170h.png",
+    "jacket": "https://sdvx.in/02/jacket/02170m.png",
     "chartUrl": "https://sdvx.in/02/02170m.htm"
   },
   {
@@ -6764,7 +6764,7 @@
     "type": "exhaust",
     "level": 18.9,
     "bpm": "43-330",
-    "jacket": "https://sdvx.in/05/jacket/05153e.png",
+    "jacket": "https://sdvx.in/05/jacket/05153m.png",
     "chartUrl": "https://sdvx.in/05/05153e.htm"
   },
   {
@@ -6809,7 +6809,7 @@
     "type": "exhaust",
     "level": 18.9,
     "bpm": "270",
-    "jacket": "https://sdvx.in/03/jacket/03065e.png",
+    "jacket": "https://sdvx.in/03/jacket/03065m.png",
     "chartUrl": "https://sdvx.in/03/03065e.htm"
   },
   {
