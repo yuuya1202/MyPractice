@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0a0a12">
+<title>SDVX 18 Manager</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+  :root {
+    --bg: #0a0a12;
+    --bg2: #12121e;
+    --bg3: #1a1a2e;
+    --bg4: #22223a;
+    --border: rgba(255,255,255,0.07);
+    --text: #e8e8f0;
+    --text2: #888899;
+    --text3: #555566;
+    --accent: #7c6af7;
+    --accent2: #a599ff;
+    --blue: #3b82f6;
+    --blue-bg: rgba(59,130,246,0.15);
+    --yellow: #f59e0b;
+    --yellow-bg: rgba(245,158,11,0.15);
+    --red: #ef4444;
+    --red-bg: rgba(239,68,68,0.15);
+    --green: #10b981;
+    --green-bg: rgba(16,185,129,0.15);
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans JP', sans-serif;
+    min-height: 100vh;
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* HEADER */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,18,0.95);
+    backdrop-filter: blur(12px);
+    padding: 12px 14px 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .header-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--accent2);
+  }
+
+  .header-count {
+    font-size: 11px;
+    color: var(--text3);
+  }
+
+  .search-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .search-wrap {
+    flex: 1;
+    position: relative;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text3);
+    font-size: 15px;
+    pointer-events: none;
+  }
+
+  .search-input {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 8px 10px 8px 32px;
+    color: var(--text);
+    font-size: 14px;
+    font-family: 'Noto Sans JP', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-input:focus { border-color: var(--accent); }
+  .search-input::placeholder { color: var(--text3); }
+
+  .filter-btn {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    color: var(--text2);
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  .filter-btn.active {
+    border-color: var(--accent);
+    color: var(--accent2);
+    background: rgba(124,106,247,0.1);
+  }
+
+  .filter-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: none;
+  }
+
+  .filter-indicator.show { display: block; }
+
+  /* ACTIVE FILTERS */
+  .active-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 8px 14px 0;
+  }
+
+  .filter-pill {
+    background: rgba(124,106,247,0.15);
+    border: 1px solid rgba(124,106,247,0.3);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 11px;
+    color: var(--accent2);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  .filter-pill .remove { opacity: 0.6; font-size: 12px; }
+
+  /* LIST */
+  .list {
+    padding: 8px 12px 100px;
+  }
+
+  .result-info {
+    font-size: 11px;
+    color: var(--text3);
+    padding: 8px 2px 6px;
+  }
+
+  /* CARD */
+  .song-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+  }
+
+  .song-card:active { transform: scale(0.98); }
+
+  .song-card.done {
+    opacity: 0.6;
+  }
+
+  .card-danger-bar {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    border-radius: 12px 0 0 12px;
+  }
+
+  .card-inner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px 10px 16px;
+  }
+
+  .jacket {
+    width: 52px;
+    height: 52px;
+    border-radius: 8px;
+    background: var(--bg3);
+    flex-shrink: 0;
+    overflow: hidden;
+    object-fit: cover;
+  }
+
+  .jacket img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .card-body { flex: 1; min-width: 0; }
+
+  .card-title {
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 3px;
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: var(--bg4);
+    color: var(--text2);
+  }
+
+  .badge-type { color: var(--accent2); background: rgba(124,106,247,0.12); }
+  .badge-level { color: var(--text); }
+  .badge-bpm { color: var(--text3); }
+
+  .card-danger-badge {
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 10px;
+  }
+
+  .card-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .check-circle {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid var(--text3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .check-circle.done {
+    background: var(--green);
+    border-color: var(--green);
+    color: white;
+  }
+
+  /* MODAL OVERLAY */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+
+  .overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* DETAIL MODAL */
+  .detail-modal {
+    background: var(--bg2);
+    border-radius: 20px 20px 0 0;
+    padding: 0 0 40px;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.32,0.72,0,1);
+  }
+
+  .overlay.open .detail-modal {
+    transform: translateY(0);
+  }
+
+  .modal-handle {
+    width: 36px;
+    height: 4px;
+    background: var(--bg4);
+    border-radius: 2px;
+    margin: 12px auto 0;
+  }
+
+  .modal-header-section {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 16px 16px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .modal-jacket {
+    width: 64px;
+    height: 64px;
+    border-radius: 10px;
+    background: var(--bg3);
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .modal-jacket img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .modal-song-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+
+  .modal-song-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .modal-body { padding: 14px 16px; }
+
+  .field-block { margin-bottom: 16px; }
+
+  .field-label {
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+  }
+
+  .toggle-row {
+    display: flex;
+    gap: 6px;
+  }
+
+  .toggle-btn {
+    flex: 1;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 8px 4px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  .toggle-btn:active { transform: scale(0.97); }
+
+  .toggle-btn.sel-blue { background: var(--blue-bg); border-color: var(--blue); color: #93c5fd; }
+  .toggle-btn.sel-yellow { background: var(--yellow-bg); border-color: var(--yellow); color: #fcd34d; }
+  .toggle-btn.sel-red { background: var(--red-bg); border-color: var(--red); color: #fca5a5; }
+  .toggle-btn.sel-accent { background: rgba(124,106,247,0.15); border-color: var(--accent); color: var(--accent2); }
+
+  .mirror-row { display: flex; gap: 6px; }
+
+  .memo-area {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px;
+    color: var(--text);
+    font-size: 13px;
+    font-family: 'Noto Sans JP', sans-serif;
+    resize: none;
+    outline: none;
+    min-height: 80px;
+    transition: border-color 0.2s;
+  }
+
+  .memo-area:focus { border-color: var(--accent); }
+  .memo-area::placeholder { color: var(--text3); }
+
+  .chart-btn {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+    color: var(--text2);
+    font-size: 13px;
+    font-family: 'Noto Sans JP', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+
+  .chart-btn:active { transform: scale(0.98); background: var(--bg4); }
+
+  .done-toggle-btn {
+    width: 100%;
+    background: var(--green-bg);
+    border: 1px solid var(--green);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+    color: #6ee7b7;
+    font-size: 13px;
+    font-family: 'Noto Sans JP', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.15s;
+    margin-top: 6px;
+  }
+
+  .done-toggle-btn.undone {
+    background: var(--bg3);
+    border-color: var(--border);
+    color: var(--text2);
+  }
+
+  /* FILTER MODAL */
+  .filter-modal {
+    background: var(--bg2);
+    border-radius: 20px 20px 0 0;
+    padding: 0 0 40px;
+    max-height: 85vh;
+    overflow-y: auto;
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.32,0.72,0,1);
+  }
+
+  .overlay.open .filter-modal {
+    transform: translateY(0);
+  }
+
+  .filter-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 16px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .filter-modal-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--text);
+  }
+
+  .reset-btn {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 5px 12px;
+    color: var(--text3);
+    font-size: 12px;
+    font-family: 'Noto Sans JP', sans-serif;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .reset-btn:active { color: var(--red); border-color: var(--red); }
+
+  .filter-modal-body { padding: 14px 16px; }
+
+  .level-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+  }
+
+  .level-chip {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 7px 4px;
+    text-align: center;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .level-chip.sel {
+    background: rgba(124,106,247,0.15);
+    border-color: var(--accent);
+    color: var(--accent2);
+  }
+
+  .danger-grid { display: flex; gap: 6px; }
+
+  .danger-chip {
+    flex: 1;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 4px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .danger-chip.sel-blue { background: var(--blue-bg); border-color: var(--blue); color: #93c5fd; }
+  .danger-chip.sel-yellow { background: var(--yellow-bg); border-color: var(--yellow); color: #fcd34d; }
+  .danger-chip.sel-red { background: var(--red-bg); border-color: var(--red); color: #fca5a5; }
+
+  .status-toggle {
+    display: flex;
+    background: var(--bg3);
+    border-radius: var(--radius-sm);
+    padding: 3px;
+    gap: 3px;
+  }
+
+  .status-opt {
+    flex: 1;
+    text-align: center;
+    padding: 7px 4px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .status-opt.sel {
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  /* LOADING */
+  .loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: 16px;
+    color: var(--text3);
+  }
+
+  .loading-spinner {
+    width: 36px;
+    height: 36px;
+    border: 2px solid var(--bg3);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loading-text { font-size: 13px; }
+
+  /* EMPTY */
+  .empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text3);
+    font-size: 13px;
+  }
+
+  /* DANGER COLORS */
+  .danger-none .card-danger-bar { background: var(--blue); }
+  .danger-caution .card-danger-bar { background: var(--yellow); }
+  .danger-danger .card-danger-bar { background: var(--red); }
+  .danger-unset .card-danger-bar { background: var(--bg4); }
+
+  .dbadge-none { background: var(--blue-bg); color: #93c5fd; }
+  .dbadge-caution { background: var(--yellow-bg); color: #fcd34d; }
+  .dbadge-danger { background: var(--red-bg); color: #fca5a5; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div class="header-title">SDVX 18</div>
+    <div class="header-count" id="headerCount">読み込み中...</div>
+  </div>
+  <div class="search-row">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" id="searchInput" type="text" placeholder="曲名を検索..." oninput="applyFilters()">
+    </div>
+    <button class="filter-btn" id="filterBtn" onclick="openFilterModal()">
+      <span>絞込</span>
+      <div class="filter-indicator" id="filterIndicator"></div>
+    </button>
+  </div>
+</div>
+
+<div class="active-filters" id="activePills"></div>
+
+<div class="list" id="listContainer">
+  <div class="loading">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">楽曲データを読み込み中...</div>
+  </div>
+</div>
+
+<!-- DETAIL OVERLAY -->
+<div class="overlay" id="detailOverlay" onclick="handleOverlayClick(event, 'detail')">
+  <div class="detail-modal" id="detailModal">
+    <div class="modal-handle"></div>
+    <div class="modal-header-section">
+      <div class="modal-jacket" id="modalJacket"></div>
+      <div style="flex:1;min-width:0;">
+        <div class="modal-song-title" id="modalTitle"></div>
+        <div class="modal-song-meta" id="modalMeta"></div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="field-block">
+        <div class="field-label">危険度</div>
+        <div class="toggle-row">
+          <div class="toggle-btn" id="d-none" onclick="setDanger('none')">問題なし</div>
+          <div class="toggle-btn" id="d-caution" onclick="setDanger('caution')">要注意</div>
+          <div class="toggle-btn" id="d-danger" onclick="setDanger('danger')">危険</div>
+        </div>
+      </div>
+      <div class="field-block">
+        <div class="field-label">ミラー</div>
+        <div class="mirror-row">
+          <div class="toggle-btn" id="m-no" onclick="setMirror('no')">なし</div>
+          <div class="toggle-btn" id="m-yes" onclick="setMirror('yes')">あり</div>
+        </div>
+      </div>
+      <div class="field-block">
+        <div class="field-label">判定</div>
+        <div class="toggle-row">
+          <div class="toggle-btn" id="j-early" onclick="setJudge('early')">早め</div>
+          <div class="toggle-btn" id="j-normal" onclick="setJudge('normal')">普通</div>
+          <div class="toggle-btn" id="j-late" onclick="setJudge('late')">遅め</div>
+        </div>
+      </div>
+      <div class="field-block">
+        <div class="field-label">メモ</div>
+        <textarea class="memo-area" id="memoArea" placeholder="対策メモを入力..." oninput="onMemoInput()"></textarea>
+      </div>
+      <a class="chart-btn" id="chartBtn" href="#" target="_blank">🎼 譜面を確認（別タブ）</a>
+      <button class="done-toggle-btn undone" id="doneBtn" onclick="toggleDone()">対策済みにする</button>
+    </div>
+  </div>
+</div>
+
+<!-- FILTER OVERLAY -->
+<div class="overlay" id="filterOverlay" onclick="handleOverlayClick(event, 'filter')">
+  <div class="filter-modal" id="filterModal">
+    <div class="modal-handle"></div>
+    <div class="filter-modal-header">
+      <div class="filter-modal-title">絞り込み</div>
+      <button class="reset-btn" onclick="resetFilters()">リセット</button>
+    </div>
+    <div class="filter-modal-body">
+      <div class="field-block">
+        <div class="field-label">難易度（選択なし＝全て）</div>
+        <div class="level-grid" id="levelGrid"></div>
+      </div>
+      <div class="field-block">
+        <div class="field-label">危険度（選択なし＝全て）</div>
+        <div class="danger-grid">
+          <div class="danger-chip" id="fc-none" onclick="toggleDangerFilter('none')">🔵 問題なし</div>
+          <div class="danger-chip" id="fc-caution" onclick="toggleDangerFilter('caution')">🟡 要注意</div>
+          <div class="danger-chip" id="fc-danger" onclick="toggleDangerFilter('danger')">🔴 危険</div>
+        </div>
+      </div>
+      <div class="field-block">
+        <div class="field-label">対策状況</div>
+        <div class="status-toggle">
+          <div class="status-opt sel" id="fs-all" onclick="setStatusFilter('all')">全て</div>
+          <div class="status-opt" id="fs-undone" onclick="setStatusFilter('undone')">未対策</div>
+          <div class="status-opt" id="fs-done" onclick="setStatusFilter('done')">対策済み</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const TYPE_LABEL = {
+  novice:'NOV', advanced:'ADV', exhaust:'EXH',
+  maximum:'MXM', heavenly:'HVN', gravity:'GRV',
+  infinite:'INF', vivid:'VVD', exceed:'EXC', nabla:'NBL'
+};
+
+const CACHE_KEY = 'sdvx18_songs_v1';
+const MEMO_KEY  = 'sdvx18_memo_v1';
+
+let songs = [];
+let memoData = {};
+let currentKey = null;
+let memoTimer = null;
+
+// Filters
+let fLevels = new Set();
+let fDanger = new Set();
+let fStatus = 'all';
+
+function makeKey(songid, type) { return `${songid}_${type}`; }
+
+function getMemo(key) {
+  return memoData[key] || { danger:'', mirror:'no', judge:'normal', memo:'', done:false };
+}
+
+function saveMemo(key, data) {
+  memoData[key] = data;
+  localStorage.setItem(MEMO_KEY, JSON.stringify(memoData));
+}
+
+async function loadSongs() {
+  const cached = localStorage.getItem(CACHE_KEY);
+  if (cached) {
+    songs = JSON.parse(cached);
+    render();
+    return;
+  }
+  try {
+    const res = await fetch('https://sdvxindex.com/songsv1.3.6.json');
+    const data = await res.json();
+    const result = [];
+    data.forEach(song => {
+      song.difficulties.forEach(diff => {
+        if (diff.level >= 18 && diff.level < 19) {
+          const suffix = getUrlSuffix(diff.type);
+          result.push({
+            key: makeKey(song.songid, diff.type),
+            songid: song.songid,
+            title: song.title,
+            level: diff.level,
+            type: diff.type,
+            typeLabel: TYPE_LABEL[diff.type] || diff.type.toUpperCase(),
+            bpm: song.bpm,
+            jacket: (diff.jacketArtPath || '').replace(/__/g,'').replace('https://sdvxindex.com/','https://sdvxindex.com/'),
+            chartUrl: `https://sdvxindex.com/s/${song.songid}/${suffix}/`
+          });
+        }
+      });
+    });
+    result.sort((a,b) => a.level - b.level || a.title.localeCompare(b.title));
+    songs = result;
+    localStorage.setItem(CACHE_KEY, JSON.stringify(songs));
+    render();
+  } catch(e) {
+    document.getElementById('listContainer').innerHTML = '<div class="empty">データの読み込みに失敗しました。<br>ネットワークを確認してください。</div>';
+  }
+}
+
+function getUrlSuffix(type) {
+  const map = { novice:'1', advanced:'2', exhaust:'3', maximum:'4m', heavenly:'4h', gravity:'4g', infinite:'4i', vivid:'4v', exceed:'4x', nabla:'4n' };
+  return map[type] || '3';
+}
+
+function buildLevelGrid() {
+  const levels = [];
+  for (let i = 0; i <= 9; i++) levels.push(18 + i * 0.1);
+  // get actual levels from songs
+  const actualLevels = [...new Set(songs.map(s => s.level))].sort((a,b)=>a-b);
+  const grid = document.getElementById('levelGrid');
+  grid.innerHTML = '';
+  actualLevels.forEach(lv => {
+    const chip = document.createElement('div');
+    chip.className = 'level-chip' + (fLevels.has(lv) ? ' sel' : '');
+    chip.textContent = lv.toFixed(1);
+    chip.onclick = () => toggleLevelFilter(lv);
+    chip.id = `lv-${lv.toFixed(1).replace('.','_')}`;
+    grid.appendChild(chip);
+  });
+}
+
+function render() {
+  memoData = JSON.parse(localStorage.getItem(MEMO_KEY) || '{}');
+  buildLevelGrid();
+  applyFilters();
+}
+
+function applyFilters() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const filtered = songs.filter(s => {
+    if (q && !s.title.toLowerCase().includes(q)) return false;
+    if (fLevels.size > 0 && !fLevels.has(s.level)) return false;
+    const m = getMemo(s.key);
+    if (fDanger.size > 0 && !fDanger.has(m.danger || 'none')) return false;
+    if (fStatus === 'done' && !m.done) return false;
+    if (fStatus === 'undone' && m.done) return false;
+    return true;
+  });
+
+  document.getElementById('headerCount').textContent = `${filtered.length} / ${songs.length}曲`;
+  updatePills();
+  updateFilterIndicator();
+
+  const container = document.getElementById('listContainer');
+  if (filtered.length === 0) {
+    container.innerHTML = '<div class="empty">該当する曲がありません</div>';
+    return;
+  }
+
+  container.innerHTML = `<div class="result-info">${filtered.length}曲表示中</div>`;
+  filtered.forEach(s => {
+    const m = getMemo(s.key);
+    const dangerClass = m.danger ? `danger-${m.danger}` : 'danger-unset';
+    const badgeClass = m.danger ? `dbadge-${m.danger}` : '';
+    const dangerLabel = { none:'問題なし', caution:'要注意', danger:'危険' }[m.danger] || '';
+
+    const card = document.createElement('div');
+    card.className = `song-card ${dangerClass} ${m.done ? 'done' : ''}`;
+    card.innerHTML = `
+      <div class="card-danger-bar"></div>
+      <div class="card-inner">
+        <div class="jacket">
+          ${s.jacket ? `<img src="${s.jacket}" alt="" loading="lazy" onerror="this.style.display='none'">` : ''}
+        </div>
+        <div class="card-body">
+          <div class="card-title">${escHtml(s.title)}</div>
+          <div class="card-meta">
+            <span class="badge badge-type">${s.typeLabel}</span>
+            <span class="badge badge-level">${s.level.toFixed(1)}</span>
+            <span class="badge badge-bpm">BPM ${s.bpm}</span>
+            ${m.danger ? `<span class="badge card-danger-badge ${badgeClass}">${dangerLabel}</span>` : ''}
+          </div>
+        </div>
+        <div class="card-right">
+          <div class="check-circle ${m.done ? 'done' : ''}" onclick="quickToggleDone(event,'${s.key}')">
+            ${m.done ? '✓' : ''}
+          </div>
+        </div>
+      </div>
+    `;
+    card.onclick = (e) => {
+      if (e.target.closest('.check-circle')) return;
+      openDetail(s.key);
+    };
+    container.appendChild(card);
+  });
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function quickToggleDone(e, key) {
+  e.stopPropagation();
+  const m = getMemo(key);
+  m.done = !m.done;
+  saveMemo(key, m);
+  applyFilters();
+}
+
+// DETAIL
+function openDetail(key) {
+  currentKey = key;
+  const s = songs.find(x => x.key === key);
+  const m = getMemo(key);
+
+  document.getElementById('modalTitle').textContent = s.title;
+  document.getElementById('modalJacket').innerHTML = s.jacket
+    ? `<img src="${s.jacket}" alt="" onerror="this.style.display='none'">`
+    : '';
+
+  document.getElementById('modalMeta').innerHTML = `
+    <span class="badge badge-type">${s.typeLabel}</span>
+    <span class="badge badge-level">${s.level.toFixed(1)}</span>
+    <span class="badge badge-bpm">BPM ${s.bpm}</span>
+  `;
+
+  document.getElementById('chartBtn').href = s.chartUrl;
+
+  updateDangerBtns(m.danger || '');
+  updateMirrorBtns(m.mirror || 'no');
+  updateJudgeBtns(m.judge || 'normal');
+  document.getElementById('memoArea').value = m.memo || '';
+  updateDoneBtn(m.done);
+
+  document.getElementById('detailOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDetail() {
+  autoSave();
+  document.getElementById('detailOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  currentKey = null;
+  applyFilters();
+}
+
+function autoSave() {
+  if (!currentKey) return;
+  const m = getMemo(currentKey);
+  m.memo = document.getElementById('memoArea').value;
+  saveMemo(currentKey, m);
+}
+
+function onMemoInput() {
+  clearTimeout(memoTimer);
+  memoTimer = setTimeout(autoSave, 800);
+}
+
+function setDanger(val) {
+  if (!currentKey) return;
+  const m = getMemo(currentKey);
+  m.danger = m.danger === val ? '' : val;
+  saveMemo(currentKey, m);
+  updateDangerBtns(m.danger);
+}
+
+function updateDangerBtns(val) {
+  ['none','caution','danger'].forEach(v => {
+    const el = document.getElementById(`d-${v}`);
+    el.className = 'toggle-btn' + (val === v ? ` sel-${v === 'none' ? 'blue' : v === 'caution' ? 'yellow' : 'red'}` : '');
+  });
+}
+
+function setMirror(val) {
+  if (!currentKey) return;
+  const m = getMemo(currentKey);
+  m.mirror = val;
+  saveMemo(currentKey, m);
+  updateMirrorBtns(val);
+}
+
+function updateMirrorBtns(val) {
+  document.getElementById('m-no').className = 'toggle-btn' + (val === 'no' ? ' sel-accent' : '');
+  document.getElementById('m-yes').className = 'toggle-btn' + (val === 'yes' ? ' sel-accent' : '');
+}
+
+function setJudge(val) {
+  if (!currentKey) return;
+  const m = getMemo(currentKey);
+  m.judge = val;
+  saveMemo(currentKey, m);
+  updateJudgeBtns(val);
+}
+
+function updateJudgeBtns(val) {
+  ['early','normal','late'].forEach(v => {
+    document.getElementById(`j-${v}`).className = 'toggle-btn' + (val === v ? ' sel-accent' : '');
+  });
+}
+
+function toggleDone() {
+  if (!currentKey) return;
+  const m = getMemo(currentKey);
+  m.done = !m.done;
+  saveMemo(currentKey, m);
+  updateDoneBtn(m.done);
+}
+
+function updateDoneBtn(done) {
+  const btn = document.getElementById('doneBtn');
+  btn.className = `done-toggle-btn ${done ? '' : 'undone'}`;
+  btn.textContent = done ? '✓ 対策済み' : '対策済みにする';
+}
+
+// FILTER MODAL
+function openFilterModal() {
+  buildLevelGrid();
+  updateDangerFilterBtns();
+  updateStatusFilterBtns();
+  document.getElementById('filterOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeFilterModal() {
+  document.getElementById('filterOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  applyFilters();
+}
+
+function toggleLevelFilter(lv) {
+  if (fLevels.has(lv)) fLevels.delete(lv);
+  else fLevels.add(lv);
+  const id = `lv-${lv.toFixed(1).replace('.','_')}`;
+  const el = document.getElementById(id);
+  if (el) el.className = 'level-chip' + (fLevels.has(lv) ? ' sel' : '');
+  applyFilters();
+}
+
+function toggleDangerFilter(val) {
+  if (fDanger.has(val)) fDanger.delete(val);
+  else fDanger.add(val);
+  updateDangerFilterBtns();
+  applyFilters();
+}
+
+function updateDangerFilterBtns() {
+  document.getElementById('fc-none').className = 'danger-chip' + (fDanger.has('none') ? ' sel-blue' : '');
+  document.getElementById('fc-caution').className = 'danger-chip' + (fDanger.has('caution') ? ' sel-yellow' : '');
+  document.getElementById('fc-danger').className = 'danger-chip' + (fDanger.has('danger') ? ' sel-red' : '');
+}
+
+function setStatusFilter(val) {
+  fStatus = val;
+  updateStatusFilterBtns();
+  applyFilters();
+}
+
+function updateStatusFilterBtns() {
+  ['all','undone','done'].forEach(v => {
+    document.getElementById(`fs-${v}`).className = 'status-opt' + (fStatus === v ? ' sel' : '');
+  });
+}
+
+function resetFilters() {
+  fLevels.clear();
+  fDanger.clear();
+  fStatus = 'all';
+  buildLevelGrid();
+  updateDangerFilterBtns();
+  updateStatusFilterBtns();
+  applyFilters();
+}
+
+function updateFilterIndicator() {
+  const active = fLevels.size > 0 || fDanger.size > 0 || fStatus !== 'all';
+  document.getElementById('filterIndicator').className = 'filter-indicator' + (active ? ' show' : '');
+  document.getElementById('filterBtn').className = 'filter-btn' + (active ? ' active' : '');
+}
+
+function updatePills() {
+  const container = document.getElementById('activePills');
+  container.innerHTML = '';
+  fLevels.forEach(lv => {
+    const pill = document.createElement('div');
+    pill.className = 'filter-pill';
+    pill.innerHTML = `${lv.toFixed(1)} <span class="remove" onclick="toggleLevelFilter(${lv})">✕</span>`;
+    container.appendChild(pill);
+  });
+  const dangerNames = { none:'問題なし', caution:'要注意', danger:'危険' };
+  fDanger.forEach(d => {
+    const pill = document.createElement('div');
+    pill.className = 'filter-pill';
+    pill.innerHTML = `${dangerNames[d]} <span class="remove" onclick="toggleDangerFilter('${d}')">✕</span>`;
+    container.appendChild(pill);
+  });
+  if (fStatus !== 'all') {
+    const pill = document.createElement('div');
+    pill.className = 'filter-pill';
+    pill.innerHTML = `${fStatus === 'done' ? '対策済み' : '未対策'} <span class="remove" onclick="setStatusFilter('all')">✕</span>`;
+    container.appendChild(pill);
+  }
+}
+
+function handleOverlayClick(e, type) {
+  const modal = document.getElementById(type === 'detail' ? 'detailModal' : 'filterModal');
+  if (!modal.contains(e.target)) {
+    type === 'detail' ? closeDetail() : closeFilterModal();
+  }
+}
+
+// Init
+loadSongs();
+</script>
+</body>
+</html>
