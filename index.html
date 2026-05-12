@@ -234,6 +234,24 @@
   }
   .chart-btn:active { transform: scale(0.98); opacity: 0.9; }
 
+  .chart-inline-btn {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: var(--accent-bg); border: 1.5px solid rgba(91,79,232,0.3);
+    border-radius: 20px; padding: 4px 12px; font-size: 11px; color: var(--accent);
+    cursor: pointer; transition: all 0.15s;
+    font-family: 'Noto Sans JP', sans-serif; font-weight: 700;
+  }
+  .chart-inline-btn:active { opacity: 0.7; }
+
+  .save-btn {
+    width: 100%; background: var(--accent); border: none;
+    border-radius: var(--radius-sm); padding: 13px; color: white;
+    font-size: 14px; font-family: 'Noto Sans JP', sans-serif;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    gap: 8px; transition: all 0.15s; font-weight: 700; letter-spacing: 0.5px;
+  }
+  .save-btn:active { transform: scale(0.98); opacity: 0.9; }
+
   /* 譜面モーダル */
   .chart-overlay {
     position: fixed; inset: 0; background: rgba(10,10,30,0.9); z-index: 300;
@@ -476,7 +494,6 @@
     <div class="header-title">SDVX 18対策</div>
     <div class="header-right">
       <div class="header-count" id="headerCount">読み込み中...</div>
-      <button class="sync-btn" id="syncBtn" onclick="manualSync()" title="今すぐ同期">☁️</button>
       <button class="setting-btn" onclick="openTokenModal(true)" title="設定">⚙️</button>
     </div>
   </div>
@@ -509,7 +526,10 @@
       <div class="modal-header-right">
         <div class="modal-song-title" id="modalTitle"></div>
         <div class="modal-song-meta" id="modalMeta"></div>
-        <button class="done-inline-btn" id="doneInlineBtn" onclick="toggleDone()">対策済みにする</button>
+        <div style="display:flex;gap:6px;margin-top:7px;">
+          <button class="done-inline-btn" id="doneInlineBtn" onclick="toggleDone()">対策済みにする</button>
+          <button class="chart-inline-btn" onclick="openChartModal()">譜面を確認</button>
+        </div>
       </div>
     </div>
     <div class="modal-body">
@@ -538,9 +558,9 @@
       </div>
       <div class="field-block">
         <div class="field-label">メモ</div>
-        <textarea class="memo-area" id="memoArea" oninput="onMemoInput()"></textarea>
+        <textarea class="memo-area" id="memoArea"></textarea>
       </div>
-      <button class="chart-btn" onclick="openChartModal()">譜面を確認</button>
+      <button class="save-btn" onclick="saveAndClose()">💾 保存して閉じる</button>
     </div>
   </div>
 </div>
@@ -686,45 +706,38 @@ async function gistSave() {
         body: JSON.stringify(body)
       });
     }
-    if (!res.ok) { isSyncing = false; setSyncIcon('err'); showToast('同期に失敗しました', 'err'); return false; }
+    if (!res.ok) { isSyncing = false; showToast('同期に失敗しました', 'err'); return false; }
     const data = await res.json();
     if (!gistId) {
       gistId = data.id;
       localStorage.setItem(LS_GISTID, gistId);
     }
     isSyncing = false;
-    setSyncIcon('ok');
     return true;
   } catch(e) {
-    isSyncing = false; setSyncIcon('err'); showToast('同期エラー', 'err'); return false;
+    isSyncing = false; showToast('同期エラー', 'err'); return false;
   }
 }
 
 function scheduleSave() {
   clearTimeout(syncTimer);
   syncTimer = setTimeout(async () => {
-    const ok = await gistSave();
-    if (ok) showToast('Gistに保存しました ☁️', 'ok');
+    await gistSave();
+    // 成功トーストは表示しない
   }, 1500);
 }
 
 function saveMemo(key, data) {
   saveMemoLocal(key, data);
+  // ボタン保存時のみGist同期するためここでは呼ばない
+}
+
+function saveMemoAndSync(key, data) {
+  saveMemoLocal(key, data);
   scheduleSave();
 }
 
 /* ===== SYNC STATUS UI ===== */
-function setSyncIcon(state) {
-  const btn = document.getElementById('syncBtn');
-  btn.className = 'sync-btn ' + state;
-  btn.textContent = state === 'syncing' ? '🔄' : state === 'ok' ? '☁️' : '⚠️';
-}
-
-async function manualSync() {
-  if (isSyncing) return;
-  const ok = await gistSave();
-  if (ok) showToast('同期完了 ☁️', 'ok');
-}
 
 let toastTimer = null;
 function showToast(msg, type = '') {
@@ -943,27 +956,30 @@ function openDetail(key) {
 }
 
 function closeDetail() {
-  autoSave();
   document.getElementById('detailOverlay').classList.remove('open');
   document.body.style.overflow = '';
   currentKey = null;
   applyFilters();
 }
 
-function autoSave() {
+async function saveAndClose() {
   if (!currentKey) return;
   const m = getMemo(currentKey);
   m.memo = document.getElementById('memoArea').value;
-  saveMemo(currentKey, m);
+  saveMemoLocal(currentKey, m);
+  const ok = await gistSave();
+  if (ok) showToast('保存しました ✓', 'ok');
+  document.getElementById('detailOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  currentKey = null;
+  applyFilters();
 }
-
-function onMemoInput() { clearTimeout(memoTimer); memoTimer = setTimeout(autoSave, 800); }
 
 function setDanger(val) {
   if (!currentKey) return;
   const m = getMemo(currentKey);
   m.danger = m.danger === val ? '' : val;
-  saveMemo(currentKey, m); updateDangerBtns(m.danger);
+  saveMemoLocal(currentKey, m); updateDangerBtns(m.danger);
 }
 function updateDangerBtns(val) {
   ['none','caution','danger'].forEach(v => {
@@ -973,7 +989,7 @@ function updateDangerBtns(val) {
 
 function setMirror(val) {
   if (!currentKey) return;
-  const m = getMemo(currentKey); m.mirror = val; saveMemo(currentKey, m); updateMirrorBtns(val);
+  const m = getMemo(currentKey); m.mirror = val; saveMemoLocal(currentKey, m); updateMirrorBtns(val);
 }
 function updateMirrorBtns(val) {
   document.getElementById('m-no').className = 'toggle-btn' + (val === 'no' ? ' sel-accent' : '');
@@ -982,7 +998,7 @@ function updateMirrorBtns(val) {
 
 function setJudge(val) {
   if (!currentKey) return;
-  const m = getMemo(currentKey); m.judge = val; saveMemo(currentKey, m); updateJudgeBtns(val);
+  const m = getMemo(currentKey); m.judge = val; saveMemoLocal(currentKey, m); updateJudgeBtns(val);
 }
 function updateJudgeBtns(val) {
   ['early','normal','late'].forEach(v => {
@@ -992,7 +1008,7 @@ function updateJudgeBtns(val) {
 
 function toggleDone() {
   if (!currentKey) return;
-  const m = getMemo(currentKey); m.done = !m.done; saveMemo(currentKey, m); updateDoneInlineBtn(m.done);
+  const m = getMemo(currentKey); m.done = !m.done; saveMemoLocal(currentKey, m); updateDoneInlineBtn(m.done);
 }
 function updateDoneInlineBtn(done) {
   const btn = document.getElementById('doneInlineBtn');
