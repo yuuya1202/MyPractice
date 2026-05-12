@@ -128,7 +128,19 @@
   .song-card:active { transform: scale(0.98); box-shadow: none; }
 
   .card-danger-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; border-radius: 14px 0 0 14px; }
-  .card-inner { display: flex; align-items: center; gap: 10px; padding: 10px 12px 10px 16px; }
+  .card-left-badges {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    flex-shrink: 0; margin-left: 2px;
+  }
+  .card-mini-badge {
+    font-size: 9px; font-weight: 700; padding: 2px 4px; border-radius: 4px;
+    background: var(--bg4); color: var(--text3); line-height: 1.2;
+    font-family: 'Rajdhani', sans-serif; letter-spacing: 0.3px; white-space: nowrap;
+  }
+  .card-mini-badge.mirror { background: var(--accent-bg); color: var(--accent); }
+  .card-mini-badge.late { background: var(--blue-bg); color: var(--blue); }
+  .card-mini-badge.early { background: var(--red-bg); color: var(--red); }
+  .card-inner { display: flex; align-items: center; gap: 8px; padding: 10px 12px 10px 14px; }
   .jacket { width: 52px; height: 52px; border-radius: 8px; background: var(--bg4); flex-shrink: 0; overflow: hidden; }
   .jacket img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
   .card-body { flex: 1; min-width: 0; }
@@ -220,6 +232,7 @@
   .toggle-btn.sel-yellow { background: var(--yellow-bg); border-color: var(--yellow); color: var(--yellow); font-weight: 700; }
   .toggle-btn.sel-red { background: var(--red-bg); border-color: var(--red); color: var(--red); font-weight: 700; }
   .toggle-btn.sel-accent { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); font-weight: 700; }
+  .toggle-btn.sel-green { background: var(--green-bg); border-color: var(--green); color: var(--green); font-weight: 700; }
 
   .memo-area {
     width: 100%; background: var(--bg3); border: 1.5px solid var(--border);
@@ -241,7 +254,7 @@
   .chart-inline-btn {
     display: inline-flex; align-items: center; gap: 4px;
     background: var(--green-bg); border: 1.5px solid var(--green);
-    border-radius: 20px; padding: 4px 12px; font-size: 11px; color: var(--green);
+    border-radius: 7px; padding: 4px 12px; font-size: 11px; color: var(--green);
     cursor: pointer; transition: all 0.15s;
     font-family: 'Noto Sans JP', sans-serif; font-weight: 700;
   }
@@ -543,13 +556,19 @@
       <div class="modal-header-right">
         <div class="modal-song-title" id="modalTitle"></div>
         <div class="modal-song-meta" id="modalMeta"></div>
-        <div style="display:flex;gap:6px;margin-top:7px;">
-          <button class="done-inline-btn" id="doneInlineBtn" onclick="toggleDone()">対策済みにする</button>
+        <div style="margin-top:7px;">
           <button class="chart-inline-btn" onclick="openChartModal()">譜面を確認</button>
         </div>
       </div>
     </div>
     <div class="modal-body">
+      <div class="field-block">
+        <div class="field-label">対策済み</div>
+        <div class="toggle-row">
+          <div class="toggle-btn" id="done-no" onclick="setDoneToggle(false)">未対策</div>
+          <div class="toggle-btn" id="done-yes" onclick="setDoneToggle(true)">対策済み ✓</div>
+        </div>
+      </div>
       <div class="field-block">
         <div class="field-label">危険度</div>
         <div class="toggle-row">
@@ -568,9 +587,9 @@
       <div class="field-block">
         <div class="field-label">判定</div>
         <div class="toggle-row">
-          <div class="toggle-btn" id="j-late" onclick="setJudge('late')">遅い</div>
+          <div class="toggle-btn" id="j-late" onclick="setJudge('late')">遅寄り</div>
           <div class="toggle-btn" id="j-normal" onclick="setJudge('normal')">普通</div>
-          <div class="toggle-btn" id="j-early" onclick="setJudge('early')">早い</div>
+          <div class="toggle-btn" id="j-early" onclick="setJudge('early')">早寄り</div>
         </div>
       </div>
       <div class="field-block">
@@ -904,17 +923,19 @@ function applyFilters() {
   filtered.forEach(s => {
     const m = getMemo(s.key);
     const dangerClass = m.danger ? `danger-${m.danger}` : 'danger-unset';
-    const badgeClass = m.danger ? `dbadge-${m.danger}` : '';
-    const dangerLabel = { none:'問題なし', caution:'要注意', danger:'危険' }[m.danger] || '';
-    const mirrorLabel = m.mirror === 'yes' ? 'ミラー' : '';
-    const judgeLabel = { early:'早い', late:'遅い' }[m.judge] || '';
-    const memoPreview = m.memo ? escHtml(m.memo.slice(0, 12)) + (m.memo.length > 12 ? '...' : '') : '';
+    const memoPreview = m.memo ? escHtml(m.memo.slice(0, 19)) + (m.memo.length > 19 ? '...' : '') : '';
+    const mirrorBadge = m.mirror === 'yes' ? `<span class="card-mini-badge mirror">ミラー</span>` : '';
+    const judgeBadge = m.judge === 'late' ? `<span class="card-mini-badge late">遅寄り</span>`
+                     : m.judge === 'early' ? `<span class="card-mini-badge early">早寄り</span>` : '';
     const card = document.createElement('div');
     card.className = `song-card ${dangerClass}`;
     card.innerHTML = `
       <div class="card-danger-bar"></div>
       <div class="card-inner">
-        <div class="check-circle ${m.done ? 'done' : ''}" style="flex-shrink:0;margin-right:2px;">${m.done ? '✓' : ''}</div>
+        <div class="card-left-badges">
+          <div class="check-circle ${m.done ? 'done' : ''}">${m.done ? '✓' : ''}</div>
+          ${mirrorBadge}${judgeBadge}
+        </div>
         <div class="jacket">${s.jacket ? `<img src="${s.jacket}" alt="" loading="lazy" onerror="this.style.display='none'">` : ''}</div>
         <div class="card-body">
           <div class="card-title">${escHtml(s.title)}</div>
@@ -922,9 +943,6 @@ function applyFilters() {
             <span class="badge badge-type">${s.typeLabel}</span>
             <span class="badge">${s.level.toFixed(1)}</span>
             <span class="badge badge-bpm">BPM ${s.bpm}</span>
-            ${m.danger ? `<span class="badge card-danger-badge ${badgeClass}">${dangerLabel}</span>` : ''}
-            ${mirrorLabel ? `<span class="badge badge-info">🔄 ${mirrorLabel}</span>` : ''}
-            ${judgeLabel ? `<span class="badge badge-info">⏱ ${judgeLabel}</span>` : ''}
           </div>
           ${memoPreview ? `<div class="card-memo">${memoPreview}</div>` : ''}
         </div>
@@ -949,7 +967,7 @@ function openDetail(key) {
     <span class="badge badge-bpm">BPM ${s.bpm}</span>`;
   currentChartUrl = s.chartUrl;
   document.getElementById('chartModalTitle').textContent = s.title;
-  updateDoneInlineBtn(m.done);
+  updateDoneToggleBtns(m.done);
   updateDangerBtns(m.danger || '');
   updateMirrorBtns(m.mirror || 'no');
   updateJudgeBtns(m.judge || 'normal');
@@ -996,11 +1014,10 @@ function updateJudgeBtns(val) {
   });
 }
 
-function toggleDone() {
+function setDoneToggle(val) {
   if (!currentKey) return;
-  const m = getMemo(currentKey); m.done = !m.done; saveMemo(currentKey, m); updateDoneInlineBtn(m.done);
+  const m = getMemo(currentKey); m.done = val; saveMemo(currentKey, m); updateDoneToggleBtns(val);
 }
-
 function onMemoInput() {
   clearTimeout(memoTimer);
   memoTimer = setTimeout(() => {
@@ -1010,10 +1027,9 @@ function onMemoInput() {
     saveMemo(currentKey, m);
   }, 800);
 }
-function updateDoneInlineBtn(done) {
-  const btn = document.getElementById('doneInlineBtn');
-  btn.className = `done-inline-btn${done ? ' done' : ''}`;
-  btn.textContent = done ? '✓ 対策済み' : '対策済みにする';
+function updateDoneToggleBtns(done) {
+  document.getElementById('done-no').className = 'toggle-btn' + (!done ? ' sel-accent' : '');
+  document.getElementById('done-yes').className = 'toggle-btn' + (done ? ' sel-green' : '');
 }
 
 function openChartModal() {
@@ -1079,27 +1095,4 @@ function updatePills() {
   fDanger.forEach(d => {
     const pill = document.createElement('div');
     pill.className = 'filter-pill';
-    pill.innerHTML = `${dangerNames[d]} <span onclick="toggleDangerFilter('${d}')">✕</span>`;
-    container.appendChild(pill);
-  });
-  if (fStatus !== 'all') {
-    const pill = document.createElement('div');
-    pill.className = 'filter-pill';
-    pill.innerHTML = `${fStatus === 'done' ? '対策済み' : '未対策'} <span onclick="setStatusFilter('all')">✕</span>`;
-    container.appendChild(pill);
-  }
-}
-
-function handleChartOverlayClick(e) {
-  if (!document.getElementById('chartModal').contains(e.target)) closeChartModal();
-}
-
-function handleOverlayClick(e, type) {
-  const modal = document.getElementById(type === 'detail' ? 'detailModal' : 'filterModal');
-  if (!modal.contains(e.target)) { type === 'detail' ? closeDetail() : closeFilterModal(); }
-}
-
-loadSongs();
-</script>
-</body>
-</html>
+    pill.innerHTML = `${dange
