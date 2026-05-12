@@ -722,7 +722,6 @@ async function gistLoad() {
 async function gistSave() {
   if (!ghToken) return false;
   isSyncing = true;
-  setSyncIcon('syncing');
   try {
     const body = {
       description: 'SDVX 18対策データ',
