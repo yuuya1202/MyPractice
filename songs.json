@@ -1944,6 +1944,15 @@
     "chartUrl": "https://sdvx.in/06/06438m.htm"
   },
   {
+    "key": "01147_nbl",
+    "title": "Earthquake Super Shock - SDVX Edit. -",
+    "type": "nabla",
+    "level": 18.3,
+    "bpm": "175",
+    "jacket": "https://sdvx.in/01/jacket/01147m.png",
+    "chartUrl": "https://sdvx.in/01/01147m.htm"
+  },
+  {
     "key": "05111_m",
     "title": "eighth-slave",
     "type": "maximum",
@@ -2878,6 +2887,15 @@
     "bpm": "235",
     "jacket": "https://sdvx.in/04/jacket/04245m.png",
     "chartUrl": "https://sdvx.in/04/04245m.htm"
+  },
+  {
+    "key": "02139_nbl",
+    "title": "BUBBLE RAVER",
+    "type": "nabla",
+    "level": 18.4,
+    "bpm": "174",
+    "jacket": "https://sdvx.in/02/jacket/02139m.png",
+    "chartUrl": "https://sdvx.in/02/02139m.htm"
   },
   {
     "key": "06287_m",
