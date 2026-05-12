@@ -39,9 +39,9 @@
     --inf: #f472b6;
     --grv: #b45309;
     --hvn: #0891b2;
-    --vvd: #be185d;
+    --vvd: #f0127a;
     --xcd: #1d4ed8;
-    --nbl: #065f46;
+    --nbl: #16a34a;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -97,12 +97,21 @@
   .search-input {
     width: 100%; background: var(--bg2);
     border: 1.5px solid var(--border); border-radius: var(--radius-sm);
-    padding: 8px 10px 8px 32px; color: var(--text); font-size: 14px;
+    padding: 8px 32px 8px 32px; color: var(--text); font-size: 14px;
     font-family: 'Noto Sans JP', sans-serif; outline: none;
     box-shadow: var(--shadow); transition: border-color 0.2s;
   }
   .search-input:focus { border-color: var(--accent2); }
   .search-input::placeholder { color: var(--text3); }
+
+  .search-clear {
+    position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+    background: var(--text3); color: white; border: none; border-radius: 50%;
+    width: 16px; height: 16px; font-size: 10px; cursor: pointer;
+    display: none; align-items: center; justify-content: center; line-height: 1;
+    padding: 0; font-family: sans-serif;
+  }
+  .search-clear.show { display: flex; }
 
   .filter-btn {
     background: var(--bg2); border: 1.5px solid var(--border);
@@ -190,7 +199,8 @@
   .danger-none .card-danger-bar { background: var(--blue); }
   .danger-caution .card-danger-bar { background: var(--yellow); }
   .danger-danger .card-danger-bar { background: var(--red); }
-  .danger-unset .card-danger-bar { background: var(--bg4); }
+  .danger-unset .card-danger-bar { background: transparent; }
+  .song-card.done-card .card-danger-bar { width: 8px !important; background: var(--green) !important; }
 
   .dbadge-none { background: var(--blue-bg); color: var(--blue); }
   .dbadge-caution { background: var(--yellow-bg); color: var(--yellow); }
@@ -263,6 +273,8 @@
     font-family: 'Noto Sans JP', sans-serif;
   }
   .toggle-btn:active { transform: scale(0.97); }
+  .toggle-btn.sel-gray { background: #e2e4ea; border-color: #b0b4c8; color: var(--text2); font-weight: 700; }
+  .toggle-btn.sel-pale-yellow { background: #fef9c3; border-color: #ca8a04; color: #854d0e; font-weight: 700; }
   .toggle-btn.sel-blue { background: var(--blue-bg); border-color: var(--blue); color: var(--blue); font-weight: 700; }
   .toggle-btn.sel-yellow { background: var(--yellow-bg); border-color: var(--yellow); color: var(--yellow); font-weight: 700; }
   .toggle-btn.sel-red { background: var(--red-bg); border-color: var(--red); color: var(--red); font-weight: 700; }
@@ -289,7 +301,7 @@
   .chart-inline-btn {
     display: inline-flex; align-items: center; gap: 4px;
     background: var(--green-bg); border: 1.5px solid var(--green);
-    border-radius: 7px; padding: 4px 12px; font-size: 11px; color: var(--green);
+    border-radius: 4px; padding: 4px 12px; font-size: 11px; color: var(--green);
     cursor: pointer; transition: all 0.15s;
     font-family: 'Noto Sans JP', sans-serif; font-weight: 700;
   }
@@ -565,7 +577,8 @@
   <div class="search-row">
     <div class="search-wrap">
       <span class="search-icon">🔍</span>
-      <input class="search-input" id="searchInput" type="text" placeholder="曲名を検索..." oninput="applyFilters()">
+      <input class="search-input" id="searchInput" type="text" placeholder="曲名を検索..." oninput="onSearchInput()">
+      <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
     </div>
     <button class="filter-btn" id="filterBtn" onclick="openFilterModal()">
       <span>絞込</span>
