@@ -136,9 +136,10 @@
   .card-meta { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
   .badge { font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; padding: 2px 7px; border-radius: 5px; background: var(--bg4); color: var(--text2); }
   .badge-type { color: var(--accent); background: var(--accent-bg); }
-  .badge-bpm { color: var(--text3); background: var(--bg3); }
+  .badge-bpm { color: var(--text2); background: var(--bg4); }
+  .badge-info { color: var(--text2); background: var(--bg4); font-size: 10px; }
   .card-danger-badge { font-size: 10px; padding: 2px 7px; border-radius: 10px; }
-  .card-right { display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0; }
+  .card-memo { font-size: 11px; color: var(--text3); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .check-circle {
     width: 22px; height: 22px; border-radius: 50%;
     border: 1.5px solid var(--border);
@@ -251,21 +252,35 @@
     border-radius: var(--radius-sm); padding: 11px; color: white;
     font-size: 13px; font-family: 'Noto Sans JP', sans-serif;
     cursor: pointer; transition: all 0.15s; font-weight: 700; letter-spacing: 0.5px;
+    display: block; margin: 0 auto;
   }
   .save-btn:active { transform: scale(0.98); opacity: 0.9; }
 
   /* 譜面モーダル */
   .chart-overlay {
-    position: fixed; inset: 0; background: rgba(10,10,30,0.9); z-index: 300;
-    display: flex; flex-direction: column;
+    position: fixed; inset: 0; background: rgba(20,20,50,0.7); z-index: 300;
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
     opacity: 0; pointer-events: none; transition: opacity 0.25s;
   }
   .chart-overlay.open { opacity: 1; pointer-events: all; }
+
+  .chart-modal {
+    background: var(--bg2); border-radius: 16px;
+    width: 100%; max-width: 460px; height: 80vh;
+    display: flex; flex-direction: column;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+    transform: scale(0.93);
+    transition: transform 0.3s cubic-bezier(0.32,0.72,0,1);
+    overflow: hidden;
+  }
+  .chart-overlay.open .chart-modal { transform: scale(1); }
 
   .chart-modal-header {
     background: var(--bg2); padding: 12px 16px;
     display: flex; align-items: center; justify-content: space-between;
     border-bottom: 1px solid var(--border); flex-shrink: 0;
+    border-radius: 16px 16px 0 0;
   }
   .chart-modal-title {
     font-size: 13px; font-weight: 700; color: var(--text);
@@ -277,7 +292,7 @@
     padding: 6px 12px; font-size: 12px; color: var(--text2);
     cursor: pointer; font-family: 'Noto Sans JP', sans-serif; flex-shrink: 0;
   }
-  .chart-iframe-wrap { flex: 1; overflow: hidden; position: relative; }
+  .chart-iframe-wrap { flex: 1; overflow: hidden; position: relative; border-radius: 0 0 16px 16px; }
   .chart-iframe { width: 100%; height: 100%; border: none; background: #fff; }
 
   /* FILTER MODAL */
@@ -546,16 +561,16 @@
       <div class="field-block">
         <div class="field-label">ミラー</div>
         <div class="toggle-row">
-          <div class="toggle-btn" id="m-no" onclick="setMirror('no')">なし</div>
-          <div class="toggle-btn" id="m-yes" onclick="setMirror('yes')">あり</div>
+          <div class="toggle-btn" id="m-no" onclick="setMirror('no')">正規</div>
+          <div class="toggle-btn" id="m-yes" onclick="setMirror('yes')">ミラー</div>
         </div>
       </div>
       <div class="field-block">
         <div class="field-label">判定</div>
         <div class="toggle-row">
-          <div class="toggle-btn" id="j-early" onclick="setJudge('early')">早め</div>
+          <div class="toggle-btn" id="j-late" onclick="setJudge('late')">遅い</div>
           <div class="toggle-btn" id="j-normal" onclick="setJudge('normal')">普通</div>
-          <div class="toggle-btn" id="j-late" onclick="setJudge('late')">遅め</div>
+          <div class="toggle-btn" id="j-early" onclick="setJudge('early')">早い</div>
         </div>
       </div>
       <div class="field-block">
@@ -601,13 +616,15 @@
 </div>
 
 <!-- 譜面モーダル -->
-<div class="chart-overlay" id="chartOverlay">
-  <div class="chart-modal-header">
-    <div class="chart-modal-title" id="chartModalTitle"></div>
-    <button class="chart-close-btn" onclick="closeChartModal()">✕ 閉じる</button>
-  </div>
-  <div class="chart-iframe-wrap">
-    <iframe class="chart-iframe" id="chartIframe" src=""></iframe>
+<div class="chart-overlay" id="chartOverlay" onclick="handleChartOverlayClick(event)">
+  <div class="chart-modal" id="chartModal">
+    <div class="chart-modal-header">
+      <div class="chart-modal-title" id="chartModalTitle"></div>
+      <button class="chart-close-btn" onclick="closeChartModal()">✕ 閉じる</button>
+    </div>
+    <div class="chart-iframe-wrap">
+      <iframe class="chart-iframe" id="chartIframe" src=""></iframe>
+    </div>
   </div>
 </div>
 
@@ -632,7 +649,7 @@
 
     <div class="token-error" id="tokenError"></div>
 
-    <button class="token-save-btn" id="tokenSaveBtn" onclick="saveToken()">接続して保存</button>
+    <button class="token-save-btn" id="tokenSaveBtn" onclick="saveToken()">閉じる</button>
   </div>
 </div>
 
@@ -783,13 +800,13 @@ async function saveToken() {
     if (!res.ok) {
       errEl.textContent = 'Tokenが無効です。再確認してください。';
       errEl.className = 'token-error show';
-      btn.disabled = false; btn.textContent = '接続して保存';
+      btn.disabled = false; btn.textContent = '閉じる';
       return;
     }
   } catch(e) {
     errEl.textContent = '接続できませんでした。';
     errEl.className = 'token-error show';
-    btn.disabled = false; btn.textContent = '接続して保存';
+    btn.disabled = false; btn.textContent = '閉じる';
     return;
   }
 
@@ -799,28 +816,19 @@ async function saveToken() {
   if (gistId) localStorage.setItem(LS_GISTID, gistId);
   else localStorage.removeItem(LS_GISTID);
 
-  btn.textContent = 'データを読み込み中...';
-
   // Gistからデータ読み込み試行
+  btn.textContent = 'データを読み込み中...';
   const loaded = await gistLoad();
-  if (loaded) {
-    showToast('Gistからデータを読み込みました ✓', 'ok');
-  } else if (gistId) {
+  if (!loaded && gistId) {
     errEl.textContent = 'Gist IDが見つかりません。空欄にして再試行してください。';
     errEl.className = 'token-error show';
-    btn.disabled = false; btn.textContent = '接続して保存';
+    btn.disabled = false; btn.textContent = '閉じる';
     return;
   }
 
   btn.disabled = false;
   closeTokenModal();
   render();
-
-  if (!loaded) {
-    // 新規：現在のデータをGistに保存
-    const ok = await gistSave();
-    if (ok) showToast('Gistに初回保存しました ☁️', 'ok');
-  }
 }
 
 /* ===== SONGS ===== */
@@ -898,11 +906,15 @@ function applyFilters() {
     const dangerClass = m.danger ? `danger-${m.danger}` : 'danger-unset';
     const badgeClass = m.danger ? `dbadge-${m.danger}` : '';
     const dangerLabel = { none:'問題なし', caution:'要注意', danger:'危険' }[m.danger] || '';
+    const mirrorLabel = m.mirror === 'yes' ? 'ミラー' : '';
+    const judgeLabel = { early:'早い', late:'遅い' }[m.judge] || '';
+    const memoPreview = m.memo ? escHtml(m.memo.slice(0, 12)) + (m.memo.length > 12 ? '...' : '') : '';
     const card = document.createElement('div');
     card.className = `song-card ${dangerClass}`;
     card.innerHTML = `
       <div class="card-danger-bar"></div>
       <div class="card-inner">
+        <div class="check-circle ${m.done ? 'done' : ''}" style="flex-shrink:0;margin-right:2px;">${m.done ? '✓' : ''}</div>
         <div class="jacket">${s.jacket ? `<img src="${s.jacket}" alt="" loading="lazy" onerror="this.style.display='none'">` : ''}</div>
         <div class="card-body">
           <div class="card-title">${escHtml(s.title)}</div>
@@ -911,10 +923,10 @@ function applyFilters() {
             <span class="badge">${s.level.toFixed(1)}</span>
             <span class="badge badge-bpm">BPM ${s.bpm}</span>
             ${m.danger ? `<span class="badge card-danger-badge ${badgeClass}">${dangerLabel}</span>` : ''}
+            ${mirrorLabel ? `<span class="badge badge-info">🔄 ${mirrorLabel}</span>` : ''}
+            ${judgeLabel ? `<span class="badge badge-info">⏱ ${judgeLabel}</span>` : ''}
           </div>
-        </div>
-        <div class="card-right">
-          <div class="check-circle ${m.done ? 'done' : ''}">${m.done ? '✓' : ''}</div>
+          ${memoPreview ? `<div class="card-memo">${memoPreview}</div>` : ''}
         </div>
       </div>`;
     card.onclick = () => openDetail(s.key);
@@ -1076,6 +1088,10 @@ function updatePills() {
     pill.innerHTML = `${fStatus === 'done' ? '対策済み' : '未対策'} <span onclick="setStatusFilter('all')">✕</span>`;
     container.appendChild(pill);
   }
+}
+
+function handleChartOverlayClick(e) {
+  if (!document.getElementById('chartModal').contains(e.target)) closeChartModal();
 }
 
 function handleOverlayClick(e, type) {
