@@ -1095,4 +1095,27 @@ function updatePills() {
   fDanger.forEach(d => {
     const pill = document.createElement('div');
     pill.className = 'filter-pill';
-    pill.innerHTML = `${dange
+    pill.innerHTML = `${dangerNames[d]} <span onclick="toggleDangerFilter('${d}')">✕</span>`;
+    container.appendChild(pill);
+  });
+  if (fStatus !== 'all') {
+    const pill = document.createElement('div');
+    pill.className = 'filter-pill';
+    pill.innerHTML = `${fStatus === 'done' ? '対策済み' : '未対策'} <span onclick="setStatusFilter('all')">✕</span>`;
+    container.appendChild(pill);
+  }
+}
+
+function handleChartOverlayClick(e) {
+  if (!document.getElementById('chartModal').contains(e.target)) closeChartModal();
+}
+
+function handleOverlayClick(e, type) {
+  const modal = document.getElementById(type === 'detail' ? 'detailModal' : 'filterModal');
+  if (!modal.contains(e.target)) { type === 'detail' ? closeDetail() : closeFilterModal(); }
+}
+
+loadSongs();
+</script>
+</body>
+</html>
