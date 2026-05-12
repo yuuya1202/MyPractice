@@ -560,9 +560,9 @@
       </div>
       <div class="field-block">
         <div class="field-label">メモ</div>
-        <textarea class="memo-area" id="memoArea"></textarea>
+        <textarea class="memo-area" id="memoArea" oninput="onMemoInput()"></textarea>
       </div>
-      <button class="save-btn" onclick="saveAndClose()">保存</button>
+      <button class="save-btn" onclick="closeDetail()">閉じる</button>
     </div>
   </div>
 </div>
@@ -633,7 +633,6 @@
     <div class="token-error" id="tokenError"></div>
 
     <button class="token-save-btn" id="tokenSaveBtn" onclick="saveToken()">接続して保存</button>
-    <button class="token-skip-btn" onclick="skipToken()">スキップ（端末内のみ保存）</button>
   </div>
 </div>
 
@@ -731,11 +730,6 @@ function scheduleSave() {
 
 function saveMemo(key, data) {
   saveMemoLocal(key, data);
-  // ボタン保存時のみGist同期するためここでは呼ばない
-}
-
-function saveMemoAndSync(key, data) {
-  saveMemoLocal(key, data);
   scheduleSave();
 }
 
@@ -827,11 +821,6 @@ async function saveToken() {
     const ok = await gistSave();
     if (ok) showToast('Gistに初回保存しました ☁️', 'ok');
   }
-}
-
-function skipToken() {
-  closeTokenModal();
-  render();
 }
 
 /* ===== SONGS ===== */
@@ -964,27 +953,11 @@ function closeDetail() {
   applyFilters();
 }
 
-async function saveAndClose() {
-  if (!currentKey) return;
-  const m = getMemo(currentKey);
-  m.memo = document.getElementById('memoArea').value;
-  saveMemoLocal(currentKey, m);
-  // モーダルを先に閉じる
-  document.getElementById('detailOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-  const key = currentKey;
-  currentKey = null;
-  applyFilters();
-  // Gist同期はバックグラウンドで実行
-  const ok = await gistSave();
-  if (ok) showToast('保存しました ✓', 'ok');
-}
-
 function setDanger(val) {
   if (!currentKey) return;
   const m = getMemo(currentKey);
   m.danger = m.danger === val ? '' : val;
-  saveMemoLocal(currentKey, m); updateDangerBtns(m.danger);
+  saveMemo(currentKey, m); updateDangerBtns(m.danger);
 }
 function updateDangerBtns(val) {
   ['none','caution','danger'].forEach(v => {
@@ -994,7 +967,7 @@ function updateDangerBtns(val) {
 
 function setMirror(val) {
   if (!currentKey) return;
-  const m = getMemo(currentKey); m.mirror = val; saveMemoLocal(currentKey, m); updateMirrorBtns(val);
+  const m = getMemo(currentKey); m.mirror = val; saveMemo(currentKey, m); updateMirrorBtns(val);
 }
 function updateMirrorBtns(val) {
   document.getElementById('m-no').className = 'toggle-btn' + (val === 'no' ? ' sel-accent' : '');
@@ -1003,7 +976,7 @@ function updateMirrorBtns(val) {
 
 function setJudge(val) {
   if (!currentKey) return;
-  const m = getMemo(currentKey); m.judge = val; saveMemoLocal(currentKey, m); updateJudgeBtns(val);
+  const m = getMemo(currentKey); m.judge = val; saveMemo(currentKey, m); updateJudgeBtns(val);
 }
 function updateJudgeBtns(val) {
   ['early','normal','late'].forEach(v => {
@@ -1013,7 +986,17 @@ function updateJudgeBtns(val) {
 
 function toggleDone() {
   if (!currentKey) return;
-  const m = getMemo(currentKey); m.done = !m.done; saveMemoLocal(currentKey, m); updateDoneInlineBtn(m.done);
+  const m = getMemo(currentKey); m.done = !m.done; saveMemo(currentKey, m); updateDoneInlineBtn(m.done);
+}
+
+function onMemoInput() {
+  clearTimeout(memoTimer);
+  memoTimer = setTimeout(() => {
+    if (!currentKey) return;
+    const m = getMemo(currentKey);
+    m.memo = document.getElementById('memoArea').value;
+    saveMemo(currentKey, m);
+  }, 800);
 }
 function updateDoneInlineBtn(done) {
   const btn = document.getElementById('doneInlineBtn');
