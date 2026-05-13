@@ -271,19 +271,22 @@
     font-family: 'Noto Sans JP', sans-serif;
   }
   .toggle-btn:active { transform: scale(0.97); }
-  .toggle-btn.sel-gray { background: #e2e4ea; border-color: #b0b4c8; color: var(--text2); font-weight: 700; }
+  .toggle-btn.sel-gray { background: #f2f3f7; border-color: #d4d6e0; color: var(--text2); font-weight: 700; }
   .toggle-btn.sel-pale-yellow { background: #fef9c3; border-color: #ca8a04; color: #854d0e; font-weight: 700; }
   .toggle-btn.sel-blue { background: var(--blue-bg); border-color: var(--blue); color: var(--blue); font-weight: 700; }
   .toggle-btn.sel-yellow { background: var(--yellow-bg); border-color: var(--yellow); color: var(--yellow); font-weight: 700; }
   .toggle-btn.sel-red { background: var(--red-bg); border-color: var(--red); color: var(--red); font-weight: 700; }
   .toggle-btn.sel-accent { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); font-weight: 700; }
   .toggle-btn.sel-green { background: var(--green-bg); border-color: var(--green); color: var(--green); font-weight: 700; }
-    width: 100%; background: var(--bg3); border: 1.5px solid var(--border);
+
+  .memo-area {
+    width: 100%; background: var(--bg2); border: 1.5px solid var(--border);
     border-radius: var(--radius-sm); padding: 10px; color: var(--text);
     font-size: 13px; font-family: 'Noto Sans JP', sans-serif;
     resize: none; outline: none; min-height: 80px; transition: border-color 0.2s;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.04);
   }
-  .memo-area:focus { border-color: var(--accent2); }
+  .memo-area:focus { border-color: var(--accent2); background: var(--bg2); }
 
   .chart-btn {
     width: 100%; background: var(--accent); border: none;
@@ -314,29 +317,22 @@
 
   /* 譜面モーダル */
   .chart-overlay {
-    position: fixed; inset: 0; background: rgba(20,20,50,0.7); z-index: 300;
-    display: flex; align-items: center; justify-content: center;
-    padding: 20px;
+    position: fixed; inset: 0; background: rgba(10,10,30,0.95); z-index: 300;
+    display: flex; flex-direction: column;
     opacity: 0; pointer-events: none; transition: opacity 0.25s;
   }
   .chart-overlay.open { opacity: 1; pointer-events: all; }
 
   .chart-modal {
-    background: var(--bg2); border-radius: 16px;
-    width: 100%; max-width: 460px; height: 80vh;
+    width: 100%; height: 100%;
     display: flex; flex-direction: column;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.35);
-    transform: scale(0.93);
-    transition: transform 0.3s cubic-bezier(0.32,0.72,0,1);
     overflow: hidden;
   }
-  .chart-overlay.open .chart-modal { transform: scale(1); }
 
   .chart-modal-header {
     background: var(--bg2); padding: 12px 16px;
     display: flex; align-items: center; justify-content: space-between;
     border-bottom: 1px solid var(--border); flex-shrink: 0;
-    border-radius: 16px 16px 0 0;
   }
   .chart-modal-title {
     font-size: 13px; font-weight: 700; color: var(--text);
@@ -348,7 +344,7 @@
     padding: 6px 12px; font-size: 12px; color: var(--text2);
     cursor: pointer; font-family: 'Noto Sans JP', sans-serif; flex-shrink: 0;
   }
-  .chart-iframe-wrap { flex: 1; overflow: hidden; position: relative; border-radius: 0 0 16px 16px; }
+  .chart-iframe-wrap { flex: 1; overflow: hidden; }
   .chart-iframe { width: 100%; height: 100%; border: none; background: #fff; }
 
   /* FILTER MODAL */
@@ -731,7 +727,7 @@ const GIST_FILENAME = 'sdvx18_data.json';
 let songs = [], memoData = {}, currentKey = null, memoTimer = null, currentChartUrl = '';
 let fLevels = new Set(), fDanger = new Set(), fStatus = 'all';
 let ghToken = '', gistId = '';
-let syncTimer = null, isSyncing = false;
+let syncTimer = null, isSyncing = false, pendingSave = false;
 
 /* ===== LOCAL STORAGE ===== */
 function getMemo(key) {
@@ -760,7 +756,7 @@ async function gistLoad() {
   } catch(e) { return false; }
 }
 
-async function gistSave() {
+async function gistSave(retryCount = 0) {
   if (!ghToken) return false;
   isSyncing = true;
   try {
@@ -783,18 +779,50 @@ async function gistSave() {
         body: JSON.stringify(body)
       });
     }
-    if (!res.ok) { isSyncing = false; showToast('同期に失敗しました', 'err'); return false; }
+    if (!res.ok) {
+      isSyncing = false;
+      if (res.status === 401 || res.status === 403) {
+        showToast('Token認証エラー。⚙️から再設定してください', 'err');
+        return false;
+      }
+      if (retryCount < 3) {
+        const delay = (retryCount + 1) * 2000;
+        setTimeout(() => gistSave(retryCount + 1), delay);
+        return false;
+      }
+      // リトライ上限：オンライン復帰時に再送予約
+      pendingSave = true;
+      showToast('ネットワークエラー。復帰後に自動再送します', 'err');
+      return false;
+    }
     const data = await res.json();
     if (!gistId) {
       gistId = data.id;
       localStorage.setItem(LS_GISTID, gistId);
     }
     isSyncing = false;
+    pendingSave = false;
     return true;
   } catch(e) {
-    isSyncing = false; showToast('同期エラー', 'err'); return false;
+    isSyncing = false;
+    if (retryCount < 3) {
+      const delay = (retryCount + 1) * 2000;
+      setTimeout(() => gistSave(retryCount + 1), delay);
+      return false;
+    }
+    pendingSave = true;
+    showToast('ネットワークエラー。復帰後に自動再送します', 'err');
+    return false;
   }
 }
+
+// オンライン復帰時に未送信データを再送
+window.addEventListener('online', () => {
+  if (pendingSave) {
+    showToast('ネットワーク復帰。同期中...', '');
+    gistSave();
+  }
+});
 
 function scheduleSave() {
   clearTimeout(syncTimer);
@@ -1174,7 +1202,7 @@ function updatePills() {
 }
 
 function handleChartOverlayClick(e) {
-  if (!document.getElementById('chartModal').contains(e.target)) closeChartModal();
+  // 全画面表示のため背景クリック閉じは無効
 }
 
 function handleOverlayClick(e, type) {
