@@ -269,13 +269,13 @@
   .toggle-row { display: flex; gap: 6px; }
 
   .toggle-btn {
-    flex: 1; background: #ffffff; border: 1.5px solid var(--border);
+    flex: 1; background: var(--bg3); border: 1.5px solid var(--border);
     border-radius: var(--radius-sm); padding: 8px 4px; text-align: center;
-    font-size: 12px; color: var(--text3); cursor: pointer; transition: all 0.15s;
+    font-size: 12px; color: var(--text2); cursor: pointer; transition: all 0.15s;
     font-family: 'Noto Sans JP', sans-serif;
   }
   .toggle-btn:active { transform: scale(0.97); }
-  .toggle-btn.sel-gray { background: #c8cad8; border-color: #8a8da8; color: var(--text); font-weight: 700; }
+  .toggle-btn.sel-gray { background: #edeef2; border-color: #c8cad8; color: var(--text2); font-weight: 700; }
   .toggle-btn.sel-pale-yellow { background: #fef9c3; border-color: #ca8a04; color: #854d0e; font-weight: 700; }
   .toggle-btn.sel-blue { background: var(--blue-bg); border-color: var(--blue); color: var(--blue); font-weight: 700; }
   .toggle-btn.sel-yellow { background: var(--yellow-bg); border-color: var(--yellow); color: var(--yellow); font-weight: 700; }
@@ -708,7 +708,7 @@
           <div class="status-opt" id="fs-done" onclick="setStatusFilter('done')">対策済み</div>
         </div>
       </div>
-      <button class="token-save-btn" style="margin-top:4px;" onclick="closeFilterModal()">適用して閉じる</button>
+      <button class="token-save-btn" style="margin-top:4px;width:33%;display:block;margin-left:auto;margin-right:auto;" onclick="closeFilterModal()">適用</button>
     </div>
   </div>
 </div>
@@ -1165,7 +1165,7 @@ function renderDashboard() {
 
   container.innerHTML = `
     <div class="dash-card">
-      <div class="dash-card-title">全体進捗</div>
+      <div class="dash-card-title">対策済み 全体</div>
       <div class="donut-wrap">
         ${donutSvg}
         <div class="donut-legend">
@@ -1177,20 +1177,7 @@ function renderDashboard() {
     </div>
 
     <div class="dash-card">
-      <div class="dash-card-title">危険度内訳</div>
-      <div class="donut-wrap">
-        ${dangerSvg}
-        <div class="donut-legend">
-          <div class="legend-row"><span class="legend-dot" style="background:#dc2626"></span>危険<span class="legend-val">${dangerDanger}</span></div>
-          <div class="legend-row"><span class="legend-dot" style="background:#d97706"></span>要注意<span class="legend-val">${dangerCaution}</span></div>
-          <div class="legend-row"><span class="legend-dot" style="background:#2563eb"></span>問題なし<span class="legend-val">${dangerNone}</span></div>
-          <div class="legend-row"><span class="legend-dot" style="background:var(--bg4);border:1px solid var(--border)"></span>未設定<span class="legend-val">${dangerUnset}</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="dash-card">
-      <div class="dash-card-title">レベル別 対策済み</div>
+      <div class="dash-card-title">対策済み レベル別</div>
       <div class="bar-chart">
         ${levels.map(lv => {
           const d = levelMap[lv].done;
@@ -1208,7 +1195,20 @@ function renderDashboard() {
     </div>
 
     <div class="dash-card">
-      <div class="dash-card-title">レベル別 危険度内訳</div>
+      <div class="dash-card-title">危険度 全体</div>
+      <div class="donut-wrap">
+        ${dangerSvg}
+        <div class="donut-legend">
+          <div class="legend-row"><span class="legend-dot" style="background:#dc2626"></span>危険<span class="legend-val">${dangerDanger}</span></div>
+          <div class="legend-row"><span class="legend-dot" style="background:#d97706"></span>要注意<span class="legend-val">${dangerCaution}</span></div>
+          <div class="legend-row"><span class="legend-dot" style="background:#2563eb"></span>問題なし<span class="legend-val">${dangerNone}</span></div>
+          <div class="legend-row"><span class="legend-dot" style="background:var(--bg4);border:1px solid var(--border)"></span>未設定<span class="legend-val">${dangerUnset}</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dash-card">
+      <div class="dash-card-title">危険度 レベル別</div>
       <div class="bar-chart">
         ${levels.map(lv => {
           const t = levelMap[lv].total;
