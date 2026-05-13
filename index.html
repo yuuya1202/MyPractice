@@ -269,13 +269,13 @@
   .toggle-row { display: flex; gap: 6px; }
 
   .toggle-btn {
-    flex: 1; background: var(--bg3); border: 1.5px solid var(--border);
+    flex: 1; background: #ffffff; border: 1.5px solid var(--border);
     border-radius: var(--radius-sm); padding: 8px 4px; text-align: center;
-    font-size: 12px; color: var(--text2); cursor: pointer; transition: all 0.15s;
+    font-size: 12px; color: var(--text3); cursor: pointer; transition: all 0.15s;
     font-family: 'Noto Sans JP', sans-serif;
   }
   .toggle-btn:active { transform: scale(0.97); }
-  .toggle-btn.sel-gray { background: #d0d3e0; border-color: #9aa0b8; color: var(--text); font-weight: 700; }
+  .toggle-btn.sel-gray { background: #c8cad8; border-color: #8a8da8; color: var(--text); font-weight: 700; }
   .toggle-btn.sel-pale-yellow { background: #fef9c3; border-color: #ca8a04; color: #854d0e; font-weight: 700; }
   .toggle-btn.sel-blue { background: var(--blue-bg); border-color: var(--blue); color: var(--blue); font-weight: 700; }
   .toggle-btn.sel-yellow { background: var(--yellow-bg); border-color: var(--yellow); color: var(--yellow); font-weight: 700; }
@@ -1267,8 +1267,8 @@ function openDetail(key) {
   document.getElementById('chartModalTitle').textContent = s.title;
   updateDoneToggleBtns(m.done);
   updateDangerBtns(m.danger || '');
-  updateMirrorBtns(m.mirror || 'no');
-  updateJudgeBtns(m.judge || 'normal');
+  updateMirrorBtns(m.mirror || '');
+  updateJudgeBtns(m.judge || '');
   document.getElementById('memoArea').value = m.memo || '';
   document.getElementById('detailOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
