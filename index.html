@@ -195,11 +195,12 @@
     display: flex; flex-direction: column; align-items: flex-end; gap: 3px;
     flex-shrink: 0;
   }
-  .danger-none .card-danger-bar { background: var(--blue); }
-  .danger-caution .card-danger-bar { background: var(--yellow); }
-  .danger-danger .card-danger-bar { background: var(--red); }
-  .danger-unset .card-danger-bar { background: var(--bg4); }
-  .song-card.done-card .card-danger-bar { background: transparent !important; width: 4px; }
+  .danger-none .card-danger-bar { background: transparent; }
+  .danger-caution .card-danger-bar { background: transparent; }
+  .danger-danger .card-danger-bar { background: transparent; }
+  .danger-unset .card-danger-bar { background: transparent; }
+  .song-card .card-danger-bar { background: #5b4fe8; }
+  .song-card.done-card .card-danger-bar { background: transparent; }
   .card-mini-badge.danger-caution { background: var(--yellow-bg); color: var(--yellow); }
   .card-mini-badge.danger-danger { background: var(--red-bg); color: var(--red); }
 
@@ -772,7 +773,7 @@ let syncTimer = null, isSyncing = false, pendingSave = false;
 
 /* ===== LOCAL STORAGE ===== */
 function getMemo(key) {
-  return memoData[key] || { danger:'', mirror:'', judge:'normal', memo:'', done:false };
+  return memoData[key] || { danger:'', mirror:'', judge:'', memo:'', done:false };
 }
 function saveMemoLocal(key, data) {
   memoData[key] = data;
@@ -1056,8 +1057,7 @@ function applyFilters() {
     const judgeBadge  = m.judge === 'late'   ? `<span class="card-mini-badge late">遅寄り</span>`
                       : m.judge === 'early'  ? `<span class="card-mini-badge early">早寄り</span>`
                       : m.judge === 'normal' ? `<span class="card-mini-badge normal">普通</span>`
-                      : '';
-    const typeKey = s.type;
+                      : '';    const typeKey = s.type;
     const badgeClass = `badge-${typeKey === 'exhaust' ? 'exh' : typeKey === 'maximum' ? 'mxm' : typeKey === 'infinite' ? 'inf' : typeKey === 'gravity' ? 'grv' : typeKey === 'heavenly' ? 'hvn' : typeKey === 'vivid' ? 'vvd' : typeKey === 'exceed' ? 'xcd' : typeKey === 'nabla' ? 'nbl' : typeKey === 'novice' ? 'nov' : typeKey === 'advanced' ? 'adv' : 'mxm'}`;
     const jacketClass = `jacket jacket-${typeKey === 'exhaust' ? 'exh' : typeKey === 'maximum' ? 'mxm' : typeKey === 'infinite' ? 'inf' : typeKey === 'gravity' ? 'grv' : typeKey === 'heavenly' ? 'hvn' : typeKey === 'vivid' ? 'vvd' : typeKey === 'exceed' ? 'xcd' : typeKey === 'nabla' ? 'nbl' : 'adv'}`;
     const card = document.createElement('div');
@@ -1305,7 +1305,9 @@ function updateMirrorBtns(val) {
 }
 function setJudge(val) {
   if (!currentKey) return;
-  const m = getMemo(currentKey); m.judge = val; saveMemo(currentKey, m); updateJudgeBtns(val);
+  const m = getMemo(currentKey);
+  m.judge = m.judge === val ? '' : val;
+  saveMemo(currentKey, m); updateJudgeBtns(m.judge);
 }
 function updateJudgeBtns(val) {
   document.getElementById('j-late').className = 'toggle-btn' + (val === 'late' ? ' sel-blue' : '');
