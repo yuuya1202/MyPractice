@@ -198,8 +198,8 @@
   .danger-none .card-danger-bar { background: var(--blue); }
   .danger-caution .card-danger-bar { background: var(--yellow); }
   .danger-danger .card-danger-bar { background: var(--red); }
-  .danger-unset .card-danger-bar { background: transparent; }
-  .song-card.done-card .card-danger-bar { width: 6px; background: var(--green) !important; }
+  .danger-unset .card-danger-bar { background: var(--bg4); }
+  .song-card.done-card .card-danger-bar { background: transparent !important; width: 4px; }
   .card-mini-badge.danger-caution { background: var(--yellow-bg); color: var(--yellow); }
   .card-mini-badge.danger-danger { background: var(--red-bg); color: var(--red); }
 
@@ -302,8 +302,8 @@
 
   .chart-inline-btn {
     display: inline-flex; align-items: center; gap: 4px;
-    background: var(--green-bg); border: 1.5px solid var(--green);
-    border-radius: 0px; padding: 4px 12px; font-size: 11px; color: var(--green);
+    background: #1e1b4b; border: 1.5px solid #1e1b4b;
+    border-radius: 0px; padding: 4px 12px; font-size: 11px; color: #fff;
     cursor: pointer; transition: all 0.15s;
     font-family: 'Noto Sans JP', sans-serif; font-weight: 700;
   }
@@ -657,7 +657,7 @@
       <div class="field-block">
         <div class="field-label">オプション</div>
         <div class="toggle-row">
-          <div class="toggle-btn" id="m-no" onclick="setMirror('no')">なし</div>
+          <div class="toggle-btn" id="m-no" onclick="setMirror('no')">正規</div>
           <div class="toggle-btn" id="m-yes" onclick="setMirror('yes')">ミラー</div>
         </div>
       </div>
@@ -1117,13 +1117,18 @@ function renderDashboard() {
   const undone = total - done;
   const doneRate = Math.round(done / total * 100);
 
-  // レベル別集計
+  // レベル別集計（対策済み＋危険度）
   const levelMap = {};
   songs.forEach(s => {
     const lv = s.level.toFixed(1);
-    if (!levelMap[lv]) levelMap[lv] = { done: 0, total: 0 };
+    if (!levelMap[lv]) levelMap[lv] = { done:0, total:0, danger:0, caution:0, dnone:0, dunset:0 };
     levelMap[lv].total++;
-    if (getMemo(s.key).done) levelMap[lv].done++;
+    const m = getMemo(s.key);
+    if (m.done) levelMap[lv].done++;
+    if (m.danger === 'danger') levelMap[lv].danger++;
+    else if (m.danger === 'caution') levelMap[lv].caution++;
+    else if (m.danger === 'none') levelMap[lv].dnone++;
+    else levelMap[lv].dunset++;
   });
   const levels = Object.keys(levelMap).sort((a,b) => parseFloat(a)-parseFloat(b));
 
@@ -1198,6 +1203,35 @@ function renderDashboard() {
             <div class="bar-count">${d}/${t}</div>
           </div>`;
         }).join('')}
+      </div>
+    </div>
+
+    <div class="dash-card">
+      <div class="dash-card-title">レベル別 危険度内訳</div>
+      <div class="bar-chart">
+        ${levels.map(lv => {
+          const t = levelMap[lv].total;
+          const pDanger  = levelMap[lv].danger  / t * 100;
+          const pCaution = levelMap[lv].caution / t * 100;
+          const pNone    = levelMap[lv].dnone   / t * 100;
+          const pUnset   = levelMap[lv].dunset  / t * 100;
+          return `<div class="bar-row">
+            <div class="bar-label">${lv}</div>
+            <div class="bar-track" style="border-radius:4px;overflow:hidden;">
+              <div style="width:${pDanger}%;background:#dc2626;height:100%;"></div>
+              <div style="width:${pCaution}%;background:#d97706;height:100%;"></div>
+              <div style="width:${pNone}%;background:#2563eb;height:100%;"></div>
+              <div style="width:${pUnset}%;background:var(--bg4);height:100%;"></div>
+            </div>
+            <div class="bar-count">${t}曲</div>
+          </div>`;
+        }).join('')}
+      </div>
+      <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;">
+        <div class="legend-row"><span class="legend-dot" style="background:#dc2626"></span>危険</div>
+        <div class="legend-row"><span class="legend-dot" style="background:#d97706"></span>要注意</div>
+        <div class="legend-row"><span class="legend-dot" style="background:#2563eb"></span>問題なし</div>
+        <div class="legend-row"><span class="legend-dot" style="background:var(--bg4);border:1px solid var(--border)"></span>未設定</div>
       </div>
     </div>`;
 }
