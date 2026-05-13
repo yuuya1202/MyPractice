@@ -1051,7 +1051,7 @@ function applyFilters() {
                       : m.danger === 'none'    ? `<span class="card-mini-badge danger-none">問題なし</span>`
                       : '';
     const mirrorBadge = m.mirror === 'yes' ? `<span class="card-mini-badge mirror">ミラー</span>`
-                      : m.mirror === 'no'  ? `<span class="card-mini-badge mirror-no">なし</span>`
+                      : m.mirror === 'no'  ? `<span class="card-mini-badge mirror-no">正規</span>`
                       : '';
     const judgeBadge  = m.judge === 'late'   ? `<span class="card-mini-badge late">遅寄り</span>`
                       : m.judge === 'early'  ? `<span class="card-mini-badge early">早寄り</span>`
@@ -1295,7 +1295,9 @@ function updateDangerBtns(val) {
 
 function setMirror(val) {
   if (!currentKey) return;
-  const m = getMemo(currentKey); m.mirror = val; saveMemo(currentKey, m); updateMirrorBtns(val);
+  const m = getMemo(currentKey);
+  m.mirror = m.mirror === val ? '' : val;
+  saveMemo(currentKey, m); updateMirrorBtns(m.mirror);
 }
 function updateMirrorBtns(val) {
   document.getElementById('m-no').className = 'toggle-btn' + (val === 'no' ? ' sel-gray' : '');
