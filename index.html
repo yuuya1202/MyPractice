@@ -188,19 +188,17 @@
   .badge-info { color: var(--text2); background: var(--bg4); font-size: 10px; }
   .card-danger-badge { font-size: 10px; padding: 2px 7px; border-radius: 10px; }
   .card-memo { font-size: 11px; color: var(--text3); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .check-circle {
-    width: 22px; height: 22px; border-radius: 50%;
-    border: 1.5px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 12px; pointer-events: none;
+  .card-right-badges {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 3px;
+    flex-shrink: 0;
   }
-  .check-circle.done { background: var(--green); border-color: var(--green); color: white; }
-
   .danger-none .card-danger-bar { background: var(--blue); }
   .danger-caution .card-danger-bar { background: var(--yellow); }
   .danger-danger .card-danger-bar { background: var(--red); }
   .danger-unset .card-danger-bar { background: transparent; }
-  .song-card.done-card .card-danger-bar { width: 8px !important; background: var(--green) !important; }
+  .song-card.done-card .card-danger-bar { width: 6px; background: var(--green) !important; }
+  .card-mini-badge.danger-caution { background: var(--yellow-bg); color: var(--yellow); }
+  .card-mini-badge.danger-danger { background: var(--red-bg); color: var(--red); }
 
   .dbadge-none { background: var(--blue-bg); color: var(--blue); }
   .dbadge-caution { background: var(--yellow-bg); color: var(--yellow); }
@@ -280,8 +278,6 @@
   .toggle-btn.sel-red { background: var(--red-bg); border-color: var(--red); color: var(--red); font-weight: 700; }
   .toggle-btn.sel-accent { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); font-weight: 700; }
   .toggle-btn.sel-green { background: var(--green-bg); border-color: var(--green); color: var(--green); font-weight: 700; }
-
-  .memo-area {
     width: 100%; background: var(--bg3); border: 1.5px solid var(--border);
     border-radius: var(--radius-sm); padding: 10px; color: var(--text);
     font-size: 13px; font-family: 'Noto Sans JP', sans-serif;
@@ -301,7 +297,7 @@
   .chart-inline-btn {
     display: inline-flex; align-items: center; gap: 4px;
     background: var(--green-bg); border: 1.5px solid var(--green);
-    border-radius: 4px; padding: 4px 12px; font-size: 11px; color: var(--green);
+    border-radius: 0px; padding: 4px 12px; font-size: 11px; color: var(--green);
     cursor: pointer; transition: all 0.15s;
     font-family: 'Noto Sans JP', sans-serif; font-weight: 700;
   }
@@ -945,6 +941,18 @@ function render() {
   applyFilters();
 }
 
+function onSearchInput() {
+  const val = document.getElementById('searchInput').value;
+  document.getElementById('searchClear').className = 'search-clear' + (val ? ' show' : '');
+  applyFilters();
+}
+
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchClear').className = 'search-clear';
+  applyFilters();
+}
+
 function applyFilters() {
   const q = document.getElementById('searchInput').value.toLowerCase();
   const filtered = songs.filter(s => {
@@ -967,19 +975,21 @@ function applyFilters() {
   filtered.forEach(s => {
     const m = getMemo(s.key);
     const dangerClass = m.danger ? `danger-${m.danger}` : 'danger-unset';
+    const doneClass = m.done ? 'done-card' : '';
     const memoPreview = m.memo ? escHtml(m.memo.slice(0, 19)) + (m.memo.length > 19 ? '...' : '') : '';
     const mirrorBadge = m.mirror === 'yes' ? `<span class="card-mini-badge mirror">ミラー</span>` : '';
     const judgeBadge = m.judge === 'late' ? `<span class="card-mini-badge late">遅寄り</span>`
                      : m.judge === 'early' ? `<span class="card-mini-badge early">早寄り</span>` : '';
-    const typeKey = s.type; // exhaust/maximum/etc
+    const dangerBadge = m.danger === 'caution' ? `<span class="card-mini-badge danger-caution">要注意</span>`
+                      : m.danger === 'danger' ? `<span class="card-mini-badge danger-danger">危険</span>` : '';
+    const typeKey = s.type;
     const badgeClass = `badge-${typeKey === 'exhaust' ? 'exh' : typeKey === 'maximum' ? 'mxm' : typeKey === 'infinite' ? 'inf' : typeKey === 'gravity' ? 'grv' : typeKey === 'heavenly' ? 'hvn' : typeKey === 'vivid' ? 'vvd' : typeKey === 'exceed' ? 'xcd' : typeKey === 'nabla' ? 'nbl' : typeKey === 'novice' ? 'nov' : typeKey === 'advanced' ? 'adv' : 'mxm'}`;
     const jacketClass = `jacket jacket-${typeKey === 'exhaust' ? 'exh' : typeKey === 'maximum' ? 'mxm' : typeKey === 'infinite' ? 'inf' : typeKey === 'gravity' ? 'grv' : typeKey === 'heavenly' ? 'hvn' : typeKey === 'vivid' ? 'vvd' : typeKey === 'exceed' ? 'xcd' : typeKey === 'nabla' ? 'nbl' : 'adv'}`;
     const card = document.createElement('div');
-    card.className = `song-card ${dangerClass}`;
+    card.className = `song-card ${dangerClass} ${doneClass}`;
     card.innerHTML = `
       <div class="card-danger-bar"></div>
       <div class="card-inner">
-        <div class="check-circle ${m.done ? 'done' : ''}">${m.done ? '✓' : ''}</div>
         <div class="${jacketClass}">${s.jacket ? `<img src="${s.jacket}" alt="" loading="lazy" onerror="this.style.display='none'">` : ''}</div>
         <div class="card-body">
           <div class="card-title">${escHtml(s.title)}</div>
@@ -991,7 +1001,7 @@ function applyFilters() {
           ${memoPreview ? `<div class="card-memo">${memoPreview}</div>` : ''}
         </div>
         <div class="card-right-badges">
-          ${mirrorBadge}${judgeBadge}
+          ${dangerBadge}${mirrorBadge}${judgeBadge}
         </div>
       </div>`;
     card.onclick = () => openDetail(s.key);
@@ -1057,7 +1067,7 @@ function setMirror(val) {
   const m = getMemo(currentKey); m.mirror = val; saveMemo(currentKey, m); updateMirrorBtns(val);
 }
 function updateMirrorBtns(val) {
-  document.getElementById('m-no').className = 'toggle-btn' + (val === 'no' ? ' sel-accent' : '');
+  document.getElementById('m-no').className = 'toggle-btn' + (val === 'no' ? ' sel-gray' : '');
   document.getElementById('m-yes').className = 'toggle-btn' + (val === 'yes' ? ' sel-accent' : '');
 }
 
@@ -1066,9 +1076,9 @@ function setJudge(val) {
   const m = getMemo(currentKey); m.judge = val; saveMemo(currentKey, m); updateJudgeBtns(val);
 }
 function updateJudgeBtns(val) {
-  ['early','normal','late'].forEach(v => {
-    document.getElementById(`j-${v}`).className = 'toggle-btn' + (val === v ? ' sel-accent' : '');
-  });
+  document.getElementById('j-late').className = 'toggle-btn' + (val === 'late' ? ' sel-blue' : '');
+  document.getElementById('j-normal').className = 'toggle-btn' + (val === 'normal' ? ' sel-gray' : '');
+  document.getElementById('j-early').className = 'toggle-btn' + (val === 'early' ? ' sel-red' : '');
 }
 
 function setDoneToggle(val) {
@@ -1085,8 +1095,8 @@ function onMemoInput() {
   }, 800);
 }
 function updateDoneToggleBtns(done) {
-  document.getElementById('done-no').className = 'toggle-btn' + (!done ? ' sel-accent' : '');
-  document.getElementById('done-yes').className = 'toggle-btn' + (done ? ' sel-green' : '');
+  document.getElementById('done-no').className = 'toggle-btn' + (!done ? ' sel-gray' : '');
+  document.getElementById('done-yes').className = 'toggle-btn' + (done ? ' sel-pale-yellow' : '');
 }
 
 function openChartModal() {
