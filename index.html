@@ -1354,6 +1354,10 @@ function updateDoneToggleBtns(done) {
 }
 
 function openChartModal() {
+  const s = songs.find(x => x.key === currentKey);
+  const m = currentKey ? getMemo(currentKey) : {};
+  const mirrorNote = m.mirror === 'yes' ? ' <span style="color:#dc2626;font-weight:700;font-size:12px;">ミラー設定あり</span>' : '';
+  document.getElementById('chartModalTitle').innerHTML = escHtml(s ? s.title : '') + mirrorNote;
   document.getElementById('chartIframe').src = currentChartUrl;
   document.getElementById('chartOverlay').classList.add('open');
 }
