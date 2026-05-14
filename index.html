@@ -741,13 +741,9 @@
     <div class="field-label" style="margin-bottom:6px;">GitHub Personal Access Token</div>
     <input class="token-input" id="tokenInput" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off" spellcheck="false">
 
-    <div class="field-label" style="margin-bottom:6px;">Gist ID（2回目以降）</div>
-    <input class="token-gist-input" id="gistIdInput" type="text" placeholder="空欄で自動作成されます" autocomplete="off" spellcheck="false">
-    <div class="token-hint">初回は空欄でOK。Gist作成後にIDが自動保存されます。</div>
-
     <div class="token-error" id="tokenError"></div>
 
-    <button class="token-save-btn" id="tokenSaveBtn" onclick="saveToken()">閉じる</button>
+    <button class="token-save-btn" id="tokenSaveBtn" onclick="saveToken()">登録</button>
   </div>
 </div>
 
@@ -781,9 +777,31 @@ function saveMemoLocal(key, data) {
 }
 
 /* ===== GIST API ===== */
-async function gistLoad() {
-  if (!ghToken || !gistId) return false;
+async function findGistId() {
+  // Gist一覧からsdvx18_data.jsonを持つGistを検索
   try {
+    const res = await fetch('https://api.github.com/gists?per_page=100', {
+      headers: { Authorization: `token ${ghToken}`, Accept: 'application/vnd.github+json' }
+    });
+    if (!res.ok) return null;
+    const list = await res.json();
+    const found = list.find(g => g.files && g.files[GIST_FILENAME]);
+    return found ? found.id : null;
+  } catch(e) { return null; }
+}
+
+async function gistLoad() {
+  if (!ghToken) return false;
+  try {
+    // GistIDがなければ一覧から検索
+    if (!gistId) {
+      const found = await findGistId();
+      if (found) {
+        gistId = found;
+        localStorage.setItem(LS_GISTID, gistId);
+      }
+    }
+    if (!gistId) return false;
     const res = await fetch(`https://api.github.com/gists/${gistId}`, {
       headers: { Authorization: `token ${ghToken}`, Accept: 'application/vnd.github+json' }
     });
@@ -814,6 +832,23 @@ async function gistSave(retryCount = 0) {
         headers: { Authorization: `token ${ghToken}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
       });
+      // 403の場合はGistIDをリセットして一覧から再検索
+      if (res.status === 403) {
+        gistId = '';
+        localStorage.removeItem(LS_GISTID);
+        const found = await findGistId();
+        if (found) {
+          gistId = found;
+          localStorage.setItem(LS_GISTID, gistId);
+          return gistSave(retryCount); // 再試行
+        }
+        // 見つからなければ新規作成
+        res = await fetch('https://api.github.com/gists', {
+          method: 'POST',
+          headers: { Authorization: `token ${ghToken}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+      }
     } else {
       res = await fetch('https://api.github.com/gists', {
         method: 'POST',
@@ -823,7 +858,7 @@ async function gistSave(retryCount = 0) {
     }
     if (!res.ok) {
       isSyncing = false;
-      if (res.status === 401 || res.status === 403) {
+      if (res.status === 401) {
         showToast('Token認証エラー。⚙️から再設定してください', 'err');
         return false;
       }
@@ -832,7 +867,6 @@ async function gistSave(retryCount = 0) {
         setTimeout(() => gistSave(retryCount + 1), delay);
         return false;
       }
-      // リトライ上限：オンライン復帰時に再送予約
       pendingSave = true;
       showToast('ネットワークエラー。復帰後に自動再送します', 'err');
       return false;
@@ -893,15 +927,9 @@ function showToast(msg, type = '') {
 /* ===== TOKEN MODAL ===== */
 function openTokenModal(fromSetting = false) {
   document.getElementById('tokenInput').value = ghToken || '';
-  document.getElementById('gistIdInput').value = gistId || '';
   document.getElementById('tokenError').className = 'token-error';
   document.getElementById('tokenOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
-  if (fromSetting) {
-    document.getElementById('tokenSaveBtn').textContent = '保存';
-  } else {
-    document.getElementById('tokenSaveBtn').textContent = '接続して保存';
-  }
 }
 
 function closeTokenModal() {
@@ -911,7 +939,6 @@ function closeTokenModal() {
 
 async function saveToken() {
   const token = document.getElementById('tokenInput').value.trim();
-  const gistInput = document.getElementById('gistIdInput').value.trim();
   const errEl = document.getElementById('tokenError');
   const btn = document.getElementById('tokenSaveBtn');
 
@@ -929,31 +956,24 @@ async function saveToken() {
     if (!res.ok) {
       errEl.textContent = 'Tokenが無効です。再確認してください。';
       errEl.className = 'token-error show';
-      btn.disabled = false; btn.textContent = '閉じる';
+      btn.disabled = false; btn.textContent = '登録';
       return;
     }
   } catch(e) {
     errEl.textContent = '接続できませんでした。';
     errEl.className = 'token-error show';
-    btn.disabled = false; btn.textContent = '閉じる';
+    btn.disabled = false; btn.textContent = '登録';
     return;
   }
 
   ghToken = token;
-  gistId = gistInput;
+  gistId = '';
   localStorage.setItem(LS_TOKEN, ghToken);
-  if (gistId) localStorage.setItem(LS_GISTID, gistId);
-  else localStorage.removeItem(LS_GISTID);
+  localStorage.removeItem(LS_GISTID);
 
-  // Gistからデータ読み込み試行
+  // Gistからデータ読み込み
   btn.textContent = 'データを読み込み中...';
-  const loaded = await gistLoad();
-  if (!loaded && gistId) {
-    errEl.textContent = 'Gist IDが見つかりません。空欄にして再試行してください。';
-    errEl.className = 'token-error show';
-    btn.disabled = false; btn.textContent = '閉じる';
-    return;
-  }
+  await gistLoad();
 
   btn.disabled = false;
   closeTokenModal();
