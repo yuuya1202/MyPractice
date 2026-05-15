@@ -592,12 +592,20 @@
   .loading-text { font-size: 13px; }
   .empty { text-align: center; padding: 60px 20px; color: var(--text3); font-size: 13px; }
 
-  .playlist-btn {
-    width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--border);
-    background: var(--bg3); display: flex; align-items: center; justify-content: center;
-    font-size: 14px; cursor: pointer; transition: all 0.15s; flex-shrink: 0;
+  .toggle-switch { display: flex; align-items: center; gap: 6px; cursor: pointer; flex-shrink: 0; }
+  .toggle-switch-label { font-size: 10px; color: var(--text3); font-family: 'Noto Sans JP', sans-serif; }
+  .toggle-switch input { display: none; }
+  .toggle-switch-track {
+    width: 36px; height: 20px; border-radius: 10px; background: var(--bg4);
+    border: 1.5px solid var(--border); position: relative; transition: all 0.2s; flex-shrink: 0;
   }
-  .playlist-btn.active { background: var(--green); border-color: var(--green); }
+  .toggle-switch input:checked + .toggle-switch-track { background: var(--green); border-color: var(--green); }
+  .toggle-switch-track::after {
+    content: ''; position: absolute; top: 2px; left: 2px;
+    width: 14px; height: 14px; border-radius: 50%; background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2); transition: transform 0.2s;
+  }
+  .toggle-switch input:checked + .toggle-switch-track::after { transform: translateX(16px); }
   .playlist-badge { background: var(--accent-bg); color: var(--accent); font-size: 9px; font-weight: 700; padding: 2px 4px; border-radius: 4px; font-family: 'Rajdhani', sans-serif; }
 
   .divider { height: 1px; background: var(--border); margin: 4px 0 14px; }
@@ -1346,9 +1354,12 @@ function openDetail(key) {
     </div>
     <div style="display:flex;gap:6px;align-items:center;">
       <button class="chart-inline-btn" onclick="openChartModal()">譜面を確認</button>
-      <button class="playlist-btn${m.playlist ? ' active' : ''}" id="playlistBtn">📋</button>
+      <label class="toggle-switch">
+        <input type="checkbox" id="playlistToggle" ${m.playlist ? 'checked' : ''} onchange="togglePlaylist()">
+        <div class="toggle-switch-track"></div>
+        <span class="toggle-switch-label">やる曲</span>
+      </label>
     </div>`;
-  document.getElementById('playlistBtn').onclick = togglePlaylist;
   currentChartUrl = s.chartUrl;
   document.getElementById('chartModalTitle').textContent = s.title;
   updateDoneToggleBtns(m.done);
@@ -1363,10 +1374,9 @@ function openDetail(key) {
 function togglePlaylist() {
   if (!currentKey) return;
   const m = getMemo(currentKey);
-  m.playlist = !m.playlist;
+  const cb = document.getElementById('playlistToggle');
+  m.playlist = cb ? cb.checked : !m.playlist;
   saveMemo(currentKey, m);
-  const btn = document.getElementById('playlistBtn');
-  if (btn) btn.className = `playlist-btn${m.playlist ? ' active' : ''}`;
 }
 
 function closeDetail() {
