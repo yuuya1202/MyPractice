@@ -1346,8 +1346,9 @@ function openDetail(key) {
     </div>
     <div style="display:flex;gap:6px;align-items:center;">
       <button class="chart-inline-btn" onclick="openChartModal()">譜面を確認</button>
-      <button class="playlist-btn ${m.playlist ? 'active' : ''}" id="playlistBtn" onclick="togglePlaylist()" title="やる曲リスト">📋</button>
+      <button class="playlist-btn${m.playlist ? ' active' : ''}" id="playlistBtn">📋</button>
     </div>`;
+  document.getElementById('playlistBtn').onclick = togglePlaylist;
   currentChartUrl = s.chartUrl;
   document.getElementById('chartModalTitle').textContent = s.title;
   updateDoneToggleBtns(m.done);
