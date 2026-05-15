@@ -592,6 +592,14 @@
   .loading-text { font-size: 13px; }
   .empty { text-align: center; padding: 60px 20px; color: var(--text3); font-size: 13px; }
 
+  .playlist-btn {
+    width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--border);
+    background: var(--bg3); display: flex; align-items: center; justify-content: center;
+    font-size: 14px; cursor: pointer; transition: all 0.15s; flex-shrink: 0;
+  }
+  .playlist-btn.active { background: var(--accent); border-color: var(--accent); }
+  .playlist-badge { background: var(--accent-bg); color: var(--accent); font-size: 9px; font-weight: 700; padding: 2px 4px; border-radius: 4px; font-family: 'Rajdhani', sans-serif; }
+
   .divider { height: 1px; background: var(--border); margin: 4px 0 14px; }
 </style>
 </head>
@@ -603,6 +611,7 @@
     <div class="header-right">
       <div class="header-count" id="headerCount">読み込み中...</div>
       <button class="nav-btn" id="navMain" onclick="switchPage('main')">一覧</button>
+      <button class="nav-btn" id="navPlay" onclick="switchPage('play')">📋</button>
       <button class="nav-btn" id="navDash" onclick="switchPage('dash')">📊</button>
       <button class="setting-btn" onclick="openTokenModal(true)" title="設定">⚙️</button>
     </div>
@@ -628,6 +637,7 @@
   </div>
 </div>
 <div class="dashboard" id="dashContainer" style="display:none;padding:12px 12px 100px;"></div>
+<div class="list" id="playContainer" style="display:none;padding:8px 12px 100px;"></div>
 
 <!-- DETAIL OVERLAY -->
 <div class="overlay" id="detailOverlay" onclick="handleOverlayClick(event,'detail')">
@@ -708,6 +718,14 @@
           <div class="status-opt" id="fs-done" onclick="setStatusFilter('done')">対策済み</div>
         </div>
       </div>
+      <div class="field-block">
+        <div class="field-label">コメント</div>
+        <div class="status-toggle">
+          <div class="status-opt sel" id="fm-all" onclick="setMemoFilter('all')">全て</div>
+          <div class="status-opt" id="fm-has" onclick="setMemoFilter('has')">あり</div>
+          <div class="status-opt" id="fm-none" onclick="setMemoFilter('none')">なし</div>
+        </div>
+      </div>
       <button class="token-save-btn" style="margin-top:4px;width:33%;display:block;margin-left:auto;margin-right:auto;" onclick="closeFilterModal()">適用</button>
     </div>
   </div>
@@ -763,13 +781,11 @@ const LS_GISTID = 'sdvx18_gist_id';
 const GIST_FILENAME = 'sdvx18_data.json';
 
 let songs = [], memoData = {}, currentKey = null, memoTimer = null, currentChartUrl = '';
-let fLevels = new Set(), fDanger = new Set(), fStatus = 'all';
-let ghToken = '', gistId = '';
-let syncTimer = null, isSyncing = false, pendingSave = false;
+let fLevels = new Set(), fDanger = new Set(), fStatus = 'all', fMemo = 'all';
 
 /* ===== LOCAL STORAGE ===== */
 function getMemo(key) {
-  return memoData[key] || { danger:'', mirror:'', judge:'', memo:'', done:false };
+  return memoData[key] || { danger:'', mirror:'', judge:'', memo:'', done:false, playlist:false };
 }
 function saveMemoLocal(key, data) {
   memoData[key] = data;
@@ -1052,6 +1068,8 @@ function applyFilters() {
     if (fDanger.size > 0 && !fDanger.has(m.danger || 'none')) return false;
     if (fStatus === 'done' && !m.done) return false;
     if (fStatus === 'undone' && m.done) return false;
+    if (fMemo === 'has' && !m.memo) return false;
+    if (fMemo === 'none' && m.memo) return false;
     return true;
   });
 
@@ -1114,10 +1132,54 @@ function switchPage(page) {
   document.getElementById('activePills').style.display = page === 'main' ? '' : 'none';
   document.getElementById('searchRow').style.display = page === 'main' ? '' : 'none';
   document.getElementById('dashContainer').style.display = page === 'dash' ? '' : 'none';
+  document.getElementById('playContainer').style.display = page === 'play' ? '' : 'none';
   document.getElementById('navMain').className = 'nav-btn' + (page === 'main' ? ' active' : '');
+  document.getElementById('navPlay').className = 'nav-btn' + (page === 'play' ? ' active' : '');
   document.getElementById('navDash').className = 'nav-btn' + (page === 'dash' ? ' active' : '');
   document.getElementById('headerCount').style.display = page === 'main' ? '' : 'none';
   if (page === 'dash') renderDashboard();
+  if (page === 'play') renderPlaylist();
+}
+
+function renderPlaylist() {
+  const container = document.getElementById('playContainer');
+  const list = songs.filter(s => getMemo(s.key).playlist);
+  if (list.length === 0) {
+    container.innerHTML = '<div class="empty">リストに曲がありません<br><br>詳細画面の 📋 ボタンで追加できます</div>';
+    return;
+  }
+  container.innerHTML = `<div class="result-info">${list.length}曲</div>`;
+  list.forEach(s => {
+    const m = getMemo(s.key);
+    const dangerClass = m.danger ? `danger-${m.danger}` : 'danger-unset';
+    const doneClass = m.done ? 'done-card' : '';
+    const memoPreview = m.memo ? escHtml(m.memo.slice(0, 19)) + (m.memo.length > 19 ? '...' : '') : '';
+    const typeKey = s.type;
+    const badgeClass = `badge-${typeKey === 'exhaust' ? 'exh' : typeKey === 'maximum' ? 'mxm' : typeKey === 'infinite' ? 'inf' : typeKey === 'gravity' ? 'grv' : typeKey === 'heavenly' ? 'hvn' : typeKey === 'vivid' ? 'vvd' : typeKey === 'exceed' ? 'xcd' : typeKey === 'nabla' ? 'nbl' : typeKey === 'novice' ? 'nov' : typeKey === 'advanced' ? 'adv' : 'mxm'}`;
+    const jacketClass = `jacket jacket-${typeKey === 'exhaust' ? 'exh' : typeKey === 'maximum' ? 'mxm' : typeKey === 'infinite' ? 'inf' : typeKey === 'gravity' ? 'grv' : typeKey === 'heavenly' ? 'hvn' : typeKey === 'vivid' ? 'vvd' : typeKey === 'exceed' ? 'xcd' : typeKey === 'nabla' ? 'nbl' : 'adv'}`;
+    const dangerBadge = m.danger === 'caution' ? `<span class="card-mini-badge danger-caution">要注意</span>` : m.danger === 'danger' ? `<span class="card-mini-badge danger-danger">危険</span>` : m.danger === 'none' ? `<span class="card-mini-badge danger-none">問題なし</span>` : '';
+    const mirrorBadge = m.mirror === 'yes' ? `<span class="card-mini-badge mirror">ミラー</span>` : m.mirror === 'no' ? `<span class="card-mini-badge mirror-no">正規</span>` : '';
+    const judgeBadge = m.judge === 'late' ? `<span class="card-mini-badge late">遅寄り</span>` : m.judge === 'early' ? `<span class="card-mini-badge early">早寄り</span>` : m.judge === 'normal' ? `<span class="card-mini-badge normal">普通</span>` : '';
+    const card = document.createElement('div');
+    card.className = `song-card ${dangerClass} ${doneClass}`;
+    card.innerHTML = `
+      <div class="card-danger-bar"></div>
+      <div class="card-inner">
+        <div class="${jacketClass}">${s.jacket ? `<img src="${s.jacket}" alt="" loading="lazy" onerror="this.style.display='none'">` : ''}</div>
+        <div class="card-body">
+          <div class="card-title">${escHtml(s.title)}</div>
+          <div class="card-meta">
+            <span class="badge ${badgeClass}">${s.typeLabel}</span>
+            <span class="badge">${s.level.toFixed(1)}</span>
+            <span class="badge badge-bpm">BPM ${s.bpm}</span>
+          </div>
+          ${memoPreview ? `<div class="card-memo">${memoPreview}</div>` : ''}
+        </div>
+        <div class="card-right-badges">${dangerBadge}${mirrorBadge}${judgeBadge}</div>
+      </div>`;
+    card.onclick = () => openDetail(s.key);
+    container.appendChild(card);
+  });
 }
 
 function renderDashboard() {
@@ -1282,7 +1344,10 @@ function openDetail(key) {
       <span class="badge">${s.level.toFixed(1)}</span>
       <span class="badge badge-bpm">BPM ${s.bpm}</span>
     </div>
-    <button class="chart-inline-btn" onclick="openChartModal()">譜面を確認</button>`;
+    <div style="display:flex;gap:6px;align-items:center;">
+      <button class="chart-inline-btn" onclick="openChartModal()">譜面を確認</button>
+      <button class="playlist-btn ${m.playlist ? 'active' : ''}" id="playlistBtn" onclick="togglePlaylist()" title="やる曲リスト">📋</button>
+    </div>`;
   currentChartUrl = s.chartUrl;
   document.getElementById('chartModalTitle').textContent = s.title;
   updateDoneToggleBtns(m.done);
@@ -1292,6 +1357,14 @@ function openDetail(key) {
   document.getElementById('memoArea').value = m.memo || '';
   document.getElementById('detailOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
+}
+
+function togglePlaylist() {
+  if (!currentKey) return;
+  const m = getMemo(currentKey);
+  m.playlist = !m.playlist;
+  saveMemo(currentKey, m);
+  document.getElementById('playlistBtn').className = `playlist-btn${m.playlist ? ' active' : ''}`;
 }
 
 function closeDetail() {
@@ -1398,12 +1471,18 @@ function updateStatusFilterBtns() {
     document.getElementById(`fs-${v}`).className = 'status-opt' + (fStatus === v ? ' sel' : '');
   });
 }
+function setMemoFilter(val) { fMemo = val; updateMemoFilterBtns(); applyFilters(); }
+function updateMemoFilterBtns() {
+  ['all','has','none'].forEach(v => {
+    document.getElementById(`fm-${v}`).className = 'status-opt' + (fMemo === v ? ' sel' : '');
+  });
+}
 function resetFilters() {
-  fLevels.clear(); fDanger.clear(); fStatus = 'all';
-  buildLevelGrid(); updateDangerFilterBtns(); updateStatusFilterBtns(); applyFilters();
+  fLevels.clear(); fDanger.clear(); fStatus = 'all'; fMemo = 'all';
+  buildLevelGrid(); updateDangerFilterBtns(); updateStatusFilterBtns(); updateMemoFilterBtns(); applyFilters();
 }
 function updateFilterIndicator() {
-  const active = fLevels.size > 0 || fDanger.size > 0 || fStatus !== 'all';
+  const active = fLevels.size > 0 || fDanger.size > 0 || fStatus !== 'all' || fMemo !== 'all';
   document.getElementById('filterIndicator').className = 'filter-indicator' + (active ? ' show' : '');
   document.getElementById('filterBtn').className = 'filter-btn' + (active ? ' active' : '');
 }
