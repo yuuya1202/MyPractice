@@ -597,7 +597,7 @@
     background: var(--bg3); display: flex; align-items: center; justify-content: center;
     font-size: 14px; cursor: pointer; transition: all 0.15s; flex-shrink: 0;
   }
-  .playlist-btn.active { background: var(--accent); border-color: var(--accent); }
+  .playlist-btn.active { background: var(--green); border-color: var(--green); }
   .playlist-badge { background: var(--accent-bg); color: var(--accent); font-size: 9px; font-weight: 700; padding: 2px 4px; border-radius: 4px; font-family: 'Rajdhani', sans-serif; }
 
   .divider { height: 1px; background: var(--border); margin: 4px 0 14px; }
@@ -1364,7 +1364,8 @@ function togglePlaylist() {
   const m = getMemo(currentKey);
   m.playlist = !m.playlist;
   saveMemo(currentKey, m);
-  document.getElementById('playlistBtn').className = `playlist-btn${m.playlist ? ' active' : ''}`;
+  const btn = document.getElementById('playlistBtn');
+  if (btn) btn.className = `playlist-btn${m.playlist ? ' active' : ''}`;
 }
 
 function closeDetail() {
@@ -1508,7 +1509,12 @@ function updatePills() {
     pill.innerHTML = `${fStatus === 'done' ? '対策済み' : '未対策'} <span onclick="setStatusFilter('all')">✕</span>`;
     container.appendChild(pill);
   }
-}
+  if (fMemo !== 'all') {
+    const pill = document.createElement('div');
+    pill.className = 'filter-pill';
+    pill.innerHTML = `コメント${fMemo === 'has' ? 'あり' : 'なし'} <span onclick="setMemoFilter('all')">✕</span>`;
+    container.appendChild(pill);
+  }
 
 function handleChartOverlayClick(e) {
   // 全画面表示のため背景クリック閉じは無効
