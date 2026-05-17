@@ -738,19 +738,6 @@
   </div>
 </div>
 
-<!-- 譜面モーダル -->
-<div class="chart-overlay" id="chartOverlay" onclick="handleChartOverlayClick(event)">
-  <div class="chart-modal" id="chartModal">
-    <div class="chart-modal-header">
-      <div class="chart-modal-title" id="chartModalTitle"></div>
-      <button class="chart-close-btn" onclick="closeChartModal()">✕ 閉じる</button>
-    </div>
-    <div class="chart-iframe-wrap">
-      <iframe class="chart-iframe" id="chartIframe" src=""></iframe>
-    </div>
-  </div>
-</div>
-
 <script>
 const TYPE_LABEL = {
   novice:'NOV', advanced:'ADV', exhaust:'EXH',
@@ -1189,18 +1176,8 @@ function updateDoneToggleBtns(done) {
 }
 
 function openChartModal() {
-  const s = songs.find(x => x.key === currentKey);
-  const m = currentKey ? getMemo(currentKey) : {};
-  const mirrorNote = m.mirror === 'yes' ? ' <span style="color:#dc2626;font-weight:700;font-size:12px;">ミラー設定あり</span>' : '';
-  document.getElementById('chartModalTitle').innerHTML = escHtml(s ? s.title : '') + mirrorNote;
-  document.getElementById('chartIframe').src = currentChartUrl;
-  document.getElementById('chartOverlay').classList.add('open');
+  window.open(currentChartUrl, '_blank');
 }
-function closeChartModal() {
-  document.getElementById('chartOverlay').classList.remove('open');
-  document.getElementById('chartIframe').src = '';
-}
-
 /* ===== FILTER MODAL ===== */
 function openFilterModal() {
   buildLevelGrid(); updateDangerFilterBtns(); updateStatusFilterBtns();
@@ -1276,10 +1253,6 @@ function updatePills() {
     pill.innerHTML = `コメント${fMemo === 'has' ? 'あり' : 'なし'} <span onclick="setMemoFilter('all')">✕</span>`;
     container.appendChild(pill);
   }
-}
-
-function handleChartOverlayClick(e) {
-  // 全画面表示のため背景クリック閉じは無効
 }
 
 function handleOverlayClick(e, type) {
