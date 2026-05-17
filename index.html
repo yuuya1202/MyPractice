@@ -685,7 +685,7 @@ function applyFilters() {
         </div>
       </div>`;
     card.onclick = () => openDetail(s.key);
-    card.addEventListener('touchend', (e) => { e.preventDefault(); openDetail(s.key); });
+    card.addEventListener('touchend', () => openDetail(s.key));
     container.appendChild(card);
   });
 }
@@ -746,7 +746,7 @@ function renderPlaylist() {
         <div class="card-right-badges">${dangerBadge}${mirrorBadge}${judgeBadge}</div>
       </div>`;
     card.onclick = () => openDetail(s.key);
-    card.addEventListener('touchend', (e) => { e.preventDefault(); openDetail(s.key); });
+    card.addEventListener('touchend', () => openDetail(s.key));
     container.appendChild(card);
   });
 }
