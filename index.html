@@ -319,6 +319,38 @@
   }
   .save-btn:active { transform: scale(0.98); opacity: 0.9; }
 
+  /* 譜面モーダル */
+  .chart-overlay {
+    position: fixed; inset: 0; background: rgba(10,10,30,0.95); z-index: 300;
+    display: flex; flex-direction: column;
+    opacity: 0; pointer-events: none; transition: opacity 0.25s;
+  }
+  .chart-overlay.open { opacity: 1; pointer-events: all; }
+
+  .chart-modal {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+
+  .chart-modal-header {
+    background: var(--bg2); padding: 12px 16px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--border); flex-shrink: 0;
+  }
+  .chart-modal-title {
+    font-size: 13px; font-weight: 700; color: var(--text);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    flex: 1; margin-right: 10px;
+  }
+  .chart-close-btn {
+    background: var(--bg4); border: none; border-radius: 8px;
+    padding: 6px 12px; font-size: 12px; color: var(--text2);
+    cursor: pointer; font-family: 'Noto Sans JP', sans-serif; flex-shrink: 0;
+  }
+  .chart-iframe-wrap { flex: 1; overflow: hidden; }
+  .chart-iframe { width: 100%; height: 100%; border: none; background: #fff; }
+
   /* FILTER MODAL */
   #filterOverlay { justify-content: center; align-items: center; padding: 16px; }
   .filter-modal {
@@ -372,6 +404,153 @@
     font-family: 'Noto Sans JP', sans-serif;
   }
   .status-opt.sel { background: var(--bg2); color: var(--text); font-weight: 700; box-shadow: 0 1px 4px rgba(91,79,232,0.1); }
+
+  /* TOKEN MODAL */
+  .token-overlay {
+    position: fixed; inset: 0; background: rgba(20,20,50,0.7);
+    z-index: 400; display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+  }
+  .token-overlay.open { opacity: 1; pointer-events: all; }
+
+  .token-modal {
+    background: var(--bg2); border-radius: 20px;
+    padding: 24px 20px 20px; width: 100%; max-width: 400px;
+    box-shadow: 0 8px 40px rgba(91,79,232,0.2);
+    transform: scale(0.92);
+    transition: transform 0.3s cubic-bezier(0.32,0.72,0,1);
+  }
+  .token-overlay.open .token-modal { transform: scale(1); }
+
+  .token-modal-title {
+    font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 700;
+    color: var(--accent); letter-spacing: 1px; margin-bottom: 6px;
+  }
+  .token-modal-desc {
+    font-size: 12px; color: var(--text2); line-height: 1.7; margin-bottom: 16px;
+  }
+  .token-modal-desc a { color: var(--accent); text-decoration: none; }
+  .token-modal-desc code {
+    background: var(--bg4); border-radius: 4px; padding: 1px 5px;
+    font-size: 11px; color: var(--accent);
+  }
+
+  .token-input {
+    width: 100%; background: var(--bg3); border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm); padding: 10px 12px; color: var(--text);
+    font-size: 13px; font-family: 'Noto Sans JP', sans-serif;
+    outline: none; margin-bottom: 10px; transition: border-color 0.2s;
+    letter-spacing: 1px;
+  }
+  .token-input:focus { border-color: var(--accent2); }
+  .token-input::placeholder { color: var(--text3); letter-spacing: 0; }
+
+  .token-gist-input {
+    width: 100%; background: var(--bg3); border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm); padding: 10px 12px; color: var(--text);
+    font-size: 13px; font-family: 'Noto Sans JP', sans-serif;
+    outline: none; margin-bottom: 6px; transition: border-color 0.2s;
+  }
+  .token-gist-input:focus { border-color: var(--accent2); }
+  .token-gist-input::placeholder { color: var(--text3); }
+
+  .token-hint { font-size: 11px; color: var(--text3); margin-bottom: 16px; line-height: 1.5; }
+
+  .token-save-btn {
+    width: 100%; background: var(--accent); border: none;
+    border-radius: var(--radius-sm); padding: 12px; color: white;
+    font-size: 13px; font-family: 'Noto Sans JP', sans-serif;
+    cursor: pointer; font-weight: 700; letter-spacing: 0.5px;
+    transition: all 0.15s; margin-bottom: 8px;
+  }
+  .token-save-btn:active { opacity: 0.85; transform: scale(0.98); }
+  .token-save-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .token-skip-btn {
+    width: 100%; background: none; border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm); padding: 10px; color: var(--text3);
+    font-size: 12px; font-family: 'Noto Sans JP', sans-serif;
+    cursor: pointer; transition: all 0.15s;
+  }
+  .token-skip-btn:active { color: var(--text2); border-color: var(--text2); }
+
+  .token-error { font-size: 12px; color: var(--red); margin-bottom: 10px; display: none; }
+  .token-error.show { display: block; }
+
+  /* ガイドアコーディオン */
+  .guide-toggle {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--accent-bg); border: 1px solid rgba(91,79,232,0.2);
+    border-radius: var(--radius-sm); padding: 9px 12px;
+    cursor: pointer; margin-bottom: 14px; transition: background 0.15s;
+  }
+  .guide-toggle:active { background: rgba(91,79,232,0.14); }
+  .guide-toggle-label { font-size: 12px; color: var(--accent); font-weight: 700; }
+  .guide-toggle-arrow { font-size: 11px; color: var(--accent); transition: transform 0.2s; }
+  .guide-toggle-arrow.open { transform: rotate(180deg); }
+
+  .guide-body {
+    display: none; background: var(--bg3);
+    border: 1px solid var(--border); border-radius: var(--radius-sm);
+    padding: 14px; margin-bottom: 14px; font-size: 12px;
+    color: var(--text2); line-height: 1.8;
+  }
+  .guide-body.open { display: block; }
+
+  .guide-step {
+    display: flex; gap: 10px; margin-bottom: 12px; align-items: flex-start;
+  }
+  .guide-step:last-child { margin-bottom: 0; }
+  .guide-num {
+    width: 20px; height: 20px; border-radius: 50%; background: var(--accent);
+    color: white; font-size: 11px; font-weight: 700; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Rajdhani', sans-serif; margin-top: 1px;
+  }
+  .guide-step-body { flex: 1; }
+  .guide-step-title { font-weight: 700; color: var(--text); margin-bottom: 2px; font-size: 12px; }
+  .guide-step-desc { font-size: 11px; color: var(--text2); line-height: 1.7; }
+  .guide-step-desc code {
+    background: var(--bg4); border-radius: 3px; padding: 1px 5px;
+    font-size: 11px; color: var(--accent); font-family: monospace;
+  }
+  .guide-divider { border: none; border-top: 1px solid var(--border); margin: 12px 0; }
+
+  .guide-section-title {
+    font-size: 11px; font-weight: 700; color: var(--text3); letter-spacing: 1px;
+    text-transform: uppercase; font-family: 'Rajdhani', sans-serif;
+    margin-bottom: 8px; margin-top: 4px;
+  }
+
+  .gist-id-display {
+    background: var(--bg4); border-radius: var(--radius-sm); padding: 8px 12px;
+    font-size: 11px; color: var(--text2); margin-bottom: 14px;
+    display: none; word-break: break-all; line-height: 1.6;
+  }
+  .gist-id-display.show { display: block; }
+  .gist-id-display strong { color: var(--accent); font-family: monospace; font-size: 12px; }
+
+  /* 設定ボタン（ヘッダー） */
+  .setting-btn {
+    background: none; border: none; cursor: pointer;
+    font-size: 15px; padding: 2px 4px; color: var(--text3);
+    display: flex; align-items: center; border-radius: 6px;
+    transition: color 0.2s;
+  }
+  .setting-btn:active { color: var(--accent); }
+
+  /* SYNC STATUS TOAST */
+  .sync-toast {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--text); color: white; font-size: 12px;
+    padding: 8px 16px; border-radius: 20px; z-index: 500;
+    opacity: 0; transition: all 0.3s; pointer-events: none;
+    font-family: 'Noto Sans JP', sans-serif; white-space: nowrap;
+  }
+  .sync-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .sync-toast.ok { background: var(--green); }
+  .sync-toast.err { background: var(--red); }
 
   .nav-btn {
     background: var(--bg3); border: 1.5px solid var(--border);
@@ -440,8 +619,9 @@
     <div class="header-right">
       <div class="header-count" id="headerCount">読み込み中...</div>
       <button class="nav-btn" id="navMain" onclick="switchPage('main')">一覧</button>
-      <button class="nav-btn" id="navPlay" onclick="switchPage('play')">📋</button>
+      <button class="nav-btn" id="navPlay" onclick="switchPage('play')">やることリスト</button>
       <button class="nav-btn" id="navDash" onclick="switchPage('dash')">📊</button>
+      <button class="setting-btn" onclick="openTokenModal(true)" title="設定">⚙️</button>
     </div>
   </div>
   <div class="search-row" id="searchRow">
@@ -559,6 +739,43 @@
   </div>
 </div>
 
+<!-- 譜面モーダル -->
+<div class="chart-overlay" id="chartOverlay" onclick="handleChartOverlayClick(event)">
+  <div class="chart-modal" id="chartModal">
+    <div class="chart-modal-header">
+      <div class="chart-modal-title" id="chartModalTitle"></div>
+      <button class="chart-close-btn" onclick="closeChartModal()">✕ 閉じる</button>
+    </div>
+    <div class="chart-iframe-wrap">
+      <iframe class="chart-iframe" id="chartIframe" src=""></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- TOKEN MODAL -->
+<div class="token-overlay" id="tokenOverlay" onclick="handleTokenOverlayClick(event)">
+  <div class="token-modal" id="tokenModal">
+    <div class="token-modal-title">☁️ Gist連携設定</div>
+    <div class="token-modal-desc">
+      データをGitHub Gistに自動保存します。<br>
+      端末が変わってもデータが引き継がれます。<br><br>
+      <strong>Tokenの取得方法：</strong><br>
+      GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)<br>
+      → <code>gist</code> スコープのみ選択して生成
+    </div>
+
+    <div class="field-label" style="margin-bottom:6px;">GitHub Personal Access Token</div>
+    <input class="token-input" id="tokenInput" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off" spellcheck="false">
+
+    <div class="token-error" id="tokenError"></div>
+
+    <button class="token-save-btn" id="tokenSaveBtn" onclick="saveToken()">登録</button>
+  </div>
+</div>
+
+<!-- SYNC TOAST -->
+<div class="sync-toast" id="syncToast"></div>
+
 <script>
 const TYPE_LABEL = {
   novice:'NOV', advanced:'ADV', exhaust:'EXH',
@@ -566,7 +783,10 @@ const TYPE_LABEL = {
   infinite:'INF', vivid:'VVD', exceed:'XCD', nabla:'NBL'
 };
 
-const LS_MEMO = 'sdvx18_memo_v1';
+const LS_MEMO   = 'sdvx18_memo_v1';
+const LS_TOKEN  = 'sdvx18_gh_token';
+const LS_GISTID = 'sdvx18_gist_id';
+const GIST_FILENAME = 'sdvx18_data.json';
 
 let songs = [], memoData = {}, currentKey = null, memoTimer = null, currentChartUrl = '';
 let fLevels = new Set(), fDanger = new Set(), fStatus = 'all', fMemo = 'all';
@@ -575,9 +795,213 @@ let fLevels = new Set(), fDanger = new Set(), fStatus = 'all', fMemo = 'all';
 function getMemo(key) {
   return memoData[key] || { danger:'', mirror:'', judge:'', memo:'', done:false, playlist:false };
 }
-function saveMemo(key, data) {
+function saveMemoLocal(key, data) {
   memoData[key] = data;
   localStorage.setItem(LS_MEMO, JSON.stringify(memoData));
+}
+
+/* ===== GIST API ===== */
+async function findGistId() {
+  // Gist一覧からsdvx18_data.jsonを持つGistを検索
+  try {
+    const res = await fetch('https://api.github.com/gists?per_page=100', {
+      headers: { Authorization: `token ${ghToken}`, Accept: 'application/vnd.github+json' }
+    });
+    if (!res.ok) return null;
+    const list = await res.json();
+    const found = list.find(g => g.files && g.files[GIST_FILENAME]);
+    return found ? found.id : null;
+  } catch(e) { return null; }
+}
+
+async function gistLoad() {
+  if (!ghToken) return false;
+  try {
+    // GistIDがなければ一覧から検索
+    if (!gistId) {
+      const found = await findGistId();
+      if (found) {
+        gistId = found;
+        localStorage.setItem(LS_GISTID, gistId);
+      }
+    }
+    if (!gistId) return false;
+    const res = await fetch(`https://api.github.com/gists/${gistId}`, {
+      headers: { Authorization: `token ${ghToken}`, Accept: 'application/vnd.github+json' }
+    });
+    if (!res.ok) return false;
+    const data = await res.json();
+    const content = data.files?.[GIST_FILENAME]?.content;
+    if (content) {
+      memoData = JSON.parse(content);
+      localStorage.setItem(LS_MEMO, JSON.stringify(memoData));
+    }
+    return true;
+  } catch(e) { return false; }
+}
+
+async function gistSave(retryCount = 0) {
+  if (!ghToken) return false;
+  isSyncing = true;
+  try {
+    const body = {
+      description: 'SDVX 18対策データ',
+      public: false,
+      files: { [GIST_FILENAME]: { content: JSON.stringify(memoData) } }
+    };
+    let res;
+    if (gistId) {
+      res = await fetch(`https://api.github.com/gists/${gistId}`, {
+        method: 'PATCH',
+        headers: { Authorization: `token ${ghToken}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      // 403の場合はGistIDをリセットして一覧から再検索
+      if (res.status === 403) {
+        gistId = '';
+        localStorage.removeItem(LS_GISTID);
+        const found = await findGistId();
+        if (found) {
+          gistId = found;
+          localStorage.setItem(LS_GISTID, gistId);
+          return gistSave(retryCount); // 再試行
+        }
+        // 見つからなければ新規作成
+        res = await fetch('https://api.github.com/gists', {
+          method: 'POST',
+          headers: { Authorization: `token ${ghToken}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+      }
+    } else {
+      res = await fetch('https://api.github.com/gists', {
+        method: 'POST',
+        headers: { Authorization: `token ${ghToken}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+    }
+    if (!res.ok) {
+      isSyncing = false;
+      if (res.status === 401) {
+        showToast('Token認証エラー。⚙️から再設定してください', 'err');
+        return false;
+      }
+      if (retryCount < 3) {
+        const delay = (retryCount + 1) * 2000;
+        setTimeout(() => gistSave(retryCount + 1), delay);
+        return false;
+      }
+      pendingSave = true;
+      showToast('ネットワークエラー。復帰後に自動再送します', 'err');
+      return false;
+    }
+    const data = await res.json();
+    if (!gistId) {
+      gistId = data.id;
+      localStorage.setItem(LS_GISTID, gistId);
+    }
+    isSyncing = false;
+    pendingSave = false;
+    return true;
+  } catch(e) {
+    isSyncing = false;
+    if (retryCount < 3) {
+      const delay = (retryCount + 1) * 2000;
+      setTimeout(() => gistSave(retryCount + 1), delay);
+      return false;
+    }
+    pendingSave = true;
+    showToast('ネットワークエラー。復帰後に自動再送します', 'err');
+    return false;
+  }
+}
+
+// オンライン復帰時に未送信データを再送
+window.addEventListener('online', () => {
+  if (pendingSave) {
+    showToast('ネットワーク復帰。同期中...', '');
+    gistSave();
+  }
+});
+
+function scheduleSave() {
+  clearTimeout(syncTimer);
+  syncTimer = setTimeout(async () => {
+    await gistSave();
+    // 成功トーストは表示しない
+  }, 1500);
+}
+
+function saveMemo(key, data) {
+  saveMemoLocal(key, data);
+  scheduleSave();
+}
+
+/* ===== SYNC STATUS UI ===== */
+
+let toastTimer = null;
+function showToast(msg, type = '') {
+  const el = document.getElementById('syncToast');
+  el.textContent = msg;
+  el.className = 'sync-toast show' + (type ? ' ' + type : '');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { el.className = 'sync-toast'; }, 2500);
+}
+
+/* ===== TOKEN MODAL ===== */
+function openTokenModal(fromSetting = false) {
+  document.getElementById('tokenInput').value = ghToken || '';
+  document.getElementById('tokenError').className = 'token-error';
+  document.getElementById('tokenOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeTokenModal() {
+  document.getElementById('tokenOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+async function saveToken() {
+  const token = document.getElementById('tokenInput').value.trim();
+  const errEl = document.getElementById('tokenError');
+  const btn = document.getElementById('tokenSaveBtn');
+
+  if (!token) { errEl.textContent = 'Tokenを入力してください'; errEl.className = 'token-error show'; return; }
+
+  btn.disabled = true;
+  btn.textContent = '確認中...';
+  errEl.className = 'token-error';
+
+  // Token検証
+  try {
+    const res = await fetch('https://api.github.com/user', {
+      headers: { Authorization: `token ${token}` }
+    });
+    if (!res.ok) {
+      errEl.textContent = 'Tokenが無効です。再確認してください。';
+      errEl.className = 'token-error show';
+      btn.disabled = false; btn.textContent = '登録';
+      return;
+    }
+  } catch(e) {
+    errEl.textContent = '接続できませんでした。';
+    errEl.className = 'token-error show';
+    btn.disabled = false; btn.textContent = '登録';
+    return;
+  }
+
+  ghToken = token;
+  gistId = '';
+  localStorage.setItem(LS_TOKEN, ghToken);
+  localStorage.removeItem(LS_GISTID);
+
+  // Gistからデータ読み込み
+  btn.textContent = 'データを読み込み中...';
+  await gistLoad();
+
+  btn.disabled = false;
+  closeTokenModal();
+  render();
 }
 
 /* ===== SONGS ===== */
@@ -587,8 +1011,25 @@ async function loadSongs() {
     const data = await res.json();
     data.forEach(s => { s.typeLabel = TYPE_LABEL[s.type] || s.type.toUpperCase(); });
     songs = data;
+
+    // 初期化
+    ghToken = localStorage.getItem(LS_TOKEN) || '';
+    gistId  = localStorage.getItem(LS_GISTID) || '';
     memoData = JSON.parse(localStorage.getItem(LS_MEMO) || '{}');
-    render();
+
+    if (!ghToken) {
+      // 初回：Token未設定 → モーダル表示
+      openTokenModal(false);
+    } else {
+      // Token有：Gistから読み込んでrenderへ
+      document.getElementById('listContainer').innerHTML = `
+        <div class="loading">
+          <div class="loading-spinner"></div>
+          <div class="loading-text">データを同期中...</div>
+        </div>`;
+      await gistLoad();
+      render();
+    }
   } catch(e) {
     document.getElementById('listContainer').innerHTML = '<div class="empty">データの読み込みに失敗しました。<br>ページを再読み込みしてください。</div>';
   }
@@ -685,7 +1126,6 @@ function applyFilters() {
         </div>
       </div>`;
     card.onclick = () => openDetail(s.key);
-    card.addEventListener('touchend', () => openDetail(s.key));
     container.appendChild(card);
   });
 }
@@ -746,7 +1186,6 @@ function renderPlaylist() {
         <div class="card-right-badges">${dangerBadge}${mirrorBadge}${judgeBadge}</div>
       </div>`;
     card.onclick = () => openDetail(s.key);
-    card.addEventListener('touchend', () => openDetail(s.key));
     container.appendChild(card);
   });
 }
@@ -999,8 +1438,18 @@ function updateDoneToggleBtns(done) {
 }
 
 function openChartModal() {
-  window.open(currentChartUrl, '_blank');
+  const s = songs.find(x => x.key === currentKey);
+  const m = currentKey ? getMemo(currentKey) : {};
+  const mirrorNote = m.mirror === 'yes' ? ' <span style="color:#dc2626;font-weight:700;font-size:12px;">ミラー設定あり</span>' : '';
+  document.getElementById('chartModalTitle').innerHTML = escHtml(s ? s.title : '') + mirrorNote;
+  document.getElementById('chartIframe').src = currentChartUrl;
+  document.getElementById('chartOverlay').classList.add('open');
 }
+function closeChartModal() {
+  document.getElementById('chartOverlay').classList.remove('open');
+  document.getElementById('chartIframe').src = '';
+}
+
 /* ===== FILTER MODAL ===== */
 function openFilterModal() {
   buildLevelGrid(); updateDangerFilterBtns(); updateStatusFilterBtns();
@@ -1078,9 +1527,17 @@ function updatePills() {
   }
 }
 
+function handleChartOverlayClick(e) {
+  // 全画面表示のため背景クリック閉じは無効
+}
+
 function handleOverlayClick(e, type) {
   const modal = document.getElementById(type === 'detail' ? 'detailModal' : 'filterModal');
   if (!modal.contains(e.target)) { type === 'detail' ? closeDetail() : closeFilterModal(); }
+}
+
+function handleTokenOverlayClick(e) {
+  if (!document.getElementById('tokenModal').contains(e.target)) closeTokenModal();
 }
 
 loadSongs();
