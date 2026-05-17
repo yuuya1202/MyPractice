@@ -619,9 +619,8 @@
     <div class="header-right">
       <div class="header-count" id="headerCount">読み込み中...</div>
       <button class="nav-btn" id="navMain" onclick="switchPage('main')">一覧</button>
-      <button class="nav-btn" id="navPlay" onclick="switchPage('play')">やることリスト</button>
+      <button class="nav-btn" id="navPlay" onclick="switchPage('play')">📋</button>
       <button class="nav-btn" id="navDash" onclick="switchPage('dash')">📊</button>
-      <button class="setting-btn" onclick="openTokenModal(true)" title="設定">⚙️</button>
     </div>
   </div>
   <div class="search-row" id="searchRow">
@@ -752,30 +751,6 @@
   </div>
 </div>
 
-<!-- TOKEN MODAL -->
-<div class="token-overlay" id="tokenOverlay" onclick="handleTokenOverlayClick(event)">
-  <div class="token-modal" id="tokenModal">
-    <div class="token-modal-title">☁️ Gist連携設定</div>
-    <div class="token-modal-desc">
-      データをGitHub Gistに自動保存します。<br>
-      端末が変わってもデータが引き継がれます。<br><br>
-      <strong>Tokenの取得方法：</strong><br>
-      GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)<br>
-      → <code>gist</code> スコープのみ選択して生成
-    </div>
-
-    <div class="field-label" style="margin-bottom:6px;">GitHub Personal Access Token</div>
-    <input class="token-input" id="tokenInput" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off" spellcheck="false">
-
-    <div class="token-error" id="tokenError"></div>
-
-    <button class="token-save-btn" id="tokenSaveBtn" onclick="saveToken()">登録</button>
-  </div>
-</div>
-
-<!-- SYNC TOAST -->
-<div class="sync-toast" id="syncToast"></div>
-
 <script>
 const TYPE_LABEL = {
   novice:'NOV', advanced:'ADV', exhaust:'EXH',
@@ -783,10 +758,7 @@ const TYPE_LABEL = {
   infinite:'INF', vivid:'VVD', exceed:'XCD', nabla:'NBL'
 };
 
-const LS_MEMO   = 'sdvx18_memo_v1';
-const LS_TOKEN  = 'sdvx18_gh_token';
-const LS_GISTID = 'sdvx18_gist_id';
-const GIST_FILENAME = 'sdvx18_data.json';
+const LS_MEMO = 'sdvx18_memo_v1';
 
 let songs = [], memoData = {}, currentKey = null, memoTimer = null, currentChartUrl = '';
 let fLevels = new Set(), fDanger = new Set(), fStatus = 'all', fMemo = 'all';
@@ -795,213 +767,9 @@ let fLevels = new Set(), fDanger = new Set(), fStatus = 'all', fMemo = 'all';
 function getMemo(key) {
   return memoData[key] || { danger:'', mirror:'', judge:'', memo:'', done:false, playlist:false };
 }
-function saveMemoLocal(key, data) {
+function saveMemo(key, data) {
   memoData[key] = data;
   localStorage.setItem(LS_MEMO, JSON.stringify(memoData));
-}
-
-/* ===== GIST API ===== */
-async function findGistId() {
-  // Gist一覧からsdvx18_data.jsonを持つGistを検索
-  try {
-    const res = await fetch('https://api.github.com/gists?per_page=100', {
-      headers: { Authorization: `token ${ghToken}`, Accept: 'application/vnd.github+json' }
-    });
-    if (!res.ok) return null;
-    const list = await res.json();
-    const found = list.find(g => g.files && g.files[GIST_FILENAME]);
-    return found ? found.id : null;
-  } catch(e) { return null; }
-}
-
-async function gistLoad() {
-  if (!ghToken) return false;
-  try {
-    // GistIDがなければ一覧から検索
-    if (!gistId) {
-      const found = await findGistId();
-      if (found) {
-        gistId = found;
-        localStorage.setItem(LS_GISTID, gistId);
-      }
-    }
-    if (!gistId) return false;
-    const res = await fetch(`https://api.github.com/gists/${gistId}`, {
-      headers: { Authorization: `token ${ghToken}`, Accept: 'application/vnd.github+json' }
-    });
-    if (!res.ok) return false;
-    const data = await res.json();
-    const content = data.files?.[GIST_FILENAME]?.content;
-    if (content) {
-      memoData = JSON.parse(content);
-      localStorage.setItem(LS_MEMO, JSON.stringify(memoData));
-    }
-    return true;
-  } catch(e) { return false; }
-}
-
-async function gistSave(retryCount = 0) {
-  if (!ghToken) return false;
-  isSyncing = true;
-  try {
-    const body = {
-      description: 'SDVX 18対策データ',
-      public: false,
-      files: { [GIST_FILENAME]: { content: JSON.stringify(memoData) } }
-    };
-    let res;
-    if (gistId) {
-      res = await fetch(`https://api.github.com/gists/${gistId}`, {
-        method: 'PATCH',
-        headers: { Authorization: `token ${ghToken}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      });
-      // 403の場合はGistIDをリセットして一覧から再検索
-      if (res.status === 403) {
-        gistId = '';
-        localStorage.removeItem(LS_GISTID);
-        const found = await findGistId();
-        if (found) {
-          gistId = found;
-          localStorage.setItem(LS_GISTID, gistId);
-          return gistSave(retryCount); // 再試行
-        }
-        // 見つからなければ新規作成
-        res = await fetch('https://api.github.com/gists', {
-          method: 'POST',
-          headers: { Authorization: `token ${ghToken}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
-          body: JSON.stringify(body)
-        });
-      }
-    } else {
-      res = await fetch('https://api.github.com/gists', {
-        method: 'POST',
-        headers: { Authorization: `token ${ghToken}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      });
-    }
-    if (!res.ok) {
-      isSyncing = false;
-      if (res.status === 401) {
-        showToast('Token認証エラー。⚙️から再設定してください', 'err');
-        return false;
-      }
-      if (retryCount < 3) {
-        const delay = (retryCount + 1) * 2000;
-        setTimeout(() => gistSave(retryCount + 1), delay);
-        return false;
-      }
-      pendingSave = true;
-      showToast('ネットワークエラー。復帰後に自動再送します', 'err');
-      return false;
-    }
-    const data = await res.json();
-    if (!gistId) {
-      gistId = data.id;
-      localStorage.setItem(LS_GISTID, gistId);
-    }
-    isSyncing = false;
-    pendingSave = false;
-    return true;
-  } catch(e) {
-    isSyncing = false;
-    if (retryCount < 3) {
-      const delay = (retryCount + 1) * 2000;
-      setTimeout(() => gistSave(retryCount + 1), delay);
-      return false;
-    }
-    pendingSave = true;
-    showToast('ネットワークエラー。復帰後に自動再送します', 'err');
-    return false;
-  }
-}
-
-// オンライン復帰時に未送信データを再送
-window.addEventListener('online', () => {
-  if (pendingSave) {
-    showToast('ネットワーク復帰。同期中...', '');
-    gistSave();
-  }
-});
-
-function scheduleSave() {
-  clearTimeout(syncTimer);
-  syncTimer = setTimeout(async () => {
-    await gistSave();
-    // 成功トーストは表示しない
-  }, 1500);
-}
-
-function saveMemo(key, data) {
-  saveMemoLocal(key, data);
-  scheduleSave();
-}
-
-/* ===== SYNC STATUS UI ===== */
-
-let toastTimer = null;
-function showToast(msg, type = '') {
-  const el = document.getElementById('syncToast');
-  el.textContent = msg;
-  el.className = 'sync-toast show' + (type ? ' ' + type : '');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { el.className = 'sync-toast'; }, 2500);
-}
-
-/* ===== TOKEN MODAL ===== */
-function openTokenModal(fromSetting = false) {
-  document.getElementById('tokenInput').value = ghToken || '';
-  document.getElementById('tokenError').className = 'token-error';
-  document.getElementById('tokenOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeTokenModal() {
-  document.getElementById('tokenOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-async function saveToken() {
-  const token = document.getElementById('tokenInput').value.trim();
-  const errEl = document.getElementById('tokenError');
-  const btn = document.getElementById('tokenSaveBtn');
-
-  if (!token) { errEl.textContent = 'Tokenを入力してください'; errEl.className = 'token-error show'; return; }
-
-  btn.disabled = true;
-  btn.textContent = '確認中...';
-  errEl.className = 'token-error';
-
-  // Token検証
-  try {
-    const res = await fetch('https://api.github.com/user', {
-      headers: { Authorization: `token ${token}` }
-    });
-    if (!res.ok) {
-      errEl.textContent = 'Tokenが無効です。再確認してください。';
-      errEl.className = 'token-error show';
-      btn.disabled = false; btn.textContent = '登録';
-      return;
-    }
-  } catch(e) {
-    errEl.textContent = '接続できませんでした。';
-    errEl.className = 'token-error show';
-    btn.disabled = false; btn.textContent = '登録';
-    return;
-  }
-
-  ghToken = token;
-  gistId = '';
-  localStorage.setItem(LS_TOKEN, ghToken);
-  localStorage.removeItem(LS_GISTID);
-
-  // Gistからデータ読み込み
-  btn.textContent = 'データを読み込み中...';
-  await gistLoad();
-
-  btn.disabled = false;
-  closeTokenModal();
-  render();
 }
 
 /* ===== SONGS ===== */
@@ -1011,25 +779,8 @@ async function loadSongs() {
     const data = await res.json();
     data.forEach(s => { s.typeLabel = TYPE_LABEL[s.type] || s.type.toUpperCase(); });
     songs = data;
-
-    // 初期化
-    ghToken = localStorage.getItem(LS_TOKEN) || '';
-    gistId  = localStorage.getItem(LS_GISTID) || '';
     memoData = JSON.parse(localStorage.getItem(LS_MEMO) || '{}');
-
-    if (!ghToken) {
-      // 初回：Token未設定 → モーダル表示
-      openTokenModal(false);
-    } else {
-      // Token有：Gistから読み込んでrenderへ
-      document.getElementById('listContainer').innerHTML = `
-        <div class="loading">
-          <div class="loading-spinner"></div>
-          <div class="loading-text">データを同期中...</div>
-        </div>`;
-      await gistLoad();
-      render();
-    }
+    render();
   } catch(e) {
     document.getElementById('listContainer').innerHTML = '<div class="empty">データの読み込みに失敗しました。<br>ページを再読み込みしてください。</div>';
   }
@@ -1534,10 +1285,6 @@ function handleChartOverlayClick(e) {
 function handleOverlayClick(e, type) {
   const modal = document.getElementById(type === 'detail' ? 'detailModal' : 'filterModal');
   if (!modal.contains(e.target)) { type === 'detail' ? closeDetail() : closeFilterModal(); }
-}
-
-function handleTokenOverlayClick(e) {
-  if (!document.getElementById('tokenModal').contains(e.target)) closeTokenModal();
 }
 
 loadSongs();
