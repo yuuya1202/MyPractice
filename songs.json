@@ -2646,6 +2646,15 @@
     "chartUrl": "https://sdvx.in/06/06416m.htm"
   },
   {
+    "key": "07080_m",
+    "title": "レシピのリドル",
+    "type": "maximum",
+    "level": 18.3,
+    "bpm": "245",
+    "jacket": "https://sdvx.in/07/jacket/07080m.png",
+    "chartUrl": "https://sdvx.in/07/07080m.htm"
+  },
+  {
     "key": "06550_m",
     "title": "一水山風",
     "type": "maximum",
@@ -5614,6 +5623,15 @@
     "bpm": "260",
     "jacket": "https://sdvx.in/04/jacket/04321m.png",
     "chartUrl": "https://sdvx.in/04/04321m.htm"
+  },
+  {
+    "key": "07077_m",
+    "title": "ちくたく2ちく2ぱ",
+    "type": "maximum",
+    "level": 18.6,
+    "bpm": "190",
+    "jacket": "https://sdvx.in/07/jacket/07077m.png",
+    "chartUrl": "https://sdvx.in/07/07077m.htm"
   },
   {
     "key": "02186_x",
