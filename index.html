@@ -626,7 +626,7 @@
   <div class="search-row" id="searchRow">
     <div class="search-wrap">
       <span class="search-icon">🔍</span>
-      <input class="search-input" id="searchInput" type="text" placeholder="曲名を検索..." oninput="onSearchInput()">
+      <input class="search-input" id="searchInput" type="text" placeholder="曲名・よみがなで検索..." oninput="onSearchInput()">
       <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
     </div>
     <button class="filter-btn" id="filterBtn" onclick="openFilterModal()">
@@ -821,7 +821,7 @@ function clearSearch() {
 function applyFilters() {
   const q = document.getElementById('searchInput').value.toLowerCase();
   const filtered = songs.filter(s => {
-    if (q && !s.title.toLowerCase().includes(q)) return false;
+    if (q && !s.title.toLowerCase().includes(q) && !(s.reading && s.reading.includes(q))) return false;
     if (fLevels.size > 0 && !fLevels.has(s.level)) return false;
     const m = getMemo(s.key);
     if (fDanger.size > 0 && !fDanger.has(m.danger || 'none')) return false;
