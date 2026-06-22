@@ -621,6 +621,7 @@
       <button class="nav-btn" id="navMain" onclick="switchPage('main')">一覧</button>
       <button class="nav-btn" id="navPlay" onclick="switchPage('play')">📋</button>
       <button class="nav-btn" id="navDash" onclick="switchPage('dash')">📊</button>
+      <button class="nav-btn" id="navExport" onclick="exportMemoText()" title="メモをエクスポート">📤</button>
     </div>
   </div>
   <div class="search-row" id="searchRow">
@@ -1273,6 +1274,86 @@ function updatePills() {
 
 function handleChartOverlayClick(e) {
   // 全画面表示のため背景クリック閉じは無効
+}
+
+/* ===== MEMO EXPORT (サイト移行時の手動再入力用) ===== */
+function exportMemoText() {
+  let memo;
+  try {
+    memo = JSON.parse(localStorage.getItem(LS_MEMO) || '{}');
+  } catch (e) {
+    alert('メモの読み込みに失敗しました: ' + e.message);
+    return;
+  }
+
+  const keys = Object.keys(memo);
+  if (keys.length === 0) {
+    alert('保存されているメモがありません。');
+    return;
+  }
+
+  const dangerLabel = { none: '問題なし', caution: '要注意', danger: '危険' };
+  const mirrorLabel = { no: '正規', yes: 'ミラー' };
+  const judgeLabel = { late: '遅寄り', normal: '普通', early: '早寄り' };
+
+  const isEmpty = (m) => {
+    return !m.memo && !m.danger && !m.mirror && !m.judge && !m.done && !m.playlist;
+  };
+
+  const blocks = [];
+  let skipped = 0;
+  let notFound = 0;
+
+  keys.forEach((key) => {
+    const m = memo[key];
+    if (!m || isEmpty(m)) { skipped++; return; }
+
+    const s = songs.find((x) => x.key === key);
+    const songLabel = s
+      ? `${s.title} [${s.typeLabel}] Lv${s.level.toFixed(1)}`
+      : `(曲データ未取得・旧key: ${key})`;
+    if (!s) notFound++;
+
+    const lines = [];
+    lines.push(`■ ${songLabel}`);
+    lines.push(`  対策済み: ${m.done ? 'はい' : 'いいえ'}`);
+    if (m.danger) lines.push(`  危険度: ${dangerLabel[m.danger] || m.danger}`);
+    if (m.mirror) lines.push(`  オプション: ${mirrorLabel[m.mirror] || m.mirror}`);
+    if (m.judge) lines.push(`  判定傾向: ${judgeLabel[m.judge] || m.judge}`);
+    if (m.playlist) lines.push(`  プレイリスト登録: はい`);
+    if (m.memo) lines.push(`  メモ:\n    ${m.memo.split('\n').join('\n    ')}`);
+
+    blocks.push(lines.join('\n'));
+  });
+
+  if (blocks.length === 0) {
+    alert('内容のあるメモが見つかりませんでした（すべて未入力扱い）。');
+    return;
+  }
+
+  const header = [
+    `SDVX18 メモ エクスポート`,
+    `出力日時: ${new Date().toLocaleString('ja-JP')}`,
+    `件数: ${blocks.length} 件${notFound > 0 ? `（うち曲データ未取得: ${notFound} 件）` : ''}${skipped > 0 ? ` / 未入力のため除外: ${skipped} 件` : ''}`,
+    `${'='.repeat(40)}`,
+  ].join('\n');
+
+  const body = blocks.join(`\n${'-'.repeat(40)}\n`);
+  const text = `${header}\n\n${body}\n`;
+
+  // テキストファイルとしてダウンロード
+  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  const ts = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14);
+  a.download = `sdvx18_memo_export_${ts}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  alert(`${blocks.length} 件のメモをエクスポートしました。`);
 }
 
 function handleOverlayClick(e, type) {
