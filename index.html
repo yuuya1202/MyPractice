@@ -871,8 +871,8 @@ function buildLevelGrid() {
     header.innerHTML = `
       <span class="level-group-title">Lv${g}</span>
       <span class="level-group-actions">
-        <button class="level-group-action-btn" type="button" onclick="selectLevelGroup(${g})">全選択</button>
-        <button class="level-group-action-btn" type="button" onclick="deselectLevelGroup(${g})">解除</button>
+        <button class="level-group-action-btn" type="button" onclick="selectLevelGroup(${g}, event)">全選択</button>
+        <button class="level-group-action-btn" type="button" onclick="deselectLevelGroup(${g}, event)">解除</button>
       </span>`;
     wrap.appendChild(header);
 
@@ -891,12 +891,14 @@ function buildLevelGrid() {
   });
 }
 
-function selectLevelGroup(g) {
+function selectLevelGroup(g, evt) {
+  if (evt) evt.stopPropagation();
   songs.forEach(s => { if (Math.floor(s.level) === g) fLevels.add(s.level); });
   buildLevelGrid();
   applyFilters();
 }
-function deselectLevelGroup(g) {
+function deselectLevelGroup(g, evt) {
+  if (evt) evt.stopPropagation();
   songs.forEach(s => { if (Math.floor(s.level) === g) fLevels.delete(s.level); });
   buildLevelGrid();
   applyFilters();
