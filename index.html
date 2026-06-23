@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="theme-color" content="#f0f4ff">
-<title>SDVX 18対策</title>
+<title>SDVX対策</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap');
 
@@ -42,6 +42,7 @@
     --vvd: #f0127a;
     --xcd: #1d4ed8;
     --nbl: #16a34a;
+    --ult: #ca8a04;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -123,6 +124,16 @@
   }
   .filter-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
 
+  .sort-group {
+    display: flex; gap: 4px; flex-shrink: 0;
+    background: var(--bg2); border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm); padding: 3px; box-shadow: var(--shadow);
+  }
+  .sort-group .nav-btn {
+    padding: 5px 8px; font-size: 11px; background: none; border: none;
+  }
+  .sort-group .nav-btn.active { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); }
+
   .filter-indicator { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: none; }
   .filter-indicator.show { display: block; }
 
@@ -172,6 +183,7 @@
   .jacket-vvd { border-color: var(--vvd); }
   .jacket-xcd { border-color: var(--xcd); }
   .jacket-nbl { border-color: var(--nbl); }
+  .jacket-ult { border-color: var(--ult); }
   .jacket-nov, .jacket-adv { border-color: var(--border); }
   .card-body { flex: 1; min-width: 0; }
   .card-title { font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px; color: var(--text); }
@@ -185,6 +197,7 @@
   .badge-vvd { color: #fff; background: var(--vvd); }
   .badge-xcd { color: #fff; background: var(--xcd); }
   .badge-nbl { color: #fff; background: var(--nbl); }
+  .badge-ult { color: #fff; background: var(--ult); }
   .badge-nov { color: var(--text2); background: var(--bg4); }
   .badge-adv { color: #fff; background: #16a34a; }
   .badge-bpm { color: var(--text2); background: var(--bg4); }
@@ -244,6 +257,7 @@
   .modal-jacket.jacket-vvd { border-color: var(--vvd); }
   .modal-jacket.jacket-xcd { border-color: var(--xcd); }
   .modal-jacket.jacket-nbl { border-color: var(--nbl); }
+  .modal-jacket.jacket-ult { border-color: var(--ult); }
   .modal-header-right { flex: 1; min-width: 0; }
   .modal-song-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--text); line-height: 1.3; }
   .modal-song-meta { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; justify-content: space-between; }
@@ -615,7 +629,7 @@
 
 <div class="header">
   <div class="header-top">
-    <div class="header-title">SDVX 18対策</div>
+    <div class="header-title">SDVX対策</div>
     <div class="header-right">
       <div class="header-count" id="headerCount">読み込み中...</div>
       <button class="nav-btn" id="navMain" onclick="switchPage('main')">一覧</button>
@@ -629,6 +643,11 @@
       <span class="search-icon">🔍</span>
       <input class="search-input" id="searchInput" type="text" placeholder="曲名・よみがなで検索..." oninput="onSearchInput()">
       <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+    </div>
+    <div class="sort-group">
+      <button class="nav-btn active" id="sort-added" onclick="setSortOrder('added')" title="追加順（収録日）">追加</button>
+      <button class="nav-btn" id="sort-level" onclick="setSortOrder('level')" title="定数順（レベル）">定数</button>
+      <button class="nav-btn" id="sort-reading" onclick="setSortOrder('reading')" title="50音順（読み仮名）">50音</button>
     </div>
     <button class="filter-btn" id="filterBtn" onclick="openFilterModal()">
       <span>絞込</span>
@@ -707,8 +726,12 @@
     </div>
     <div class="filter-modal-body">
       <div class="field-block">
-        <div class="field-label">難易度（選択なし＝全て）</div>
+        <div class="field-label">レベル（選択なし＝全て）</div>
         <div class="level-grid" id="levelGrid"></div>
+      </div>
+      <div class="field-block">
+        <div class="field-label">難易度（選択なし＝全て）</div>
+        <div class="level-grid" id="typeGrid"></div>
       </div>
       <div class="field-block">
         <div class="field-label">危険度（選択なし＝全て）</div>
@@ -756,13 +779,15 @@
 const TYPE_LABEL = {
   novice:'NOV', advanced:'ADV', exhaust:'EXH',
   maximum:'MXM', heavenly:'HVN', gravity:'GRV',
-  infinite:'INF', vivid:'VVD', exceed:'XCD', nabla:'NBL'
+  infinite:'INF', vivid:'VVD', exceed:'XCD', nabla:'NBL',
+  ultimate:'ULT'
 };
 
 const LS_MEMO = 'sdvx18_memo_v1';
 
 let songs = [], memoData = {}, currentKey = null, memoTimer = null, currentChartUrl = '';
-let fLevels = new Set(), fDanger = new Set(), fStatus = 'all', fMemo = 'all';
+let fLevels = new Set(), fTypes = new Set(), fDanger = new Set(), fStatus = 'all', fMemo = 'all';
+let sortOrder = 'added'; // 'added' | 'level' | 'reading'
 
 /* ===== LOCAL STORAGE ===== */
 function getMemo(key) {
@@ -801,9 +826,27 @@ function buildLevelGrid() {
   });
 }
 
+// 難易度フィルター対象（EXH〜ULT。NOV/ADVは対象外）
+const TYPE_FILTER_ORDER = ['exhaust','maximum','infinite','gravity','heavenly','vivid','exceed','nabla','ultimate'];
+function buildTypeGrid() {
+  const actualTypes = new Set(songs.map(s => s.type));
+  const orderedTypes = TYPE_FILTER_ORDER.filter(t => actualTypes.has(t));
+  const grid = document.getElementById('typeGrid');
+  grid.innerHTML = '';
+  orderedTypes.forEach(type => {
+    const chip = document.createElement('div');
+    chip.className = 'level-chip' + (fTypes.has(type) ? ' sel' : '');
+    chip.textContent = TYPE_LABEL[type] || type.toUpperCase();
+    chip.onclick = () => toggleTypeFilter(type);
+    chip.id = `tp-${type}`;
+    grid.appendChild(chip);
+  });
+}
+
 function render() {
   memoData = JSON.parse(localStorage.getItem(LS_MEMO) || '{}');
   buildLevelGrid();
+  buildTypeGrid();
   applyFilters();
 }
 
@@ -819,11 +862,46 @@ function clearSearch() {
   applyFilters();
 }
 
+/* ===== SORT ===== */
+function sortSongs(list) {
+  const arr = list.slice();
+  if (sortOrder === 'level') {
+    arr.sort((a, b) => {
+      if (a.level !== b.level) return a.level - b.level;
+      return (a.reading || '').localeCompare(b.reading || '', 'ja');
+    });
+  } else if (sortOrder === 'reading') {
+    arr.sort((a, b) => (a.reading || '').localeCompare(b.reading || '', 'ja'));
+  } else {
+    // 追加順: 収録日(date)昇順
+    arr.sort((a, b) => {
+      const da = a.date || '';
+      const db = b.date || '';
+      if (da !== db) return da < db ? -1 : 1;
+      return (a.reading || '').localeCompare(b.reading || '', 'ja');
+    });
+  }
+  return arr;
+}
+
+function setSortOrder(val) {
+  sortOrder = val;
+  updateSortBtns();
+  applyFilters();
+}
+function updateSortBtns() {
+  ['added','level','reading'].forEach(v => {
+    const el = document.getElementById(`sort-${v}`);
+    if (el) el.className = 'nav-btn' + (sortOrder === v ? ' active' : '');
+  });
+}
+
 function applyFilters() {
   const q = document.getElementById('searchInput').value.toLowerCase();
-  const filtered = songs.filter(s => {
+  let filtered = songs.filter(s => {
     if (q && !s.title.toLowerCase().includes(q) && !(s.reading && s.reading.includes(q))) return false;
     if (fLevels.size > 0 && !fLevels.has(s.level)) return false;
+    if (fTypes.size > 0 && !fTypes.has(s.type)) return false;
     const m = getMemo(s.key);
     if (fDanger.size > 0 && !fDanger.has(m.danger || 'none')) return false;
     if (fStatus === 'done' && !m.done) return false;
@@ -832,6 +910,8 @@ function applyFilters() {
     if (fMemo === 'none' && m.memo) return false;
     return true;
   });
+
+  filtered = sortSongs(filtered);
 
   document.getElementById('headerCount').textContent = `${filtered.length} / ${songs.length}曲`;
   updatePills(); updateFilterIndicator();
@@ -856,8 +936,9 @@ function applyFilters() {
                       : m.judge === 'early'  ? `<span class="card-mini-badge early">早寄り</span>`
                       : m.judge === 'normal' ? `<span class="card-mini-badge normal">普通</span>`
                       : '';    const typeKey = s.type;
-    const badgeClass = `badge-${typeKey === 'exhaust' ? 'exh' : typeKey === 'maximum' ? 'mxm' : typeKey === 'infinite' ? 'inf' : typeKey === 'gravity' ? 'grv' : typeKey === 'heavenly' ? 'hvn' : typeKey === 'vivid' ? 'vvd' : typeKey === 'exceed' ? 'xcd' : typeKey === 'nabla' ? 'nbl' : typeKey === 'novice' ? 'nov' : typeKey === 'advanced' ? 'adv' : 'mxm'}`;
-    const jacketClass = `jacket jacket-${typeKey === 'exhaust' ? 'exh' : typeKey === 'maximum' ? 'mxm' : typeKey === 'infinite' ? 'inf' : typeKey === 'gravity' ? 'grv' : typeKey === 'heavenly' ? 'hvn' : typeKey === 'vivid' ? 'vvd' : typeKey === 'exceed' ? 'xcd' : typeKey === 'nabla' ? 'nbl' : 'adv'}`;
+    const tk = typeToKey(typeKey);
+    const badgeClass = `badge-${tk}`;
+    const jacketClass = `jacket jacket-${tk}`;
     const card = document.createElement('div');
     card.className = `song-card ${dangerClass} ${doneClass}`;
     card.innerHTML = `
@@ -903,7 +984,7 @@ function switchPage(page) {
 
 function renderPlaylist() {
   const container = document.getElementById('playContainer');
-  const list = songs.filter(s => getMemo(s.key).playlist);
+  const list = sortSongs(songs.filter(s => getMemo(s.key).playlist));
   if (list.length === 0) {
     container.innerHTML = '<div class="empty">リストに曲がありません<br><br>詳細画面の 📋 ボタンで追加できます</div>';
     return;
@@ -915,8 +996,9 @@ function renderPlaylist() {
     const doneClass = m.done ? 'done-card' : '';
     const memoPreview = m.memo ? escHtml(m.memo.slice(0, 19)) + (m.memo.length > 19 ? '...' : '') : '';
     const typeKey = s.type;
-    const badgeClass = `badge-${typeKey === 'exhaust' ? 'exh' : typeKey === 'maximum' ? 'mxm' : typeKey === 'infinite' ? 'inf' : typeKey === 'gravity' ? 'grv' : typeKey === 'heavenly' ? 'hvn' : typeKey === 'vivid' ? 'vvd' : typeKey === 'exceed' ? 'xcd' : typeKey === 'nabla' ? 'nbl' : typeKey === 'novice' ? 'nov' : typeKey === 'advanced' ? 'adv' : 'mxm'}`;
-    const jacketClass = `jacket jacket-${typeKey === 'exhaust' ? 'exh' : typeKey === 'maximum' ? 'mxm' : typeKey === 'infinite' ? 'inf' : typeKey === 'gravity' ? 'grv' : typeKey === 'heavenly' ? 'hvn' : typeKey === 'vivid' ? 'vvd' : typeKey === 'exceed' ? 'xcd' : typeKey === 'nabla' ? 'nbl' : 'adv'}`;
+    const tk = typeToKey(typeKey);
+    const badgeClass = `badge-${tk}`;
+    const jacketClass = `jacket jacket-${tk}`;
     const dangerBadge = m.danger === 'caution' ? `<span class="card-mini-badge danger-caution">要注意</span>` : m.danger === 'danger' ? `<span class="card-mini-badge danger-danger">危険</span>` : m.danger === 'none' ? `<span class="card-mini-badge danger-none">問題なし</span>` : '';
     const mirrorBadge = m.mirror === 'yes' ? `<span class="card-mini-badge mirror">ミラー</span>` : m.mirror === 'no' ? `<span class="card-mini-badge mirror-no">正規</span>` : '';
     const judgeBadge = m.judge === 'late' ? `<span class="card-mini-badge late">遅寄り</span>` : m.judge === 'early' ? `<span class="card-mini-badge early">早寄り</span>` : m.judge === 'normal' ? `<span class="card-mini-badge normal">普通</span>` : '';
@@ -944,12 +1026,14 @@ function renderPlaylist() {
 
 function renderDashboard() {
   const container = document.getElementById('dashContainer');
-  const total = songs.length;
+  // グラフはLv18(18.0〜18.9)のみを対象とする
+  const dashSongs = songs.filter(s => s.level >= 18 && s.level < 19);
+  const total = dashSongs.length;
   if (total === 0) { container.innerHTML = '<div class="empty">データ読み込み中...</div>'; return; }
 
   // 集計
   let done = 0, dangerNone = 0, dangerCaution = 0, dangerDanger = 0, dangerUnset = 0;
-  songs.forEach(s => {
+  dashSongs.forEach(s => {
     const m = getMemo(s.key);
     if (m.done) done++;
     if (m.danger === 'none') dangerNone++;
@@ -962,7 +1046,7 @@ function renderDashboard() {
 
   // レベル別集計（対策済み＋危険度）
   const levelMap = {};
-  songs.forEach(s => {
+  dashSongs.forEach(s => {
     const lv = s.level.toFixed(1);
     if (!levelMap[lv]) levelMap[lv] = { done:0, total:0, danger:0, caution:0, dnone:0, dunset:0 };
     levelMap[lv].total++;
@@ -1085,7 +1169,7 @@ function renderDashboard() {
 }
 
 function typeToKey(type) {
-  return type === 'exhaust' ? 'exh' : type === 'maximum' ? 'mxm' : type === 'infinite' ? 'inf' : type === 'gravity' ? 'grv' : type === 'heavenly' ? 'hvn' : type === 'vivid' ? 'vvd' : type === 'exceed' ? 'xcd' : type === 'nabla' ? 'nbl' : type === 'novice' ? 'nov' : type === 'advanced' ? 'adv' : 'mxm';
+  return type === 'exhaust' ? 'exh' : type === 'maximum' ? 'mxm' : type === 'infinite' ? 'inf' : type === 'gravity' ? 'grv' : type === 'heavenly' ? 'hvn' : type === 'vivid' ? 'vvd' : type === 'exceed' ? 'xcd' : type === 'nabla' ? 'nbl' : type === 'ultimate' ? 'ult' : type === 'novice' ? 'nov' : type === 'advanced' ? 'adv' : 'mxm';
 }
 
 /* ===== DETAIL MODAL ===== */
@@ -1197,7 +1281,7 @@ function closeChartModal() {}
 
 /* ===== FILTER MODAL ===== */
 function openFilterModal() {
-  buildLevelGrid(); updateDangerFilterBtns(); updateStatusFilterBtns();
+  buildLevelGrid(); buildTypeGrid(); updateDangerFilterBtns(); updateStatusFilterBtns();
   document.getElementById('filterOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -1210,6 +1294,12 @@ function toggleLevelFilter(lv) {
   if (fLevels.has(lv)) fLevels.delete(lv); else fLevels.add(lv);
   const el = document.getElementById(`lv-${lv.toFixed(1).replace('.','_')}`);
   if (el) el.className = 'level-chip' + (fLevels.has(lv) ? ' sel' : '');
+  applyFilters();
+}
+function toggleTypeFilter(type) {
+  if (fTypes.has(type)) fTypes.delete(type); else fTypes.add(type);
+  const el = document.getElementById(`tp-${type}`);
+  if (el) el.className = 'level-chip' + (fTypes.has(type) ? ' sel' : '');
   applyFilters();
 }
 function toggleDangerFilter(val) {
@@ -1234,11 +1324,11 @@ function updateMemoFilterBtns() {
   });
 }
 function resetFilters() {
-  fLevels.clear(); fDanger.clear(); fStatus = 'all'; fMemo = 'all';
-  buildLevelGrid(); updateDangerFilterBtns(); updateStatusFilterBtns(); updateMemoFilterBtns(); applyFilters();
+  fLevels.clear(); fTypes.clear(); fDanger.clear(); fStatus = 'all'; fMemo = 'all';
+  buildLevelGrid(); buildTypeGrid(); updateDangerFilterBtns(); updateStatusFilterBtns(); updateMemoFilterBtns(); applyFilters();
 }
 function updateFilterIndicator() {
-  const active = fLevels.size > 0 || fDanger.size > 0 || fStatus !== 'all' || fMemo !== 'all';
+  const active = fLevels.size > 0 || fTypes.size > 0 || fDanger.size > 0 || fStatus !== 'all' || fMemo !== 'all';
   document.getElementById('filterIndicator').className = 'filter-indicator' + (active ? ' show' : '');
   document.getElementById('filterBtn').className = 'filter-btn' + (active ? ' active' : '');
 }
@@ -1249,6 +1339,12 @@ function updatePills() {
     const pill = document.createElement('div');
     pill.className = 'filter-pill';
     pill.innerHTML = `${lv.toFixed(1)} <span onclick="toggleLevelFilter(${lv})">✕</span>`;
+    container.appendChild(pill);
+  });
+  fTypes.forEach(t => {
+    const pill = document.createElement('div');
+    pill.className = 'filter-pill';
+    pill.innerHTML = `${TYPE_LABEL[t] || t.toUpperCase()} <span onclick="toggleTypeFilter('${t}')">✕</span>`;
     container.appendChild(pill);
   });
   const dangerNames = { none:'問題なし', caution:'要注意', danger:'危険' };
@@ -1331,8 +1427,11 @@ function exportMemoText() {
     return;
   }
 
+  const confirmMsg = `${blocks.length} 件のメモをテキストファイルとして書き出します。${notFound > 0 ? `\n（うち曲データ未取得: ${notFound} 件）` : ''}${skipped > 0 ? `\n（未入力のため除外: ${skipped} 件）` : ''}\n\nよろしいですか？`;
+  if (!confirm(confirmMsg)) return;
+
   const header = [
-    `SDVX18 メモ エクスポート`,
+    `SDVX メモ エクスポート`,
     `出力日時: ${new Date().toLocaleString('ja-JP')}`,
     `件数: ${blocks.length} 件${notFound > 0 ? `（うち曲データ未取得: ${notFound} 件）` : ''}${skipped > 0 ? ` / 未入力のため除外: ${skipped} 件` : ''}`,
     `${'='.repeat(40)}`,
@@ -1347,7 +1446,7 @@ function exportMemoText() {
   const a = document.createElement('a');
   a.href = url;
   const ts = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14);
-  a.download = `sdvx18_memo_export_${ts}.txt`;
+  a.download = `sdvx_memo_export_${ts}.txt`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
