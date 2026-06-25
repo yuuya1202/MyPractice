@@ -214,19 +214,25 @@
   /* OVERLAYS */
   .overlay {
     position: fixed; inset: 0; background: rgba(30,30,60,0.4); z-index: 200;
-    display: flex; flex-direction: column; justify-content: flex-end;
+    display: block;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 16px;
     opacity: 0; pointer-events: none; transition: opacity 0.25s;
   }
   .overlay.open { opacity: 1; pointer-events: all; }
-
-  #detailOverlay { justify-content: center; align-items: center; padding: 16px; }
-  #sortOverlay { justify-content: center; align-items: center; padding: 16px; }
+  .overlay-modal-wrap {
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   .detail-modal {
     background: var(--bg2); border-radius: 20px;
-    padding: 0 0 20px; max-height: 92vh; overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    padding: 0 0 20px;
     width: 100%; max-width: 460px;
+    margin: 0 auto;
     transform: scale(0.93) translateY(12px);
     transition: transform 0.3s cubic-bezier(0.32,0.72,0,1);
     box-shadow: 0 8px 40px rgba(91,79,232,0.18);
@@ -358,20 +364,6 @@
   .chart-iframe { width: 100%; height: 100%; border: none; background: #fff; }
 
   /* FILTER MODAL */
-  #filterOverlay {
-    display: block;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    padding: 16px;
-    justify-content: initial;
-    align-items: initial;
-  }
-  .filter-modal-v2-wrap {
-    min-height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
   .filter-modal-v2 {
     background: var(--bg2); border-radius: 20px;
     width: 100%; max-width: 460px;
@@ -383,8 +375,8 @@
   .overlay.open .filter-modal-v2 { transform: scale(1) translateY(0); }
   .filter-modal {
     background: var(--bg2); border-radius: 20px;
-    padding: 0 0 0; width: 100%; max-width: 460px; max-height: 85vh; overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    padding: 0 0 0; width: 100%; max-width: 460px;
+    margin: 0 auto;
     transform: scale(0.93) translateY(12px);
     transition: transform 0.3s cubic-bezier(0.32,0.72,0,1);
     box-shadow: 0 8px 40px rgba(91,79,232,0.18);
@@ -710,6 +702,7 @@
 
 <!-- DETAIL OVERLAY -->
 <div class="overlay" id="detailOverlay" onclick="handleOverlayClick(event,'detail')">
+  <div class="overlay-modal-wrap">
   <div class="detail-modal" id="detailModal">
     <div class="modal-handle"></div>
     <div class="modal-header-section">
@@ -757,10 +750,12 @@
       <button class="save-btn" onclick="closeDetail()">閉じる</button>
     </div>
   </div>
+  </div>
 </div>
 
 <!-- SORT OVERLAY -->
 <div class="overlay" id="sortOverlay" onclick="handleOverlayClick(event,'sort')">
+  <div class="overlay-modal-wrap">
   <div class="filter-modal" id="sortModal">
     <div class="filter-modal-header">
       <div class="filter-modal-title">並び順</div>
@@ -769,11 +764,12 @@
       <div class="sort-option-list" id="sortOptionList"></div>
     </div>
   </div>
+  </div>
 </div>
 
 <!-- FILTER OVERLAY -->
 <div class="overlay" id="filterOverlay" onclick="handleOverlayClick(event,'filter')">
-  <div class="filter-modal-v2-wrap">
+  <div class="overlay-modal-wrap">
   <div class="filter-modal-v2" id="filterModal">
     <div class="filter-modal-header">
       <div class="filter-modal-title">絞り込み</div>
@@ -849,35 +845,6 @@ const SORT_LABELS = {
   level: { asc: '定数順（低い→高い）', desc: '定数順（高い→低い）' },
   reading: { asc: '50音順（あ→わ）', desc: '50音順（わ→あ）' },
 };
-
-/* ===== MODAL SCROLL LOCK (iOS PWAスタンドアロン対策) =====
-   body に overflow:hidden だけを設定すると、iOSのホーム画面PWA(standalone)では
-   position:fixed なオーバーレイ内部の overflow-y:auto までスクロール不能になることがある。
-   そのため body 自体を position:fixed で固定し、内部モーダルのスクロールには干渉しない方式にする。 */
-let scrollLockCount = 0;
-let savedScrollY = 0;
-function lockBodyScroll() {
-  if (scrollLockCount === 0) {
-    savedScrollY = window.scrollY || window.pageYOffset || 0;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${savedScrollY}px`;
-    document.body.style.left = '50%';
-    document.body.style.transform = 'translateX(-50%)';
-    document.body.style.width = '100%';
-  }
-  scrollLockCount++;
-}
-function unlockBodyScroll() {
-  scrollLockCount = Math.max(0, scrollLockCount - 1);
-  if (scrollLockCount === 0) {
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.left = '';
-    document.body.style.transform = '';
-    document.body.style.width = '';
-    window.scrollTo(0, savedScrollY);
-  }
-}
 
 /* ===== LOCAL STORAGE ===== */
 function getMemo(key) {
@@ -1030,12 +997,11 @@ const SORT_OPTIONS = [
 ];
 function openSortModal() {
   buildSortOptionList();
+  document.getElementById('sortOverlay').scrollTop = 0;
   document.getElementById('sortOverlay').classList.add('open');
-  lockBodyScroll();
 }
 function closeSortModal() {
   document.getElementById('sortOverlay').classList.remove('open');
-  unlockBodyScroll();
 }
 function buildSortOptionList() {
   const list = document.getElementById('sortOptionList');
@@ -1367,8 +1333,8 @@ function openDetail(key) {
   updateMirrorBtns(m.mirror || '');
   updateJudgeBtns(m.judge || '');
   document.getElementById('memoArea').value = m.memo || '';
+  document.getElementById('detailOverlay').scrollTop = 0;
   document.getElementById('detailOverlay').classList.add('open');
-  lockBodyScroll();
 }
 
 function togglePlaylist() {
@@ -1381,7 +1347,6 @@ function togglePlaylist() {
 
 function closeDetail() {
   document.getElementById('detailOverlay').classList.remove('open');
-  unlockBodyScroll();
   currentKey = null;
   applyFilters();
 }
