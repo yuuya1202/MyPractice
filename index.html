@@ -214,13 +214,16 @@
   /* OVERLAYS */
   .overlay {
     position: fixed; inset: 0; background: rgba(30,30,60,0.4); z-index: 200;
-    display: block;
+    display: none;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     padding: 16px;
     opacity: 0; pointer-events: none; transition: opacity 0.25s;
   }
-  .overlay.open { opacity: 1; pointer-events: all; }
+  .overlay.open {
+    display: block;
+    opacity: 1; pointer-events: all;
+  }
   .overlay-modal-wrap {
     min-height: 100%;
     display: flex;
@@ -846,6 +849,31 @@ const SORT_LABELS = {
   reading: { asc: '50音順（あ→わ）', desc: '50音順（わ→あ）' },
 };
 
+/* ===== OVERLAY HELPERS =====
+   .overlay は display:none で隠しているため、開く際は先に display:block にしてから
+   次フレームで .open を付与しないと opacity の transition が発火しない（＝アニメーションが
+   スキップされる）ことがある。display:none⇔block の切り替えを挟むことで、モバイルで
+   非表示中の要素にタッチイベントのヒットテストが残ってしまう不具合を防ぐ。 */
+function openOverlay(id) {
+  const el = document.getElementById(id);
+  el.style.display = 'block';
+  el.scrollTop = 0;
+  // display反映後に開始させるため次フレームでopenを付与
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => el.classList.add('open'));
+  });
+}
+function closeOverlay(id) {
+  const el = document.getElementById(id);
+  el.classList.remove('open');
+  const onEnd = (e) => {
+    if (e.propertyName !== 'opacity') return;
+    el.style.display = 'none';
+    el.removeEventListener('transitionend', onEnd);
+  };
+  el.addEventListener('transitionend', onEnd);
+}
+
 /* ===== LOCAL STORAGE ===== */
 function getMemo(key) {
   return memoData[key] || { danger:'', mirror:'', judge:'', memo:'', done:false, playlist:false };
@@ -997,11 +1025,10 @@ const SORT_OPTIONS = [
 ];
 function openSortModal() {
   buildSortOptionList();
-  document.getElementById('sortOverlay').scrollTop = 0;
-  document.getElementById('sortOverlay').classList.add('open');
+  openOverlay('sortOverlay');
 }
 function closeSortModal() {
-  document.getElementById('sortOverlay').classList.remove('open');
+  closeOverlay('sortOverlay');
 }
 function buildSortOptionList() {
   const list = document.getElementById('sortOptionList');
@@ -1333,8 +1360,7 @@ function openDetail(key) {
   updateMirrorBtns(m.mirror || '');
   updateJudgeBtns(m.judge || '');
   document.getElementById('memoArea').value = m.memo || '';
-  document.getElementById('detailOverlay').scrollTop = 0;
-  document.getElementById('detailOverlay').classList.add('open');
+  openOverlay('detailOverlay');
 }
 
 function togglePlaylist() {
@@ -1346,7 +1372,7 @@ function togglePlaylist() {
 }
 
 function closeDetail() {
-  document.getElementById('detailOverlay').classList.remove('open');
+  closeOverlay('detailOverlay');
   currentKey = null;
   applyFilters();
 }
@@ -1412,11 +1438,10 @@ function closeChartModal() {}
 /* ===== FILTER MODAL ===== */
 function openFilterModal() {
   buildLevelGrid(); buildTypeGrid(); updateDangerFilterBtns(); updateStatusFilterBtns();
-  document.getElementById('filterOverlay').scrollTop = 0;
-  document.getElementById('filterOverlay').classList.add('open');
+  openOverlay('filterOverlay');
 }
 function closeFilterModal() {
-  document.getElementById('filterOverlay').classList.remove('open');
+  closeOverlay('filterOverlay');
   applyFilters();
 }
 function toggleLevelFilter(lv) {
